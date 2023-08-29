@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import './index.css';
 import RootLayout from './pages/RootLayout';
+import IndexPage from './pages/IndexPage';
 import OrderPage from './pages/OrderPage';
+
 import ConfirmationPage from './pages/ConfirmationPage';
 import { CustomerProvider } from './CustomerContext';
+
+import ProductPage from './pages/ProductPage';
+
+
 
 
 const router = createBrowserRouter(
@@ -13,9 +19,9 @@ const router = createBrowserRouter(
     <Route element={<RootLayout/>}>
 
     {/* alla produkter syns här */}
-      <Route index element={<div>FÖRSTA SIDAN</div>}></Route> 
+      <Route index element={<IndexPage/>}></Route> 
       {/* en specifik produkt visas här */}
-      <Route path="product/:id" element={<div>VISAR EN PRODUKT</div>}></Route>
+      <Route path="product/:id" element={<ProductPage/>}></Route>
       {/* här är sidan för kundvagnen */}
       <Route path="cart" element={<div>I DIN KUNDVAGN ....</div>}></Route>
       {/* formulär betalning */}
