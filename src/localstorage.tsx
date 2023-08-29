@@ -10,13 +10,13 @@ export const addProductToLS = (product: Products) => {
   };
   
 
-  const getProductsFromLS= (): Products[] => {
+ export const getProductsFromLS= (): Products[] => {
     const productsString = localStorage.getItem('products');
     const products = productsString ? JSON.parse(productsString) : [];
     return products;
   };
 
-const addProductToCart = (product: Products) => {
+export const addProductToCart = (product: Products) => {
     const cart: Cart = JSON.parse(localStorage.getItem('cart') || '{"products":[],"totalPrice":0}');
   
     cart.products.push(product);
