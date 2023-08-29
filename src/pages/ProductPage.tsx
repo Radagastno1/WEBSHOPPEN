@@ -1,10 +1,23 @@
 import { mockedProducts } from "../mockedList";
-import { NavLink } from "react-router-dom";
+import { parsePath, useParams } from "react-router-dom";
 
-export default function IndexPage() {
+export default function ProductPage() {
+  const { id } = useParams();
+
+  
+  const selectedProduct = mockedProducts.find(product => String(product.id) == id );
+
+  if (!selectedProduct) {
+    return <p>Product not found</p>;
+  }
+
   return (
-    <div className="flex flex-col">
-      <h1>Produkter</h1>
-      </div>
+    <div data-cy="product-id">
+      <h2>{selectedProduct.title}</h2>
+      <p>{selectedProduct.description}</p>
+      <p>Price: {selectedProduct.price}</p>
+    </div>
   );
 }
+
+

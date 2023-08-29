@@ -8,7 +8,7 @@ export default function IndexPage() {
 
       <ul>
         {mockedProducts.map((product) => (
-          <NavLink key={product.id} to={`product/${String(product.id)}`}>
+          <NavLink key={product.id} to={`product/${String(product.id)}`} data-cy="product">
             {product.title}
           </NavLink>
         ))}
