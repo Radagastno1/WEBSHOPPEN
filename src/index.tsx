@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import './index.css';
 import RootLayout from './pages/RootLayout';
+import OrderPage from './pages/OrderPage';
 
 
 const router = createBrowserRouter(
@@ -16,7 +17,7 @@ const router = createBrowserRouter(
       {/* här är sidan för kundvagnen */}
       <Route path="cart" element={<div>I DIN KUNDVAGN ....</div>}></Route>
       {/* formulär betalning */}
-      <Route path="checkout" element={<div>KASSA FORMULÄR</div>}></Route>
+      <Route path="checkout" element={<OrderPage/>}></Route>
       {/* bekräftelsesida */}
       <Route path="confirmation" element={<div>BEKRÄFTELSE</div>}></Route>
     </Route>
