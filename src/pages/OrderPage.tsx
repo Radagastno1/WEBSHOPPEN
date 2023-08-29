@@ -1,13 +1,7 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCustomerContext } from "../CustomerContext";
-import { useNavigate } from 'react-router-dom'; 
 
-// - `data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
-// - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
-// - `data-cy="customer-address"` kundens gatuadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-zipcode"` kundens postnummer (som fylls i på checkout-sidan).
-// - `data-cy="customer-city"` kundens stad (som fylls i på checkout-sidan).
-// - `data-cy="customer-email"` kundens emailadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-phone"` kundens telefonnummer (som fylls i på checkout-sidan).
 // - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
 // - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
 // - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
@@ -18,14 +12,21 @@ import { useNavigate } from 'react-router-dom';
 export default function OrderPage() {
     const { customer, setCustomer } = useCustomerContext();
     const navigate = useNavigate();
+    
+    const [nameError, setNameError] = useState('');
+
 
   function handleSubmit(e: any) {
     e.preventDefault();
+    if (!customer.name) {
+        setNameError('Förnamn och efternamn är obligatoriskt.');
+        return; 
+    }
     navigate('../confirmation');
   }
 
   return (
-    <div>
+    <div className='flex flex-col'>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -40,9 +41,12 @@ export default function OrderPage() {
           type="text"
           autoComplete="name"
           value={customer?.name}
-          onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, name: e.target.value });
+            setNameError('');
+        }}
         />
+        <p className="error-message text-red-800" data-cy="customer-name-error">{nameError}</p>
 
         <label>Gatuadress</label>
         <input
@@ -53,7 +57,7 @@ export default function OrderPage() {
           onChange={(e) =>
             setCustomer({ ...customer, address: e.target.value })
           }
-          required
+        
         />
         <label>Postkod</label>
         <input
@@ -64,7 +68,7 @@ export default function OrderPage() {
           onChange={(e) =>
             setCustomer({ ...customer, zipcode: e.target.value })
           }
-          required
+         
         />
         <label>Stad</label>
         <input
@@ -73,7 +77,7 @@ export default function OrderPage() {
           autoComplete="address-level2"
           value={customer?.city}
           onChange={(e) => setCustomer({ ...customer, city: e.target.value })}
-          required
+       
         />
         <label>Email</label>
         <input
@@ -82,7 +86,7 @@ export default function OrderPage() {
           autoComplete="email"
           value={customer?.email}
           onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
-          required
+       
         />
         <label>Telefon</label>
         <input
@@ -91,7 +95,7 @@ export default function OrderPage() {
           autoComplete="tel"
           value={customer?.phone}
           onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
-          required
+       
         />
         <input type="submit" value="Bekräfta" />
       </form>
