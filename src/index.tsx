@@ -5,6 +5,7 @@ import './index.css';
 import RootLayout from './pages/RootLayout';
 import IndexPage from './pages/IndexPage';
 import OrderPage from './pages/OrderPage';
+import ProductPage from './pages/ProductPage';
 
 
 
@@ -15,7 +16,7 @@ const router = createBrowserRouter(
     {/* alla produkter syns här */}
       <Route index element={<IndexPage/>}></Route> 
       {/* en specifik produkt visas här */}
-      <Route path="product/:id" element={<div>VISAR EN PRODUKT</div>}></Route>
+      <Route path="product/:id" element={<ProductPage/>}></Route>
       {/* här är sidan för kundvagnen */}
       <Route path="cart" element={<div>I DIN KUNDVAGN ....</div>}></Route>
       {/* formulär betalning */}
