@@ -1,13 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCustomerContext } from "../CustomerContext";
 
-
-// - `data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
-// - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
-// - `data-cy="customer-address"` kundens gatuadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-zipcode"` kundens postnummer (som fylls i på checkout-sidan).
-// - `data-cy="customer-city"` kundens stad (som fylls i på checkout-sidan).
-// - `data-cy="customer-email"` kundens emailadress (som fylls i på checkout-sidan).
-// - `data-cy="customer-phone"` kundens telefonnummer (som fylls i på checkout-sidan).
 // - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
 // - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
 // - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
@@ -15,28 +9,51 @@ import { useState } from "react";
 // - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
 // - `data-cy="customer-phone-error"`
 
-
 export default function OrderPage() {
+  const { customer, setCustomer } = useCustomerContext();
+  const navigate = useNavigate();
 
-         const [customer, setCustomer] = useState({
-        name: "",
-        address: "",
-        zipcode: "",
-        city: "",
-        email: "",
-        phone: ""
-      })
+  const [nameError, setNameError] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [zipcodeError, setZipcodeError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
-  function handleSubmit(e:any) {
+  function handleSubmit(e: any) {
     e.preventDefault();
-    alert("Du har köpt något");
-    window.location.href = '../confirmation';    
+    if (!customer.name) {
+      setNameError("Förnamn och efternamn är obligatoriskt.");
+      return;
+    } else if (!customer.address) {
+      setAddressError("Adress är obligatoriskt.");
+      return;
+    } else if (!customer.zipcode) {
+      setZipcodeError("Postkod är obligatoriskt.");
+      return;
+    } else if (!customer.city) {
+      setCityError("Stad är obligatoriskt.");
+      return;
+    } else if (!customer.email) {
+      setEmailError("Email är obligatoriskt.");
+      return;
+    } else if (!customer.phone) {
+      setPhoneError("Telefonnummer är obligatoriskt.");
+      return;
+    }
+
+    navigate("../confirmation");
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => {handleSubmit(e)}} data-cy="customer-form" className="flex flex-col">
-
+    <div className="flex flex-col">
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+        data-cy="customer-form"
+        className="flex flex-col"
+      >
         <label>Förnamn och efternamn</label>
 
         <input
@@ -44,9 +61,14 @@ export default function OrderPage() {
           type="text"
           autoComplete="name"
           value={customer?.name}
-          onChange={(e) => setCustomer({...customer, name: e.target.value})} 
-          required
-        />  
+          onChange={(e) => {
+            setCustomer({ ...customer, name: e.target.value });
+            setNameError("");
+          }}
+        />
+        <p className="error-message text-red-800" data-cy="customer-name-error">
+          {nameError}
+        </p>
 
         <label>Gatuadress</label>
         <input
@@ -54,46 +76,82 @@ export default function OrderPage() {
           type="text"
           autoComplete="street-address"
           value={customer?.address}
-          onChange={(e) => setCustomer({...customer, address: e.target.value})} 
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, address: e.target.value });
+            setAddressError("");
+          }}
         />
+        <p
+          className="error-message text-red-800"
+          data-cy="customer-street-address-error"
+        >
+          {addressError}
+        </p>
+
         <label>Postkod</label>
         <input
           data-cy="customer-zipcode"
           type="number"
           autoComplete="postal-code"
           value={customer?.zipcode}
-          onChange={(e) => setCustomer({...customer, zipcode: e.target.value})} 
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, zipcode: e.target.value });
+            setZipcodeError("");
+          }}
         />
+        <p
+          className="error-message text-red-800"
+          data-cy="customer-zipcode-error"
+        >
+          {zipcodeError}
+        </p>
+
         <label>Stad</label>
         <input
           data-cy="customer-city"
           type="text"
           autoComplete="address-level2"
           value={customer?.city}
-          onChange={(e) => setCustomer({...customer, city: e.target.value})} 
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, city: e.target.value });
+            setCityError("");
+          }}
         />
+        <p className="error-message text-red-800" data-cy="customer-city-error">
+          {cityError}
+        </p>
+
         <label>Email</label>
         <input
           data-cy="customer-email"
           type="email"
           autoComplete="email"
           value={customer?.email}
-          onChange={(e) => setCustomer({...customer, email: e.target.value})} 
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, email: e.target.value });
+            setEmailError("");
+          }}
         />
+        <p className="error-message text-red-800" data-cy="customer-city-error">
+          {emailError}
+        </p>
+
         <label>Telefon</label>
         <input
           data-cy="customer-phone"
           type="number"
           autoComplete="tel"
           value={customer?.phone}
-          onChange={(e) => setCustomer({...customer, phone: e.target.value})} 
-          required
+          onChange={(e) => {
+            setCustomer({ ...customer, phone: e.target.value });
+            setPhoneError("");
+          }}
         />
-        <input type="submit" value="Bekräfta"/>
+        <p className="error-message text-red-800" data-cy="customer-city-error">
+          {phoneError}
+        </p>
+
+        <input type="submit" value="Bekräfta" />
       </form>
     </div>
   );
