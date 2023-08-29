@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useCustomerContext } from "../CustomerContext";
+import { useNavigate } from 'react-router-dom'; 
 
 // - `data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
 // - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
@@ -15,28 +15,24 @@ import { useState } from "react";
 // - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
 // - `data-cy="customer-phone-error"`
 
-
 export default function OrderPage() {
+    const { customer, setCustomer } = useCustomerContext();
+    const navigate = useNavigate();
 
-         const [customer, setCustomer] = useState({
-        name: "",
-        address: "",
-        zipcode: "",
-        city: "",
-        email: "",
-        phone: ""
-      })
-
-  function handleSubmit(e:any) {
+  function handleSubmit(e: any) {
     e.preventDefault();
-    alert("Du har köpt något");
-    window.location.href = '../confirmation';    
+    navigate('../confirmation');
   }
 
   return (
     <div>
-      <form onSubmit={(e) => {handleSubmit(e)}} data-cy="customer-form" className="flex flex-col">
-
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+        data-cy="customer-form"
+        className="flex flex-col"
+      >
         <label>Förnamn och efternamn</label>
 
         <input
@@ -44,9 +40,9 @@ export default function OrderPage() {
           type="text"
           autoComplete="name"
           value={customer?.name}
-          onChange={(e) => setCustomer({...customer, name: e.target.value})} 
+          onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
           required
-        />  
+        />
 
         <label>Gatuadress</label>
         <input
@@ -54,7 +50,9 @@ export default function OrderPage() {
           type="text"
           autoComplete="street-address"
           value={customer?.address}
-          onChange={(e) => setCustomer({...customer, address: e.target.value})} 
+          onChange={(e) =>
+            setCustomer({ ...customer, address: e.target.value })
+          }
           required
         />
         <label>Postkod</label>
@@ -63,7 +61,9 @@ export default function OrderPage() {
           type="number"
           autoComplete="postal-code"
           value={customer?.zipcode}
-          onChange={(e) => setCustomer({...customer, zipcode: e.target.value})} 
+          onChange={(e) =>
+            setCustomer({ ...customer, zipcode: e.target.value })
+          }
           required
         />
         <label>Stad</label>
@@ -72,7 +72,7 @@ export default function OrderPage() {
           type="text"
           autoComplete="address-level2"
           value={customer?.city}
-          onChange={(e) => setCustomer({...customer, city: e.target.value})} 
+          onChange={(e) => setCustomer({ ...customer, city: e.target.value })}
           required
         />
         <label>Email</label>
@@ -81,7 +81,7 @@ export default function OrderPage() {
           type="email"
           autoComplete="email"
           value={customer?.email}
-          onChange={(e) => setCustomer({...customer, email: e.target.value})} 
+          onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
           required
         />
         <label>Telefon</label>
@@ -90,10 +90,10 @@ export default function OrderPage() {
           type="number"
           autoComplete="tel"
           value={customer?.phone}
-          onChange={(e) => setCustomer({...customer, phone: e.target.value})} 
+          onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
           required
         />
-        <input type="submit" value="Bekräfta"/>
+        <input type="submit" value="Bekräfta" />
       </form>
     </div>
   );
