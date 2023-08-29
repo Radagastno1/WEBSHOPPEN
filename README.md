@@ -139,6 +139,7 @@ Ni ska vid presentationstillfället hålla i en muntlig presentation för klasse
 - [ ] Det ska gå att gå till checkoutsidan och se innehållet i kundvagnen (knapp & url).
 - [ ] Det ska gå att se det totala priset i kundvagnen.
 - [ ] Det ska gå att ändra produkterna i kundvagnen (header + vyn + pris + ls).
+
 - [ ] Det ska gå att ange leveransuppgifter i ett formulär.
 - [ ] Samtliga fält för checkoutsidans formulär ska ha valideringsregler.
 - [ ] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
