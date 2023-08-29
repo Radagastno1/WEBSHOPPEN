@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import './index.css';
 import RootLayout from './pages/RootLayout';
+import IndexPage from './pages/IndexPage';
 
 
 const router = createBrowserRouter(
@@ -10,7 +11,7 @@ const router = createBrowserRouter(
     <Route element={<RootLayout/>}>
 
     {/* alla produkter syns här */}
-      <Route index element={<div>FÖRSTA SIDAN</div>}></Route> 
+      <Route index element={<IndexPage/>}></Route> 
       {/* en specifik produkt visas här */}
       <Route path="product/:id" element={<div>VISAR EN PRODUKT</div>}></Route>
       {/* här är sidan för kundvagnen */}
