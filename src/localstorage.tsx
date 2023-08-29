@@ -24,7 +24,7 @@ export const addProductToCart = (product: Products) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   };
   
-  const getCartFromLocalStorage = (): Cart => {
+  export const getCartFromLocalStorage = (): Cart => {
     const cartString = localStorage.getItem('cart');
     const cart: Cart = cartString ? JSON.parse(cartString) : { products: [], totalPrice: 0 };
     return cart;
