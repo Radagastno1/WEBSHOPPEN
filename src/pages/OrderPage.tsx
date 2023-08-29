@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 // - `data-cy="customer-form"` formulär för att fylla i kunduppgifter på checkout-sidan.
 // - `data-cy="customer-name"` kundens namn (som fylls i på checkout-sidan).
 // - `data-cy="customer-address"` kundens gatuadress (som fylls i på checkout-sidan).
@@ -14,24 +15,27 @@ import { useState } from "react";
 // - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
 // - `data-cy="customer-phone-error"`
 
+
 export default function OrderPage() {
-  const [customer, setCustomer] = useState({
-    name: "",
-    address: "",
-    zipcode: "",
-    city: "",
-    email: "",
-    phone: ""
-  })
 
-  function handleSubmit(){
-    alert("du har köpt något");
+         const [customer, setCustomer] = useState({
+        name: "",
+        address: "",
+        zipcode: "",
+        city: "",
+        email: "",
+        phone: ""
+      })
+
+  function handleSubmit(e:any) {
+    e.preventDefault();
+    alert("Du har köpt något");
+    window.location.href = '../confirmation';    
   }
-
 
   return (
     <div>
-      <form onSubmit={handleSubmit} data-cy="customer-form" className="flex flex-col">
+      <form onSubmit={(e) => {handleSubmit(e)}} data-cy="customer-form" className="flex flex-col">
 
         <label>Förnamn och efternamn</label>
 
@@ -41,7 +45,8 @@ export default function OrderPage() {
           autoComplete="name"
           value={customer?.name}
           onChange={(e) => setCustomer({...customer, name: e.target.value})} 
-        />
+          required
+        />  
 
         <label>Gatuadress</label>
         <input
@@ -50,6 +55,7 @@ export default function OrderPage() {
           autoComplete="street-address"
           value={customer?.address}
           onChange={(e) => setCustomer({...customer, address: e.target.value})} 
+          required
         />
         <label>Postkod</label>
         <input
@@ -58,6 +64,7 @@ export default function OrderPage() {
           autoComplete="postal-code"
           value={customer?.zipcode}
           onChange={(e) => setCustomer({...customer, zipcode: e.target.value})} 
+          required
         />
         <label>Stad</label>
         <input
@@ -66,6 +73,7 @@ export default function OrderPage() {
           autoComplete="address-level2"
           value={customer?.city}
           onChange={(e) => setCustomer({...customer, city: e.target.value})} 
+          required
         />
         <label>Email</label>
         <input
@@ -74,6 +82,7 @@ export default function OrderPage() {
           autoComplete="email"
           value={customer?.email}
           onChange={(e) => setCustomer({...customer, email: e.target.value})} 
+          required
         />
         <label>Telefon</label>
         <input
@@ -82,6 +91,7 @@ export default function OrderPage() {
           autoComplete="tel"
           value={customer?.phone}
           onChange={(e) => setCustomer({...customer, phone: e.target.value})} 
+          required
         />
         <input type="submit" value="Bekräfta"/>
       </form>
