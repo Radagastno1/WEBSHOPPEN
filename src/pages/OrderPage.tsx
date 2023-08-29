@@ -12,61 +12,73 @@ import { useState } from "react";
 // - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
 // - `data-cy="customer-city-error"` felmeddelande vid felaktigt angiven stad.
 // - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
-// - `data-cy="customer-phone-error"` 
+// - `data-cy="customer-phone-error"`
 
-export default function OrderPage(){
+export default function OrderPage() {
+  const [customer, setCustomer] = useState({
+    name: "",
+    address: "",
+    zipcode: "",
+    city: "",
+    email: "",
+    phone: ""
+  })
 
-    const [customer, setCustomer] = 
-    useState<{name: string, address: string, zipcode: number, city: string, email: string, phone: string}>();
-
-    function handleChange(){
-
-    }
+  function handleSubmit(){
+    alert("du har köpt något");
+  }
 
 
-    return(
-        <div>
-            <form data-cy="customer-form" className="flex flex-col">
-                <label>Förnamn och efternamn</label>
-                <input data-cy="customer-name"
-          type="text" 
+  return (
+    <div>
+      <form onSubmit={handleSubmit} data-cy="customer-form" className="flex flex-col">
+
+        <label htmlFor="name">Förnamn och efternamn</label>
+
+        <input
+          data-cy="customer-name"
+          type="text"
           value={customer?.name}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, name: e.target.value})} 
         />
-            <label>Gatuadress</label>
-                <input data-cy="customer-address"
-          type="text" 
+
+        <label>Gatuadress</label>
+        <input
+          data-cy="customer-address"
+          type="text"
           value={customer?.address}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, address: e.target.value})} 
         />
-             <label>Postkod</label>
-                <input data-cy="customer-zipcode"
-          type="number" 
+        <label>Postkod</label>
+        <input
+          data-cy="customer-zipcode"
+          type="number"
           value={customer?.zipcode}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, zipcode: e.target.value})} 
         />
-             <label>Stad</label>
-                <input data-cy="customer-city"
-          type="text" 
+        <label>Stad</label>
+        <input
+          data-cy="customer-city"
+          type="text"
           value={customer?.city}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, city: e.target.value})} 
         />
-             <label>Email</label>
-                <input data-cy="customer-email"
-          type="email" 
+        <label>Email</label>
+        <input
+          data-cy="customer-email"
+          type="email"
           value={customer?.email}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, email: e.target.value})} 
         />
-             <label>Telefon</label>
-                <input data-cy="customer-phone"
-          type="number" 
+        <label>Telefon</label>
+        <input
+          data-cy="customer-phone"
+          type="number"
           value={customer?.phone}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setCustomer({...customer, phone: e.target.value})} 
         />
-
-
-        <input type="submit" />
-            </form>
-        </div>
-    );
+        <input type="submit" value="Bekräfta"/>
+      </form>
+    </div>
+  );
 }
