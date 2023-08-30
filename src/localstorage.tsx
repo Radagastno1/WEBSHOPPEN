@@ -35,13 +35,17 @@ export const addProductToCart = (product: Products) => {
     return cart;
   };
 
+  export const removeCartFromLocalstorage = () => {
+    localStorage.removeItem("cart");
+  }
+
   export const generateNewOrderToLS = (ordernr: string, customer : Customer, cart: Cart) => {
       const newOrder : Order = {orderNr: ordernr, customer : customer, cart: cart}
       addOrderToLS(newOrder);
+      return newOrder;
   };
 
   export const addOrderToLS = (order: Order) => {
-    localStorage.removeItem('order'); 
     localStorage.setItem('order', JSON.stringify(order));
   };
 
