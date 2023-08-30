@@ -1,17 +1,14 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { mockedProducts } from "../mockedList";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
 
 export default function IndexPage() {
-  const saveProductsToLocalStorage = () => {
+  useEffect(() => {
+    // Endast kör detta när komponenten monteras för första gången
     mockedProducts.forEach((product) => {
       addProductToLS(product);
     });
-  };
-
-  useEffect(() => {
-    saveProductsToLocalStorage();
   }, []);
 
   return (
@@ -32,3 +29,4 @@ export default function IndexPage() {
     </div>
   );
 }
+

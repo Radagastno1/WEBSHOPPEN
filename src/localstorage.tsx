@@ -2,17 +2,18 @@ import { Customer } from "./CustomerContext";
 import { Order } from "./interfaces";
 import { Cart, Products } from "./interfaces";
 
-
 export const addProductToLS = (product: Products) => {
-    const existingProducts = JSON.parse(localStorage.getItem('products') || '[]') as Products[];
 
-  const isProductInList = existingProducts.some(existingProduct => existingProduct.id === product.id);
+  const existingProducts = JSON.parse(localStorage.getItem('products') || '[]') as Products[];
 
-  if (!isProductInList) {
+  const productExists = existingProducts.some((existingProduct) => existingProduct.id === product.id);
+
+  if (!productExists) {
     existingProducts.push(product);
     localStorage.setItem('products', JSON.stringify(existingProducts));
   }
 };
+
   
  export const getProductsFromLS= (): Products[] => {
     const productsString = localStorage.getItem('products');
