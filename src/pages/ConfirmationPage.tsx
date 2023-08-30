@@ -38,7 +38,6 @@ export default function ConfirmationPage() {
           cartsRef.current
         );
       }
-
       orderRef.current = orderInLS;
       setOrderLoaded(true);
     }
