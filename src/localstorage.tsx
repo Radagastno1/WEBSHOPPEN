@@ -1,13 +1,16 @@
 import { Cart, Products } from "./mockedList";
 
-
 export const addProductToLS = (product: Products) => {
-    const existingProducts = JSON.parse(localStorage.getItem('products') || '[]') as Products[];
-  
+  const existingProducts = JSON.parse(localStorage.getItem('products') || '[]') as Products[];
+
+  const productExists = existingProducts.some((existingProduct) => existingProduct.id === product.id);
+
+  if (!productExists) {
     existingProducts.push(product);
-  
     localStorage.setItem('products', JSON.stringify(existingProducts));
-  };
+  }
+};
+
   
 
  export const getProductsFromLS= (): Products[] => {
