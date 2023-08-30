@@ -41,7 +41,7 @@ export const addProductToCart = (product: Products) => {
     localStorage.setItem('customer', JSON.stringify(customer));
   };
 
-  export const getCustomerFromLS = (): Customer | null => {
+  export const getCustomerFromLS = (): Customer => {
     const customerString = localStorage.getItem('customer');
     const customer: Customer = customerString ? JSON.parse(customerString) : null;
     return customer;

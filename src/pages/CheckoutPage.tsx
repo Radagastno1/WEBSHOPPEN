@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-import { addProductToCart, getProductsFromLS } from "../localstorage";
-import { Products } from "../mockedList";
+import { addCustomerToLS } from "../localstorage";
 
 // - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
 // - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
@@ -44,7 +43,7 @@ export default function OrderPage() {
       setPhoneError("Telefonnummer är obligatoriskt.");
       return;
     }
-
+    addCustomerToLS(customer);
     navigate("../confirmation");
   }
 

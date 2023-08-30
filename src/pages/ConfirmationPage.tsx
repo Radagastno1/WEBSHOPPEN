@@ -1,15 +1,31 @@
 import { useEffect, useRef, useState } from "react";
-import { useCustomerContext } from "../CustomerContext";
+import { Customer, useCustomerContext } from "../CustomerContext";
 import {
+  addCustomerToLS,
   addProductToCart,
   addProductToLS,
   getCartFromLocalStorage,
+  getCustomerFromLS,
   getProductsFromLS,
 } from "../localstorage";
 import { Products, mockedProducts } from "../mockedList";
 
 export default function ConfirmationPage() {
   const { customer } = useCustomerContext();
+
+  const [customerLoaded, setCustomerLoaded] = useState(false);
+
+  const customerRef = useRef<Customer>();
+
+  useEffect(() => {
+    // kunden till ref om det inte finns än i current då. för att se så den är inladdad från ls
+    if (!customerRef.current) {
+      const customerInLS = getCustomerFromLS();
+      customerRef.current = customerInLS;
+      setCustomerLoaded(true);
+    }
+  }, [customer]);
+
   //använder ref nu sålänge för att jag lägger till i ls i useeffect, så att produkterna finns deklararerade innan
   // useeffect körs (genom livscykeln på ref) samt att man kan anropa dom utanför useeffect
   const productsRef = useRef<Products[]>([]);
@@ -37,11 +53,18 @@ export default function ConfirmationPage() {
     <div className="flex flex-col items-center">
       <div className="flex flex-col">
         <h2>Din leveransadress</h2>
-        <p>{customer.name}</p>
-        <p>{customer.address}</p>
-        <p>
-          {customer.zipcode} {customer.city}
-        </p>
+
+        {customerLoaded ? (
+          <div>
+            <p>{customerRef.current?.name}</p>
+            <p>{customerRef.current?.address}</p>
+            <p>
+              {customerRef.current?.zipcode} {customerRef.current?.city}
+            </p>
+          </div>
+        ) : (
+          <p>Laddar uppgifter....</p>
+        )}
       </div>
 
       <div className="flex flex-col my-2">
