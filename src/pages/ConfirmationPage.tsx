@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useCustomerContext } from "../CustomerContext";
-import { Order } from "../interfaces";
+import { Cart, Order } from "../interfaces";
 import {
-  generateNewOrderToLS,
-  getCartFromLocalStorage,
-  getOrderFromLS,
+    generateNewOrderToLS,
+    getCartFromLocalStorage,
+    getOrderFromLS,
+    removeCartFromLocalstorage,
 } from "../localstorage";
-import { Cart } from "../interfaces";
 
 function generateRandomNumber() {
   const randomNumbers = Math.floor(Math.random() * 9000) + 1000;
@@ -38,6 +38,9 @@ export default function ConfirmationPage() {
           cartsRef.current
         );
       }
+      if(cartsRef.current){
+        removeCartFromLocalstorage();
+    }
       orderRef.current = orderInLS;
       setOrderLoaded(true);
     }
