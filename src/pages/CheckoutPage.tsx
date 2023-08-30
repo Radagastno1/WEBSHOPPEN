@@ -3,13 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
 import { addCustomerToLS } from "../localstorage";
 
-// - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
-// - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
-// - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
-// - `data-cy="customer-city-error"` felmeddelande vid felaktigt angiven stad.
-// - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
-// - `data-cy="customer-phone-error"`
-
 export default function OrderPage() {
     
   const { customer, setCustomer } = useCustomerContext();

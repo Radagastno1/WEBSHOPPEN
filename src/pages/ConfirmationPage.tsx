@@ -51,7 +51,7 @@ export default function ConfirmationPage() {
 
   return (
     <div className="flex flex-col items-center" style={{ maxHeight: "calc(100vh - 200px)" }}>
-      <div className="mt-2 p-3 w-screen bg-neutral-700">
+      <div className="mt-2 p-3 w-screen bg-neutral-700 bg-opacity-50">
         <h2>Order och leverans</h2>
       </div>
 
@@ -80,7 +80,7 @@ export default function ConfirmationPage() {
         </div>
       </div>
 
-      <div className="mt-2 p-3 w-screen bg-neutral-700">
+      <div className="p-3 w-screen bg-neutral-700 bg-opacity-50">
         <h2>Beställda produkter</h2>
       </div>
 
