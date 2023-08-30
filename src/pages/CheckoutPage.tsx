@@ -1,10 +1,9 @@
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-// import { addCustomerToLS } from "../localstorage";
 
 export default function OrderPage() {
-    
   const { customer, setCustomer } = useCustomerContext();
   const navigate = useNavigate();
 
@@ -48,34 +47,34 @@ export default function OrderPage() {
         data-cy="customer-form"
         className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded"
       >
-        <label>Förnamn och efternamn</label>
-
-        <input
-          data-cy="customer-name"
-          type="text"
-          autoComplete="name"
+          <Box mt={2}>
+          <TextField
+          label="Förnamn och efternamn"
           value={customer?.name}
+          autoComplete="name"
+          data-cy="customer-name"
           onChange={(e) => {
             setCustomer({ ...customer, name: e.target.value });
             setNameError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          variant="standard"
         />
         <p className="error-message text-red-800" data-cy="customer-name-error">
           {nameError}
         </p>
+          </Box>
+     
 
-        <label>Gatuadress</label>
-        <input
+        <TextField
+          label="Gatuadress"
           data-cy="customer-address"
-          type="text"
           autoComplete="street-address"
           value={customer?.address}
+          variant="standard"
           onChange={(e) => {
             setCustomer({ ...customer, address: e.target.value });
             setAddressError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -84,17 +83,16 @@ export default function OrderPage() {
           {addressError}
         </p>
 
-        <label>Postkod</label>
-        <input
+        <TextField
+          label="Postkod"
           data-cy="customer-zipcode"
-          type="number"
           autoComplete="postal-code"
           value={customer?.zipcode}
+          variant="standard"
           onChange={(e) => {
             setCustomer({ ...customer, zipcode: e.target.value });
             setZipcodeError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -103,55 +101,57 @@ export default function OrderPage() {
           {zipcodeError}
         </p>
 
-        <label>Stad</label>
-        <input
+        <TextField
+          label="Stad"
           data-cy="customer-city"
-          type="text"
           autoComplete="address-level2"
           value={customer?.city}
+          variant="standard"
           onChange={(e) => {
             setCustomer({ ...customer, city: e.target.value });
             setCityError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {cityError}
         </p>
 
-        <label>Email</label>
-        <input
+        <TextField
+          label="Email"
           data-cy="customer-email"
           type="email"
           autoComplete="email"
           value={customer?.email}
+          variant="standard"
           onChange={(e) => {
             setCustomer({ ...customer, email: e.target.value });
             setEmailError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {emailError}
         </p>
 
-        <label>Telefon</label>
-        <input
+        <TextField
+          label="Telefonnummer"
           data-cy="customer-phone"
-          type="number"
           autoComplete="tel"
           value={customer?.phone}
+          variant="standard"
           onChange={(e) => {
             setCustomer({ ...customer, phone: e.target.value });
             setPhoneError("");
           }}
-          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {phoneError}
         </p>
 
-        <input type="submit" value="Bekräfta" className="pr-4 pl-4 py-1 bg-neutral-400 rounded mt-1  focus:ring-blue-00" />
+        <Box mt={2}>
+          <Button type="submit" variant="contained" color="primary">
+            Bekräfta
+          </Button>
+        </Box>
       </form>
     </div>
   );
