@@ -11,7 +11,7 @@ export interface Order{
     title: string;
     price: number;
     description: string;
-    url: string;
+    image: string;
 }
 
 export interface Cart{
