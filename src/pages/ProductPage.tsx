@@ -1,11 +1,11 @@
+import React from "react";
 import { mockedProducts } from "../mockedList";
-import { parsePath, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import AddtoCartButton from "./AddtoCartButton";
 
 export default function ProductPage() {
   const { id } = useParams();
-
-  
-  const selectedProduct = mockedProducts.find(product => String(product.id) == id );
+  const selectedProduct = mockedProducts.find((product) => String(product.id) === id);
 
   if (!selectedProduct) {
     return <p>Product not found</p>;
@@ -13,11 +13,18 @@ export default function ProductPage() {
 
   return (
     <div data-cy="product-id">
-      <h2>{selectedProduct.title}</h2>
-      <p>{selectedProduct.description}</p>
-      <p>Price: {selectedProduct.price}</p>
+      <h2 data-cy="product-title">{selectedProduct.title}</h2>
+      <p data-cy="product-description">{selectedProduct.description}</p>
+      <p data-cy="product-price">Price: {selectedProduct.price}</p>
+      <AddtoCartButton product={selectedProduct} />
     </div>
   );
 }
+
+
+
+
+
+
 
 

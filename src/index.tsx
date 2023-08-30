@@ -4,8 +4,13 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import './index.css';
 import RootLayout from './pages/RootLayout';
 import IndexPage from './pages/IndexPage';
-import OrderPage from './pages/OrderPage';
+import OrderPage from './pages/CheckoutPage';
+
+import ConfirmationPage from './pages/ConfirmationPage';
+import { CustomerProvider } from './CustomerContext';
+
 import ProductPage from './pages/ProductPage';
+
 
 
 
@@ -20,9 +25,9 @@ const router = createBrowserRouter(
       {/* här är sidan för kundvagnen */}
       <Route path="cart" element={<div>I DIN KUNDVAGN ....</div>}></Route>
       {/* formulär betalning */}
-      <Route path="checkout" element={<OrderPage/>}></Route>
+      <Route path="checkout" element={<CustomerProvider><OrderPage/></CustomerProvider>}></Route>
       {/* bekräftelsesida */}
-      <Route path="confirmation" element={<div>BEKRÄFTELSE</div>}></Route>
+      <Route path="confirmation" element={<CustomerProvider><ConfirmationPage/></CustomerProvider>}></Route>
     </Route>
   )
 );
