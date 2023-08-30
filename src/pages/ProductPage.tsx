@@ -3,13 +3,26 @@ import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "./AddtoCartButton";
 
+interface CartItem {
+  id: string;
+  quantity: number;
+}
+
+function getCartItemsFromLocalStorage(): CartItem[] {
+  const cartItemsJSON = localStorage.getItem("cartItems");
+  return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
+}
+
 export default function ProductPage() {
-  const { id } = useParams<{ id: string }>(); // Använd generic för typen av id
+  const { id } = useParams<{ id: string }>();
   const selectedProduct = mockedProducts.find((product) => String(product.id) === id);
 
   if (!selectedProduct) {
     return <p>Product not found</p>;
   }
+
+  const cartItems = getCartItemsFromLocalStorage();
+  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="flex flex-col items-center">
@@ -24,9 +37,12 @@ export default function ProductPage() {
         alt={selectedProduct.title}
         className="mt-4 w-32 h-auto"
       />
+     
     </div>
   );
 }
+
+
 
 
 

@@ -17,4 +17,9 @@ export interface Order{
 export interface Cart{
     products : Products[];
     totalPrice: number;
+    
+  }
+
+  export interface CartItem extends Products {
+    quantity: number;
   }
