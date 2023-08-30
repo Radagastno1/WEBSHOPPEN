@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addProductToCart } from "../localstorage";
-import { Products } from "../mockedList";
+import { Products } from "../interfaces";
 
 interface Props {
   product: Products; 
