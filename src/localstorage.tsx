@@ -1,6 +1,9 @@
-import { Cart, Products } from "./mockedList";
+import { Customer } from "./CustomerContext";
+import { Order } from "./interfaces";
+import { Cart, Products } from "./interfaces";
 
 export const addProductToLS = (product: Products) => {
+
   const existingProducts = JSON.parse(localStorage.getItem('products') || '[]') as Products[];
 
   const productExists = existingProducts.some((existingProduct) => existingProduct.id === product.id);
@@ -12,7 +15,6 @@ export const addProductToLS = (product: Products) => {
 };
 
   
-
  export const getProductsFromLS= (): Products[] => {
     const productsString = localStorage.getItem('products');
     const products = productsString ? JSON.parse(productsString) : [];
@@ -32,4 +34,19 @@ export const addProductToCart = (product: Products) => {
     const cart: Cart = cartString ? JSON.parse(cartString) : { products: [], totalPrice: 0 };
     return cart;
   };
-  
+
+  export const generateNewOrderToLS = (ordernr: string, customer : Customer, cart: Cart) => {
+      const newOrder : Order = {orderNr: ordernr, customer : customer, cart: cart}
+      addOrderToLS(newOrder);
+  };
+
+  export const addOrderToLS = (order: Order) => {
+    localStorage.removeItem('order'); 
+    localStorage.setItem('order', JSON.stringify(order));
+  };
+
+  export const getOrderFromLS = (): Order => {
+    const orderString = localStorage.getItem('order');
+    const order: Order = orderString ? JSON.parse(orderString) : null;
+    return order;
+  };

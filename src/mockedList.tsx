@@ -1,15 +1,4 @@
-export interface Products{
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    url: string;
-}
-
-export interface Cart{
-    products : Products[];
-    totalPrice: number;
-  }
+import { Products } from "./interfaces";
 
 export const mockedProducts : Products[] = [
     {

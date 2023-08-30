@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-
-// - `data-cy="customer-name-error"` felmeddelande vid felaktigt angivet namn.
-// - `data-cy="customer-address-error"` felmeddelande vid felaktigt angiven adress.
-// - `data-cy="customer-zipcode-error"` felmeddelande vid felaktigt angivet postnummer.
-// - `data-cy="customer-city-error"` felmeddelande vid felaktigt angiven stad.
-// - `data-cy="customer-email-error"` felmeddelande vid felaktigt angiven emailadress.
-// - `data-cy="customer-phone-error"`
+import { generateNewOrderToLS } from "../localstorage";
+// import { addCustomerToLS } from "../localstorage";
 
 export default function OrderPage() {
+    
   const { customer, setCustomer } = useCustomerContext();
   const navigate = useNavigate();
 
@@ -41,7 +37,6 @@ export default function OrderPage() {
       setPhoneError("Telefonnummer är obligatoriskt.");
       return;
     }
-
     navigate("../confirmation");
   }
 
@@ -52,7 +47,7 @@ export default function OrderPage() {
           handleSubmit(e);
         }}
         data-cy="customer-form"
-        className="flex flex-col"
+        className="flex flex-col items-center"
       >
         <label>Förnamn och efternamn</label>
 
@@ -65,6 +60,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, name: e.target.value });
             setNameError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-name-error">
           {nameError}
@@ -80,6 +76,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, address: e.target.value });
             setAddressError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -98,6 +95,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, zipcode: e.target.value });
             setZipcodeError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -116,6 +114,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, city: e.target.value });
             setCityError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {cityError}
@@ -131,6 +130,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, email: e.target.value });
             setEmailError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {emailError}
@@ -146,12 +146,13 @@ export default function OrderPage() {
             setCustomer({ ...customer, phone: e.target.value });
             setPhoneError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {phoneError}
         </p>
 
-        <input type="submit" value="Bekräfta" />
+        <input type="submit" value="Bekräfta" className="p-2 bg-blue-200 rounded mt-1  focus:ring-blue-00" />
       </form>
     </div>
   );
