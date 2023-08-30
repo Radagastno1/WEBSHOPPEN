@@ -5,6 +5,7 @@ import './index.css';
 import RootLayout from './pages/RootLayout';
 import IndexPage from './pages/IndexPage';
 import OrderPage from './pages/CheckoutPage';
+// import CartPage from './pages/CartPage';
 
 import ConfirmationPage from './pages/ConfirmationPage';
 import { CustomerProvider } from './CustomerContext';
@@ -23,7 +24,7 @@ const router = createBrowserRouter(
       {/* en specifik produkt visas här */}
       <Route path="product/:id" element={<ProductPage/>}></Route>
       {/* här är sidan för kundvagnen */}
-      <Route path="cart" element={<div>I DIN KUNDVAGN ....</div>}></Route>
+      {/* <Route path="cart" element={<CartPage/>}></Route> */}
       {/* formulär betalning */}
       <Route path="checkout" element={<CustomerProvider><OrderPage/></CustomerProvider>}></Route>
       {/* bekräftelsesida */}
