@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-import { generateNewOrderToLS } from "../localstorage";
 // import { addCustomerToLS } from "../localstorage";
 
 export default function OrderPage() {
@@ -19,7 +18,7 @@ export default function OrderPage() {
   function handleSubmit(e: any) {
     e.preventDefault();
     if (!customer.name) {
-      setNameError("Förnamn och efternamn är obligatoriskt.");
+      setNameError("Namn är obligatoriskt.");
       return;
     } else if (!customer.address) {
       setAddressError("Adress är obligatoriskt.");
@@ -34,20 +33,20 @@ export default function OrderPage() {
       setEmailError("Email är obligatoriskt.");
       return;
     } else if (!customer.phone) {
-      setPhoneError("Telefonnummer är obligatoriskt.");
+      setPhoneError("Nummer är obligatoriskt.");
       return;
     }
     navigate("../confirmation");
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-1 flex-col items-center justify-center">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
         data-cy="customer-form"
-        className="flex flex-col items-center"
+        className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded"
       >
         <label>Förnamn och efternamn</label>
 
@@ -152,7 +151,7 @@ export default function OrderPage() {
           {phoneError}
         </p>
 
-        <input type="submit" value="Bekräfta" className="p-2 bg-blue-200 rounded mt-1  focus:ring-blue-00" />
+        <input type="submit" value="Bekräfta" className="pr-4 pl-4 py-1 bg-neutral-400 rounded mt-1  focus:ring-blue-00" />
       </form>
     </div>
   );
