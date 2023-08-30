@@ -4,7 +4,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import './index.css';
 import RootLayout from './pages/RootLayout';
 import IndexPage from './pages/IndexPage';
-import OrderPage from './pages/OrderPage';
+import OrderPage from './pages/CheckoutPage';
 
 import ConfirmationPage from './pages/ConfirmationPage';
 import { CustomerProvider } from './CustomerContext';
