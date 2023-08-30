@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-import { addCustomerToLS } from "../localstorage";
+import { generateNewOrderToLS } from "../localstorage";
+// import { addCustomerToLS } from "../localstorage";
 
 export default function OrderPage() {
     
@@ -36,7 +37,6 @@ export default function OrderPage() {
       setPhoneError("Telefonnummer är obligatoriskt.");
       return;
     }
-    addCustomerToLS(customer);
     navigate("../confirmation");
   }
 

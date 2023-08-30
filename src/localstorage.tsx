@@ -1,5 +1,6 @@
 import { Customer } from "./CustomerContext";
-import { Cart, Products } from "./mockedList";
+import { Order } from "./interfaces";
+import { Cart, Products } from "./interfaces";
 
 
 export const addProductToLS = (product: Products) => {
@@ -13,7 +14,6 @@ export const addProductToLS = (product: Products) => {
   }
 };
   
-
  export const getProductsFromLS= (): Products[] => {
     const productsString = localStorage.getItem('products');
     const products = productsString ? JSON.parse(productsString) : [];
@@ -33,17 +33,19 @@ export const addProductToCart = (product: Products) => {
     const cart: Cart = cartString ? JSON.parse(cartString) : { products: [], totalPrice: 0 };
     return cart;
   };
-  
-  //när ska jag radera customer från ls, tänker att jag gör det varje gång den  läggs till för det händer
-  //ju vid formuläret ändå så?
-  export const addCustomerToLS = (customer: Customer) => {
-    localStorage.removeItem('customer'); 
-    localStorage.setItem('customer', JSON.stringify(customer));
+
+  export const generateNewOrderToLS = (ordernr: string, customer : Customer, cart: Cart) => {
+      const newOrder : Order = {orderNr: ordernr, customer : customer, cart: cart}
+      addOrderToLS(newOrder);
   };
 
-  export const getCustomerFromLS = (): Customer => {
-    const customerString = localStorage.getItem('customer');
-    const customer: Customer = customerString ? JSON.parse(customerString) : null;
-    return customer;
+  export const addOrderToLS = (order: Order) => {
+    localStorage.removeItem('order'); 
+    localStorage.setItem('order', JSON.stringify(order));
   };
-  
+
+  export const getOrderFromLS = (): Order => {
+    const orderString = localStorage.getItem('order');
+    const order: Order = orderString ? JSON.parse(orderString) : null;
+    return order;
+  };
