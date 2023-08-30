@@ -18,7 +18,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <a
+    <button
       data-cy="product-buy-button"
       onClick={handleAddToCart}
       className={`bg-blue-500 border border-black rounded h-12 w-32 text-white ${
@@ -26,7 +26,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
       }`}
     >
       {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
-    </a>
+    </button>
   );
 };
 

@@ -7,7 +7,7 @@ export interface Order{
   }
 
   export interface Products{
-    id: number;
+    id: string;
     title: string;
     price: number;
     description: string;
