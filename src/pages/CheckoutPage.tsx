@@ -47,7 +47,7 @@ export default function OrderPage() {
           handleSubmit(e);
         }}
         data-cy="customer-form"
-        className="flex flex-col"
+        className="flex flex-col items-center"
       >
         <label>Förnamn och efternamn</label>
 
@@ -60,6 +60,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, name: e.target.value });
             setNameError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-name-error">
           {nameError}
@@ -75,6 +76,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, address: e.target.value });
             setAddressError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -93,6 +95,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, zipcode: e.target.value });
             setZipcodeError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p
           className="error-message text-red-800"
@@ -111,6 +114,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, city: e.target.value });
             setCityError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {cityError}
@@ -126,6 +130,7 @@ export default function OrderPage() {
             setCustomer({ ...customer, email: e.target.value });
             setEmailError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {emailError}
@@ -141,12 +146,13 @@ export default function OrderPage() {
             setCustomer({ ...customer, phone: e.target.value });
             setPhoneError("");
           }}
+          className="bg-gray-100 rounded p-1 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <p className="error-message text-red-800" data-cy="customer-city-error">
           {phoneError}
         </p>
 
-        <input type="submit" value="Bekräfta" />
+        <input type="submit" value="Bekräfta" className="p-2 bg-blue-200 rounded mt-1  focus:ring-blue-00" />
       </form>
     </div>
   );
