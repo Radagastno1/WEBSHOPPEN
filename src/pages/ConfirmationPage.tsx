@@ -1,8 +1,8 @@
+import { Paper, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useCustomerContext } from "../CustomerContext";
-import { Cart, Order } from "../interfaces";
 import TableMUI from "../components/TableMUI";
-import { Typography } from "@mui/material";
+import { Cart, Order } from "../interfaces";
 
 import {
   generateNewOrderToLS,
@@ -74,48 +74,48 @@ export default function ConfirmationPage() {
     ]);
   });
   
-  return (
-    <div
-      className="flex flex-col items-center"
-      style={{ maxHeight: "calc(100vh - 200px)" }}
-    >
-      <div className="mt-2 p-3 w-screen bg-neutral-700 bg-opacity-50">
-        <Typography>Order och leverans</Typography>
-      </div>
 
-      <div className="flex bg-neutral-500 w-screen bg-opacity-5">
-        <div className="w-1/2 p-3">
-          <Typography className="font-bold">Order</Typography>
-          <div>
-            <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
+    return (
+      <div className="flex flex-col items-center" style={{ maxHeight: "calc(100vh - 200px)" }}>
+       <Paper className="mt-2 p-3 w-screen"  sx={{
+    backgroundColor: "var(--color-neutral-700)"
+  }}>
+          <Typography variant="h6">Order och leverans</Typography>
+        </Paper>
+    
+        <div className="flex bg-neutral-500 w-screen bg-opacity-5">
+          <div className="w-1/2 p-3">
+            {/* <Typography variant="h6" className="font-bold">Order</Typography> */}
+            <div>
+              <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
+            </div>
+          </div>
+    
+          <div className="w-1/2 p-3">
+            {/* <Typography variant="h6" className="font-bold">Leveransadress</Typography> */}
+            {orderLoaded ? (
+              <div>
+                <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
+              </div>
+            ) : (
+              <Typography>Laddar uppgifter....</Typography>
+            )}
           </div>
         </div>
-
-        <div className="w-1/2 p-3">
-          <Typography className="font-bold">Leveransadress</Typography>
-          {orderLoaded ? (
+    
+        <Paper className="p-3 w-screen bg-neutral-700 bg-opacity-50">
+          <Typography variant="h6">Beställda produkter</Typography>
+        </Paper>
+    
+        <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
+          {orderLoaded && orderRef.current?.cart?.products ? (
             <div>
-              <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
+              <TableMUI titleRow={productTitleRows} cellRows={productRows} />
             </div>
           ) : (
-            <Typography>Laddar uppgifter....</Typography>
+            <Typography>Väntar på att produkter ska laddas...</Typography>
           )}
         </div>
       </div>
-
-      <div className="p-3 w-screen bg-neutral-700 bg-opacity-50">
-        <Typography>Beställda produkter</Typography>
-      </div>
-
-      <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
-        {orderLoaded && orderRef.current?.cart?.products ? (
-          <div>
-          <TableMUI titleRow={productTitleRows} cellRows={productRows} />
-        </div>
-        ) : (
-          <Typography>Väntar på att produkter ska laddas...</Typography>
-        )}
-      </div>
-    </div>
-  );
+    );
 }
