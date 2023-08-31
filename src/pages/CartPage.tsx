@@ -1,18 +1,29 @@
 import React from "react";
-import { mockedProducts } from "../mockedList";
-import { Products } from "../interfaces";
+import { getProductsFromLS } from '../localstorage'; 
 
-export default function CartPage (){
-  {
+
+export default function CartPage() {
+    const productsInCart = getProductsFromLS();
+  
+    const total = productsInCart.reduce((accumulator, product) => accumulator + product.price, 0);
+  
     return (
-      <ul  className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
-        {mockedProducts.map((product) => (
-          <li key={product.id} data-cy={`product-${product.id}`}>
-            <strong>ID:</strong> {product.id}, <strong>Title:</strong> {product.title}, <strong>Price:</strong> {product.price}
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
+        <ul>
+          {productsInCart.map((product) => (
+            <li key={product.id} data-cy={`product-${product.id}`} className="product-item">
+              <div className="product-info" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <div className="product-title" style={{ marginRight: '75px' }}>{product.title}</div>
+                <div className="product-price">
+                  <strong>Pris:</strong> {product.price}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p>Totalt pris: {total}</p>
+      </div>
     );
   }
-}
-
+  
+  
