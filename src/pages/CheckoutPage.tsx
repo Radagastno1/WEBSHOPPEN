@@ -22,16 +22,16 @@ export default function OrderPage() {
     } else if (!customer.address) {
       setAddressError("Adress är obligatoriskt.");
       return;
-    } else if (!customer.zipcode) {
+    } else if (!customer.zipcode || isNaN(Number(customer.zipcode)) || customer.zipcode.length != 5) {
       setZipcodeError("Postkod är obligatoriskt.");
       return;
     } else if (!customer.city) {
       setCityError("Stad är obligatoriskt.");
       return;
-    } else if (!customer.email) {
+    } else if (!customer.email || !customer.email.includes("@")) {
       setEmailError("Email är obligatoriskt.");
       return;
-    } else if (!customer.phone) {
+    } else if (!customer.phone || isNaN(Number(customer.phone)) || customer.phone.length != 10) {
       setPhoneError("Nummer är obligatoriskt.");
       return;
     }
@@ -49,25 +49,27 @@ export default function OrderPage() {
         className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded"
       >
         <Box mt={2}>
-        <TextField
-  label="Förnamn och efternamn"
-  value={customer?.name}
-  autoComplete="name"
-  onChange={(e) => {
-    setCustomer({ ...customer, name: e.target.value });
-    setNameError("");
-  }}
-  inputProps={{
-    'data-cy': 'customer-name' 
-  }}
-  variant="standard"
-/>
-          <p
-            className="error-message text-red-800"
-            data-cy="customer-name-error"
-          >
-            {nameError}
-          </p>
+          <TextField
+            label="Förnamn och efternamn"
+            value={customer?.name}
+            autoComplete="name"
+            onChange={(e) => {
+              setCustomer({ ...customer, name: e.target.value });
+              setNameError("");
+            }}
+            inputProps={{
+              "data-cy": "customer-name",
+            }}
+            variant="standard"
+          />
+          {nameError && (
+            <p
+              className="error-message text-red-800"
+              data-cy="customer-name-error"
+            >
+              {nameError}
+            </p>
+          )}
         </Box>
 
         <TextField
@@ -80,15 +82,17 @@ export default function OrderPage() {
             setAddressError("");
           }}
           inputProps={{
-            'data-cy': 'customer-address' 
+            "data-cy": "customer-address",
           }}
         />
-        <p
-          className="error-message text-red-800"
-          data-cy="customer-street-address-error"
-        >
-          {addressError}
-        </p>
+        {addressError && (
+          <p
+            className="error-message text-red-800"
+            data-cy="customer-address-error"
+          >
+            {addressError}
+          </p>
+        )}
 
         <TextField
           label="Postkod"
@@ -100,15 +104,17 @@ export default function OrderPage() {
             setZipcodeError("");
           }}
           inputProps={{
-            'data-cy': 'customer-zipcode' 
+            "data-cy": "customer-zipcode",
           }}
         />
-        <p
-          className="error-message text-red-800"
-          data-cy="customer-zipcode-error"
-        >
-          {zipcodeError}
-        </p>
+        {zipcodeError && (
+          <p
+            className="error-message text-red-800"
+            data-cy="customer-zipcode-error"
+          >
+            {zipcodeError}
+          </p>
+        )}
 
         <TextField
           label="Stad"
@@ -120,16 +126,20 @@ export default function OrderPage() {
             setCityError("");
           }}
           inputProps={{
-            'data-cy': 'customer-city' 
+            "data-cy": "customer-city",
           }}
         />
-        <p className="error-message text-red-800" data-cy="customer-city-error">
-          {cityError}
-        </p>
+        {cityError && (
+          <p
+            className="error-message text-red-800"
+            data-cy="customer-city-error"
+          >
+            {cityError}
+          </p>
+        )}
 
         <TextField
           label="Email"
-          type="email"
           autoComplete="email"
           value={customer?.email}
           variant="standard"
@@ -138,12 +148,17 @@ export default function OrderPage() {
             setEmailError("");
           }}
           inputProps={{
-            'data-cy': 'customer-email' 
+            "data-cy": "customer-email",
           }}
         />
-        <p className="error-message text-red-800" data-cy="customer-city-error">
-          {emailError}
-        </p>
+        {emailError && (
+          <p
+            className="error-message text-red-800"
+            data-cy="customer-email-error"
+          >
+            {emailError}
+          </p>
+        )}
 
         <TextField
           label="Telefonnummer"
@@ -155,12 +170,17 @@ export default function OrderPage() {
             setPhoneError("");
           }}
           inputProps={{
-            'data-cy': 'customer-phone' 
+            "data-cy": "customer-phone",
           }}
         />
-        <p className="error-message text-red-800" data-cy="customer-city-error">
-          {phoneError}
-        </p>
+        {phoneError && (
+          <p
+            className="error-message text-red-800"
+            data-cy="customer-phone-error"
+          >
+            {phoneError}
+          </p>
+        )}
 
         <Box mt={2}>
           <Button type="submit" variant="contained" color="primary">

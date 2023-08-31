@@ -24,6 +24,7 @@ export default function IndexPage() {
             data-cy="product"
           >
             {product.title}
+            <AddtoCartButton product={product}/>
           </NavLink>
         ))}
       </ul>
