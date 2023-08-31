@@ -1,16 +1,22 @@
 import React from "react";
-import { getProductsFromLS } from '../localstorage'; 
+import { getCartFromLocalStorage } from '../localstorage'; 
 
 
 export default function CartPage() {
-    const productsInCart = getProductsFromLS();
-  
-    const total = productsInCart.reduce((accumulator, product) => accumulator + product.price, 0);
+
+    const cart = getCartFromLocalStorage();
+
+    const total = cart.products.reduce((accumulator, product) => accumulator + product.price, 0);
+
+    cart.totalPrice = total;
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    //uppdatera det till ls
   
     return (
-      <div className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
+        <div className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
         <ul>
-          {productsInCart.map((product) => (
+          {cart.products.map((product) => (
             <li key={product.id} data-cy={`product-${product.id}`} className="product-item">
               <div className="product-info" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <div className="product-title" style={{ marginRight: '75px' }}>{product.title}</div>
