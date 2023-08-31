@@ -13,6 +13,7 @@ export default function RootLayout(){
           backgroundPosition: "center",
         }}
       >
+
         <NavLink to="/checkout" className="ml-auto mr-12" data-cy="cart-link">
             <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" />
             </NavLink>
