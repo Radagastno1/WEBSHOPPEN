@@ -80,12 +80,13 @@ export default function ConfirmationPage() {
       className="flex flex-col items-center"
       style={{ maxHeight: "calc(100vh - 200px)" }}
     >
-      <Paper elevation={4}
-        className="mt-2 p-3 w-screen grey-paper"
+      <Paper  elevation={4}
         sx={{
-          backgroundColor: "var(--color-neutral-700)",
+          mt: 1,
+          p: 1.5,
+          width: "100%",
+          backgroundColor: "#707070", 
         }}
-        
       >
         <Typography variant="h6" className="text-white">Order och leverans</Typography>
       </Paper>
@@ -110,7 +111,13 @@ export default function ConfirmationPage() {
         </div>
       </div>
 
-      <Paper elevation={4} className="p-3 w-screen bg-neutral-700 bg-opacity-50 grey-paper">
+      <Paper  elevation={4}
+        sx={{
+          mt: 0,
+          p: 1.5,
+          width: "100%",
+          backgroundColor: "#707070", 
+        }}>
         <Typography variant="h6" className="text-white">Beställda produkter</Typography>
       </Paper>
 
