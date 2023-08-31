@@ -35,6 +35,7 @@ export default function OrderPage() {
       setPhoneError("Nummer är obligatoriskt.");
       return;
     }
+    localStorage.removeItem("order");
     navigate("../confirmation");
   }
 
