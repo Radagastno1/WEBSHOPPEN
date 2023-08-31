@@ -1,9 +1,9 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
-import CartPage from "./CartPage";
 import "../media.css";
+import CartPage from "./CartPage";
 
 
 export default function OrderPage() {
@@ -68,12 +68,12 @@ export default function OrderPage() {
             variant="standard"
           />
           {nameError && (
-            <p
+            <Typography
               className="error-message text-red-800"
               data-cy="customer-name-error"
             >
               {nameError}
-            </p>
+            </Typography>
           )}
         </Box>
 
@@ -91,12 +91,12 @@ export default function OrderPage() {
           }}
         />
         {addressError && (
-          <p
+          <Typography
             className="error-message text-red-800"
             data-cy="customer-address-error"
           >
             {addressError}
-          </p>
+          </Typography>
         )}
 
         <TextField
@@ -113,12 +113,12 @@ export default function OrderPage() {
           }}
         />
         {zipcodeError && (
-          <p
+          <Typography
             className="error-message text-red-800"
             data-cy="customer-zipcode-error"
           >
             {zipcodeError}
-          </p>
+          </Typography>
         )}
 
         <TextField
@@ -135,12 +135,12 @@ export default function OrderPage() {
           }}
         />
         {cityError && (
-          <p
+          <Typography
             className="error-message text-red-800"
             data-cy="customer-city-error"
           >
             {cityError}
-          </p>
+          </Typography>
         )}
 
         <TextField
@@ -157,12 +157,12 @@ export default function OrderPage() {
           }}
         />
         {emailError && (
-          <p
+          <Typography
             className="error-message text-red-800"
             data-cy="customer-email-error"
           >
             {emailError}
-          </p>
+          </Typography>
         )}
 
         <TextField
@@ -179,12 +179,12 @@ export default function OrderPage() {
           }}
         />
         {phoneError && (
-          <p
+          <Typography
             className="error-message text-red-800"
             data-cy="customer-phone-error"
           >
             {phoneError}
-          </p>
+          </Typography>
         )}
 
         <Box mt={2}>

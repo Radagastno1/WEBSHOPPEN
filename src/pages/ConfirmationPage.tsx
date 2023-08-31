@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCustomerContext } from "../CustomerContext";
 import { Cart, Order } from "../interfaces";
 import TableMUI from "../components/TableMUI";
+import { Typography } from "@mui/material";
 
 import {
   generateNewOrderToLS,
@@ -79,31 +80,31 @@ export default function ConfirmationPage() {
       style={{ maxHeight: "calc(100vh - 200px)" }}
     >
       <div className="mt-2 p-3 w-screen bg-neutral-700 bg-opacity-50">
-        <h2>Order och leverans</h2>
+        <Typography>Order och leverans</Typography>
       </div>
 
       <div className="flex bg-neutral-500 w-screen bg-opacity-5">
         <div className="w-1/2 p-3">
-          <h2 className="font-bold">Order</h2>
+          <Typography className="font-bold">Order</Typography>
           <div>
             <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
           </div>
         </div>
 
         <div className="w-1/2 p-3">
-          <h2 className="font-bold">Leveransadress</h2>
+          <Typography className="font-bold">Leveransadress</Typography>
           {orderLoaded ? (
             <div>
               <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
             </div>
           ) : (
-            <p>Laddar uppgifter....</p>
+            <Typography>Laddar uppgifter....</Typography>
           )}
         </div>
       </div>
 
       <div className="p-3 w-screen bg-neutral-700 bg-opacity-50">
-        <h2>Beställda produkter</h2>
+        <Typography>Beställda produkter</Typography>
       </div>
 
       <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
@@ -112,7 +113,7 @@ export default function ConfirmationPage() {
           <TableMUI titleRow={productTitleRows} cellRows={productRows} />
         </div>
         ) : (
-          <p>Väntar på att produkter ska laddas...</p>
+          <Typography>Väntar på att produkter ska laddas...</Typography>
         )}
       </div>
     </div>
