@@ -54,14 +54,16 @@ export default function ConfirmationPage() {
     "För och efternamn",
     "Gatuadress",
     "Stad och postkod",
+    "Mailadress",
+    "Telefonnummer"
   ];
-  const orderTitleRows = ["Ordernummer", "Leverans", "Betalning"];
+  const orderTitleRows = ["Ordernummer", "Leverans", "Betalning", "Totalt belopp"];
 
   const addressRow = [
-    [customer.name, customer.address, `${customer.city} ${customer.zipcode}`],
+    [customer.name, customer.address, `${customer.city} ${customer.zipcode} `,customer.email, customer.phone],
   ];
 
-  const orderRow = [[orderRef.current?.orderNr, "Instabox", "Faktura"]];
+  const orderRow = [[orderRef.current?.orderNr, "Instabox", "Faktura", orderRef.current?.cart.totalPrice]];
 
   const productTitleRows = ["Produkt", "Titel", "Pris"];
 

@@ -2,7 +2,6 @@ import React from "react";
 import { getCartFromLocalStorage } from '../localstorage'; 
 
 
-
 export default function CartPage() {
 
     const cart = getCartFromLocalStorage();
