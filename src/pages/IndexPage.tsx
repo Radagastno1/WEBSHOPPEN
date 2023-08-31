@@ -26,9 +26,9 @@ export default function IndexPage() {
               data-cy="product"
               onClick={() => setSelectedProduct(product)}
             >
-              <AddtoCartButton product={product} />
               {product.title}
             </NavLink>
+            <AddtoCartButton product={product} />
           </div>
         ))}
       </ul>
