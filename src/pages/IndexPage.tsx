@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
 import { mockedProducts } from "../mockedList";
+import AddtoCartButton from "./AddtoCartButton";
 
 
 export default function IndexPage() {
@@ -18,6 +19,8 @@ export default function IndexPage() {
 
       <ul>
         {mockedProducts.map((product) => (
+          <div>
+    <AddtoCartButton product={product}/>
           <NavLink
             key={product.id}
             to={`/product/${String(product.id)}`}
@@ -25,6 +28,7 @@ export default function IndexPage() {
           >
             {product.title}
           </NavLink>
+          </div>
         ))}
       </ul>
     </div>

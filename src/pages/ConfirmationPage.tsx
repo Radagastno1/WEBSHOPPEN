@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useCustomerContext } from "../CustomerContext";
-import TableMUI from "../components/TableMUI";
+import TableMUI from "../components/TableMUIComponent";
 import { Cart, Order } from "../interfaces";
 import "../styles.css";
 
