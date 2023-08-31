@@ -8,7 +8,7 @@ interface TableMUIProps {
 
 const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer elevation={2} component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
