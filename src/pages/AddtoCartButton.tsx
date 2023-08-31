@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { addProductToCart, getCartFromLocalStorage } from "../localstorage";
-import { Products } from "../interfaces";
-
-interface CartItem extends Products {
-  quantity: number;
-}
+import { Products, CartItem } from "../interfaces";
 
 interface Props {
   product: Products;
@@ -38,8 +34,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
     }
   };
 
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
   return (
     <div>
       <Button
@@ -52,14 +46,12 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
       >
         {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
       </Button>
-      <span data-cy="cart-items-count-badge" style={{ marginTop: 2 }}>
-        Antal produkter i kundvagnen: {cartItemCount}
-      </span>
     </div>
   );
 };
 
 export default AddtoCartButton;
+
 
 
 
