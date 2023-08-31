@@ -1,13 +1,10 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material"; // Importera komponenter från Material-UI
+import { Box, Typography, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "./AddtoCartButton";
+import { CartItem } from "../interfaces";
 
-interface CartItem {
-  id: string;
-  quantity: number;
-}
 
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
@@ -48,6 +45,7 @@ export default function ProductPage() {
     </Box>
   );
 }
+
 
 
 
