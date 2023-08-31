@@ -65,15 +65,19 @@ export default function ConfirmationPage() {
         </div>
 
         <div className="w-1/2 p-3">
+          
           <h2 className="font-bold">Leveransadress</h2>
           {orderLoaded ? (
-            <div>
-              <p>{orderRef.current?.customer.name}</p>
+            <div> 
+                
+                 <p>{orderRef.current?.customer.name}</p>
               <p>{orderRef.current?.customer.address}</p>
               <p>
                 {orderRef.current?.customer.zipcode}{" "}
                 {orderRef.current?.customer.city}
               </p>
+      
+            
             </div>
           ) : (
             <p>Laddar uppgifter....</p>
