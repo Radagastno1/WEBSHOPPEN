@@ -1,46 +1,34 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React from 'react';
 
-interface AddressRow{
-    name:string;
-    address: string;
-    zipcode: string;
-    city: string;
-  }
-  
-  interface OrderRow {
-    orderNr?: string;
-    delivery: string;
-  }
-  
-  interface TableMUIProps {
-    addressRow: AddressRow[];
-    orderRow: OrderRow[];
-  }
+interface TableMUIProps {
+  titleRow: string[];    
+  cellRows: any[];      
+}
 
-  const TableMUI: React.FC<TableMUIProps> = ({ addressRow, orderRow }) => {
-    return(
-        <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-            <TableCell>För och efternamn</TableCell>
-              <TableCell>Adress</TableCell>
-              <TableCell>Stad och postkod</TableCell>
+const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows }) => {
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            {titleRow.map((title) => (
+              <TableCell key={title}>{title}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cellRows.map((row, rowIndex) => (
+            <TableRow key={rowIndex}>
+              {row.map((cell:string, cellIndex: number) => (
+                <TableCell key={cellIndex}>{cell}</TableCell>
+              ))}
             </TableRow>
-          </TableHead>
-          <TableBody>
-          {addressRow.map((row) => (
-      <TableRow>
-          <TableCell>{row.name}</TableCell>
-        <TableCell>{row.address}</TableCell>
-        <TableCell>{`${row.city} ${row.zipcode}`}</TableCell>
-      </TableRow>
-    ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default TableMUI;

@@ -49,8 +49,18 @@ export default function ConfirmationPage() {
   }, [customer]);
 
 
-  const addressRow = [{name: customer.name, address: customer.address, city: customer.city, zipcode: customer.zipcode }];
-  const orderRow = [{orderNr: orderRef.current?.orderNr, delivery: "Instabox" }];
+
+  const addressTitleRow = ["För och efternamn", "Gatuadress", "Stad och postkod"];
+
+
+  const addressRow = [
+    [customer.name, customer.address, `${customer.city} ${customer.zipcode}`]
+  ];
+  
+  const orderRow = [
+    [orderRef.current?.orderNr, "Instabox"]
+  ];
+ 
 
 
 
@@ -76,7 +86,7 @@ export default function ConfirmationPage() {
           <h2 className="font-bold">Leveransadress</h2>
           {orderLoaded ? (
             <div>
-             <TableMUI addressRow={addressRow} orderRow={orderRow}/>
+             <TableMUI titleRow={addressTitleRow} cellRows={addressRow}/>
             </div>
           ) : (
             <p>Laddar uppgifter....</p>
