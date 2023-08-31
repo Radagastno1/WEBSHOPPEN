@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { mockedProducts } from "../mockedList";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
-import AddtoCartButton from "./AddtoCartButton";
+import { mockedProducts } from "../mockedList";
+
 
 export default function IndexPage() {
   useEffect(() => {
