@@ -51,24 +51,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
 };
 
 export default AddtoCartButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 
 
