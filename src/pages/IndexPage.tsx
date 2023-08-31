@@ -17,7 +17,7 @@ export default function IndexPage() {
   return (
     <div className="flex flex-col">
       <h1>SKORPA</h1>
-    
+
       <ul>
         {mockedProducts.map((product) => (
           <div key={product.id}>
@@ -26,10 +26,9 @@ export default function IndexPage() {
               data-cy="product"
               onClick={() => setSelectedProduct(product)}
             >
+              <AddtoCartButton product={product} />
               {product.title}
             </NavLink>
-          
-            <AddtoCartButton product={product} />
           </div>
         ))}
       </ul>
