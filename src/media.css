@@ -1,0 +1,9 @@
+@media (max-width: 600px) {
+    .order-page-container {
+      flex-direction: column;
+    }
+    
+    .order-page-container > div {
+      margin: 10px; /* Add spacing between the two sections */
+    }
+  }

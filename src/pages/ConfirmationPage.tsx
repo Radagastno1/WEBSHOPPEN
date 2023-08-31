@@ -89,7 +89,7 @@ export default function ConfirmationPage() {
         {orderLoaded && orderRef.current?.cart?.products ? (
           orderRef.current.cart.products.map((p) => (
             <div key={p.id} className="flex items-center mb-2 my-2">
-              <img src={p.url} alt={p.title} className="w-10 h-10 mr-2" />
+              <img src={p.image} alt={p.title} className="w-10 h-10 mr-2" />
               <p>{p.title}</p>
             </div>
           ))

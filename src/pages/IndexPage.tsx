@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { mockedProducts } from "../mockedList";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
+import AddtoCartButton from "./AddtoCartButton";
 
 export default function IndexPage() {
   useEffect(() => {
