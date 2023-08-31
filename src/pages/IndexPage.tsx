@@ -20,15 +20,18 @@ export default function IndexPage() {
 
       <ul>
         {mockedProducts.map((product) => (
+          <div data-cy="product">
           <div key={product.id}>
             <NavLink
               to={`/product/${String(product.id)}`}
-              data-cy="product"
               onClick={() => setSelectedProduct(product)}
             >
-              <AddtoCartButton product={product} />
               {product.title}
             </NavLink>
+          </div>
+          <div data-cy="product-buy-button">
+           <AddtoCartButton product={product} />
+          </div>
           </div>
         ))}
       </ul>
