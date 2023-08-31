@@ -61,6 +61,18 @@ export default function ConfirmationPage() {
 
   const orderRow = [[orderRef.current?.orderNr, "Instabox", "Faktura"]];
 
+  const productTitleRows = ["Produkt", "Titel", "Pris"];
+
+  let productRows: any[] = [];
+
+  orderRef.current?.cart.products.forEach((p) => {
+    productRows.push([
+      <img src={p.image} alt="Product" width="20" height="20" />,
+      p.title,
+      p.price
+    ]);
+  });
+  
   return (
     <div
       className="flex flex-col items-center"
@@ -96,12 +108,9 @@ export default function ConfirmationPage() {
 
       <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
         {orderLoaded && orderRef.current?.cart?.products ? (
-          orderRef.current.cart.products.map((p) => (
-            <div key={p.id} className="flex items-center mb-2 my-2">
-              <img src={p.image} alt={p.title} className="w-10 h-10 mr-2" />
-              <p>{p.title}</p>
-            </div>
-          ))
+          <div>
+          <TableMUI titleRow={productTitleRows} cellRows={productRows} />
+        </div>
         ) : (
           <p>Väntar på att produkter ska laddas...</p>
         )}
