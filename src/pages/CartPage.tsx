@@ -1,5 +1,4 @@
-import React from "react";
-import { getProductsFromLS } from '../localstorage'; 
+import { getProductsFromLS } from '../localstorage';
 
 
 export default function CartPage() {
@@ -8,7 +7,7 @@ export default function CartPage() {
     const total = productsInCart.reduce((accumulator, product) => accumulator + product.price, 0);
   
     return (
-      <div className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
+      <div className="flex flex-1 flex-col items-center">
         <ul>
           {productsInCart.map((product) => (
             <li key={product.id} data-cy={`product-${product.id}`} className="product-item">

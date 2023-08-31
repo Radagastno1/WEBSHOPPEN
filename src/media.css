@@ -1,9 +1,12 @@
 @media (max-width: 600px) {
     .order-page-container {
       flex-direction: column;
+      max-height: 80vh;
+      overflow-y: auto;
     }
     
     .order-page-container > div {
-      margin: 10px; /* Add spacing between the two sections */
+      margin: 10px; 
+      background-color: #707070;
     }
   }
