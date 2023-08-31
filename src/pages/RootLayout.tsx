@@ -13,10 +13,9 @@ export default function RootLayout(){
           backgroundPosition: "center",
         }}
       >
-        <NavLink to="/cart" className="ml-auto mr-12">
-            <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" />
-            </NavLink>
-
+        <NavLink to="/checkout" className="ml-auto mr-12" data-cy="cart-link">  
+        <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" /> 
+        </NavLink>
         </header>
 
         <main className="bg-neutral-100 flex flex-1 flex-col"><div className="flex flex-col flex-1"><Outlet/></div></main>
