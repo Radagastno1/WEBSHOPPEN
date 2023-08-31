@@ -28,6 +28,7 @@ export default function IndexPage() {
             >
               {product.title}
             </NavLink>
+            <AddtoCartButton product={product} />
           </div>
           <div data-cy="product-buy-button">
            <AddtoCartButton product={product} />
