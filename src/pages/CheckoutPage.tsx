@@ -2,6 +2,9 @@ import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCustomerContext } from "../CustomerContext";
+import CartPage from "./CartPage";
+import "../media.css";
+
 
 export default function OrderPage() {
   const { customer, setCustomer } = useCustomerContext();
@@ -40,6 +43,8 @@ export default function OrderPage() {
   }
 
   return (
+    <div className="order-page-container flex">
+  
     <div className="flex flex-1 flex-col items-center justify-center">
       <form
         onSubmit={(e) => {
@@ -189,5 +194,11 @@ export default function OrderPage() {
         </Box>
       </form>
     </div>
+    <div className="flex flex-1 flex-col items-center justify-center">
+       <CartPage/>
+       </div>
+    </div>
   );
 }
+
+

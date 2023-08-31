@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
 import { mockedProducts } from "../mockedList";
-import AddtoCartButton from "./AddtoCartButton";
+
 
 export default function IndexPage() {
   useEffect(() => {
