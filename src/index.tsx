@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import './index.css';
-import RootLayout from './pages/RootLayout';
-import IndexPage from './pages/IndexPage';
 import OrderPage from './pages/CheckoutPage';
+import IndexPage from './pages/IndexPage';
+import RootLayout from './pages/RootLayout';
 
 
-import ConfirmationPage from './pages/ConfirmationPage';
 import { CustomerProvider } from './CustomerContext';
+import ConfirmationPage from './pages/ConfirmationPage';
 
+import AdminPage from './pages/AdminPage';
 import ProductPage from './pages/ProductPage';
 
 
@@ -27,7 +28,7 @@ const router = createBrowserRouter(
       <Route path="checkout" element={<CustomerProvider><OrderPage/></CustomerProvider>}></Route>
       {/* bekräftelsesida */}
       <Route path="confirmation" element={<CustomerProvider><ConfirmationPage/></CustomerProvider>}></Route>
-      <Route path="admin" element={<div>ADMIN</div>}></Route>
+      <Route path="admin" element={<AdminPage/>}></Route>
 
     </Route>
   )

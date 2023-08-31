@@ -1,6 +1,13 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Products } from '../interfaces';
 
-export default function DatagridComponent(rows:[], columns:[]){
+interface DatagridProps {
+    rows: Products[];
+    columns: GridColDef<Products>[]; 
+  }
+  
+
+export default function DatagridComponent({ rows, columns }: DatagridProps){
 
     return(
         <div style={{ height: 400, width: '100%' }}>
@@ -9,10 +16,10 @@ export default function DatagridComponent(rows:[], columns:[]){
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: { page: 0, pageSize: 6 },
             },
           }}
-          pageSizeOptions={[5, 10]}
+          pageSizeOptions={[6, 12]}
           checkboxSelection
         />
       </div>
