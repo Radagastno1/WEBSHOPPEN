@@ -2,6 +2,7 @@ import React from "react";
 import { getCartFromLocalStorage } from '../localstorage'; 
 
 
+
 export default function CartPage() {
 
     const cart = getCartFromLocalStorage();
@@ -14,7 +15,7 @@ export default function CartPage() {
     //uppdatera det till ls
   
     return (
-        <div className="flex flex-1 flex-col items-center w-80 bg-slate-300 rounded">
+      <div className="flex flex-1 flex-col items-center">
         <ul>
           {cart.products.map((product) => (
             <li key={product.id} data-cy={`product-${product.id}`} className="product-item">

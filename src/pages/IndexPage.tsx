@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { addProductToLS } from "../localstorage";
 import { mockedProducts } from "../mockedList";
-
+import AddtoCartButton from "./AddtoCartButton";
+import { Products } from "../interfaces";
 
 export default function IndexPage() {
+  const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+
   useEffect(() => {
-    // Endast kör detta när komponenten monteras för första gången
     mockedProducts.forEach((product) => {
       addProductToLS(product);
     });
@@ -15,19 +17,22 @@ export default function IndexPage() {
   return (
     <div className="flex flex-col">
       <h1>SKORPA</h1>
-
+    
       <ul>
         {mockedProducts.map((product) => (
-          <NavLink
-            key={product.id}
-            to={`/product/${String(product.id)}`}
-            data-cy="product"
-          >
-            {product.title}
-          </NavLink>
+          <div key={product.id}>
+            <NavLink
+              to={`/product/${String(product.id)}`}
+              data-cy="product"
+              onClick={() => setSelectedProduct(product)}
+            >
+              {product.title}
+            </NavLink>
+          
+            <AddtoCartButton product={product} />
+          </div>
         ))}
       </ul>
     </div>
   );
 }
-

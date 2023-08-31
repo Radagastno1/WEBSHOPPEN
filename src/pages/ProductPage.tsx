@@ -1,12 +1,10 @@
 import React from "react";
+import { Box, Typography, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "./AddtoCartButton";
+import { CartItem } from "../interfaces";
 
-interface CartItem {
-  id: string;
-  quantity: number;
-}
 
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
@@ -25,22 +23,30 @@ export default function ProductPage() {
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <div className="flex flex-col items-center">
-      <div data-cy="product-id">
-        <h2 data-cy="product-title">{selectedProduct.title}</h2>
-        <p data-cy="product-description">{selectedProduct.description}</p>
-        <p data-cy="product-price">Price: {selectedProduct.price}</p>
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Box data-cy="product-id">
+        <Typography variant="h2" data-cy="product-title">
+          {selectedProduct.title}
+        </Typography>
+        <Typography data-cy="product-description">
+          {selectedProduct.description}
+        </Typography>
+        <Typography data-cy="product-price">
+          Price: {selectedProduct.price}
+        </Typography>
         <AddtoCartButton product={selectedProduct} />
-      </div>
+      </Box>
       <img
         src={selectedProduct.image}
         alt={selectedProduct.title}
-        className="mt-4 w-32 h-auto"
+        style={{ marginTop: "1rem", width: "8rem", height: "auto" }}
       />
-     
-    </div>
+      {/* Resten av din kod */}
+    </Box>
   );
 }
+
+
 
 
 
