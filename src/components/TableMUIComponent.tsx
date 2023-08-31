@@ -13,7 +13,9 @@ const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows }) => {
         <TableHead>
           <TableRow>
             {titleRow.map((title) => (
-              <TableCell key={title}>{title}</TableCell>
+              <TableCell  sx={{
+                backgroundColor: "#c9c7c7", 
+              }} key={title}>{title}</TableCell>
             ))}
           </TableRow>
         </TableHead>
