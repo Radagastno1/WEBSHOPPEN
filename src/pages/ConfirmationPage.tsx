@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useCustomerContext } from "../CustomerContext";
 import { Cart, Order } from "../interfaces";
+import TableMUI from "../components/TableMUI";
+
 import {
-    generateNewOrderToLS,
-    getCartFromLocalStorage,
-    getOrderFromLS,
-    removeCartFromLocalstorage,
+  generateNewOrderToLS,
+  getCartFromLocalStorage,
+  getOrderFromLS,
+  removeCartFromLocalstorage,
 } from "../localstorage";
 
 function generateRandomNumber() {
@@ -38,13 +40,26 @@ export default function ConfirmationPage() {
           cartsRef.current
         );
       }
-      if(cartsRef.current){
+      if (cartsRef.current) {
         removeCartFromLocalstorage();
-    }
+      }
       orderRef.current = orderInLS;
       setOrderLoaded(true);
     }
   }, [customer]);
+
+  const addressTitleRow = [
+    "För och efternamn",
+    "Gatuadress",
+    "Stad och postkod",
+  ];
+  const orderTitleRows = ["Ordernummer", "Leverans", "Betalning"];
+
+  const addressRow = [
+    [customer.name, customer.address, `${customer.city} ${customer.zipcode}`],
+  ];
+
+  const orderRow = [[orderRef.current?.orderNr, "Instabox", "Faktura"]];
 
   return (
     <div
@@ -59,25 +74,15 @@ export default function ConfirmationPage() {
         <div className="w-1/2 p-3">
           <h2 className="font-bold">Order</h2>
           <div>
-            <p>Ordernummer: {orderRef?.current?.orderNr}</p>
-            <p>Leveransmetod: Instabox</p>
+            <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
           </div>
         </div>
 
         <div className="w-1/2 p-3">
-          
           <h2 className="font-bold">Leveransadress</h2>
           {orderLoaded ? (
-            <div> 
-                
-                 <p>{orderRef.current?.customer.name}</p>
-              <p>{orderRef.current?.customer.address}</p>
-              <p>
-                {orderRef.current?.customer.zipcode}{" "}
-                {orderRef.current?.customer.city}
-              </p>
-      
-            
+            <div>
+              <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
             </div>
           ) : (
             <p>Laddar uppgifter....</p>
