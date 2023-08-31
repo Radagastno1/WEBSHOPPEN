@@ -27,6 +27,8 @@ const router = createBrowserRouter(
       <Route path="checkout" element={<CustomerProvider><OrderPage/></CustomerProvider>}></Route>
       {/* bekräftelsesida */}
       <Route path="confirmation" element={<CustomerProvider><ConfirmationPage/></CustomerProvider>}></Route>
+      <Route path="admin" element={<div>ADMIN</div>}></Route>
+
     </Route>
   )
 );

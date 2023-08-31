@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 export type Customer = {
-    id: string;
   name: string;
   address: string;
   zipcode: string;
@@ -19,7 +18,6 @@ const CustomerContext = createContext<CustomerContextType | undefined>(undefined
 
 export function CustomerProvider({ children }: { children: ReactNode }) {
   const [customer, setCustomer] = useState<Customer>({
-    id: '',
     name: '',
     address: '',
     zipcode: '',
