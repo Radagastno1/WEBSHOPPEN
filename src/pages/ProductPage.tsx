@@ -12,6 +12,7 @@ function getCartItemsFromLocalStorage(): CartItem[] {
 }
 
 export default function ProductPage() {
+  
   const { id } = useParams<{ id: string }>();
   const selectedProduct = mockedProducts.find((product) => String(product.id) === id);
 
@@ -34,7 +35,7 @@ export default function ProductPage() {
         <Typography data-cy="product-price">
           Price: {selectedProduct.price}
         </Typography>
-        <AddtoCartButton product={selectedProduct} />
+        <AddtoCartButton product={selectedProduct }/>
       </Box>
       <img
         src={selectedProduct.image}

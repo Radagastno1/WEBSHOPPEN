@@ -44,7 +44,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         disabled={productAddedToCart}
         sx={{ mt: 2 }} 
       >
-        {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
+        {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn" }
       </Button>
     </div>
   );
