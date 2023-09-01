@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material"; // Importera komponenter från Material-UI
+import { Box, Typography, CardMedia, Grid, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
@@ -34,9 +34,25 @@ export default function ProductPage() {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Box data-cy="product-id">
-        <Typography variant="h2" data-cy="product-title">
-          {selectedProduct.title}
-        </Typography>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          marginTop="1rem"
+        >
+          <Typography
+            variant="h2"
+            data-cy="product-title"
+            style={{
+              textAlign: "center",
+              fontSize: "2rem",
+              fontWeight: "bold",
+              fontFamily: "BlinkMacSystemFont",
+            }}
+          >
+            {selectedProduct.title}
+          </Typography>
+        </Box>
         <Typography data-cy="product-description">
           {selectedProduct.description}
         </Typography>
@@ -46,16 +62,20 @@ export default function ProductPage() {
         <div data-cy="cart-items-count-badge">
           <div data-cy="product-buy-button" className="flex-1">
             <AddtoCartButton product={selectedProduct} />
-            {/* {Count} */}
           </div>
         </div>
       </Box>
-      <img
-        src={selectedProduct.image}
-        alt={selectedProduct.title}
-        style={{ marginTop: "1rem", width: "8rem", height: "auto" }}
-      />
-      {/* Resten av din kod */}
+      <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
+        <Grid item lg={2}>
+          <CardMedia
+            component="img"
+            alt={selectedProduct.title}
+            style={{ width: "100%", height: "auto", borderRadius: "20px" }}
+            image={selectedProduct.image}
+            title={selectedProduct.title}
+          />
+        </Grid>
+      </Grid>
     </Box>
   );
 }
