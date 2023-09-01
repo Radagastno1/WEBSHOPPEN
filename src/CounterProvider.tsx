@@ -1,34 +1,31 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { ReactNode, createContext, useContext } from "react";
+import useLocalStorageState from "./useLocalStorage";
 
 // Definiera contexttypen
 type CartContextType = {
-  Count: number;
+  count: number;
   addCount: () => void;
   subCount: () => void;
 };
 
 // Skapa en kontext
 const CounterContext = createContext<CartContextType>({
-  Count: 0,
+  count: 0,
   addCount: () => {},
   subCount: () => {},
 });
 
 // En komponent som du kan använda för att tillhandahålla värdet i din app
 export function CounterProvider({ children }: { children: ReactNode }) {
-  const [count, setCount] = useState(0);
+  //Använder den generiska Localstorage-staten och sätter count i LS med default-värde 0!
+  const [count, setCount] = useLocalStorageState(0, "count");
 
-  const addCount = () => {
-    setCount(count + 1);
-  };
+  const addCount = () => setCount(count + 1);
 
-  const subCount = () => {
-    setCount(count - 1);
-  };
- 
+  const subCount = () => setCount(count - 1);
 
   return (
-    <CounterContext.Provider value={{ Count: count, addCount, subCount }}>
+    <CounterContext.Provider value={{ count: count, addCount, subCount }}>
       {children}
     </CounterContext.Provider>
   );
@@ -38,13 +35,3 @@ export function CounterProvider({ children }: { children: ReactNode }) {
 export function useCounterContext() {
   return useContext(CounterContext);
 }
-
-
-
-
-
-
-
-
-
-

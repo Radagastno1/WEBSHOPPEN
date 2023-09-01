@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorageState<T>(
-  initialVaule: TextEncoderCommon,
-
-  key: string
-) {
+export default function useLocalStorageState<T>(initialVaule: T, key: string) {
   const [count, setCount] = useState(() => {
     const IsItem = localStorage.getItem(key);
 

@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { CounterProvider, useCounterContext } from "../CounterProvider";
 
 export default function RootLayout() {
-  const { Count } = useCounterContext();
+  const { count } = useCounterContext();
 
   return (
     <div className="flex flex-col h-screen">
@@ -33,7 +33,7 @@ export default function RootLayout() {
                   fontSize="large"
                   data-cy="cart-items-count-badge"
                 />
-                {Count}
+                {count}
               </NavLink>
             </li>
           </ul>
