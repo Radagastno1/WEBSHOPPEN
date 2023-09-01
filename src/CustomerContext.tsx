@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import useLocalStorageState from "./useLocalStorage";
 
 export type Customer = {
@@ -13,6 +13,7 @@ export type Customer = {
 type CustomerContextType = {
   customer: Customer;
   setCustomer: (newCustomer: Customer) => void;
+  resetCustomer: () => void;
 };
 
 const CustomerContext = createContext<CustomerContextType | undefined>(
@@ -20,14 +21,31 @@ const CustomerContext = createContext<CustomerContextType | undefined>(
 );
 
 export function CustomerProvider({ children }: { children: ReactNode }) {
-  const [customer, setCustomer] = useLocalStorageState(
-    { name: "", address: "", zipcode: "", city: "", email: "", phone: "" },
+  const [customer, setCustomer] = useLocalStorageState<Customer>(
+    {
+      name: "",
+      address: "",
+      zipcode: "",
+      city: "",
+      email: "",
+      phone: "",
+    },
     "customer"
   );
 
+  const resetCustomer = () =>
+    setCustomer({
+      name: "",
+      address: "",
+      zipcode: "",
+      city: "",
+      email: "",
+      phone: "",
+    });
+
   //detta menas att alla barn i denna kommer åt customerprovidern och kan använda useCustomerContext
   return (
-    <CustomerContext.Provider value={{ customer, setCustomer }}>
+    <CustomerContext.Provider value={{ customer, setCustomer, resetCustomer }}>
       {children}
     </CustomerContext.Provider>
   );
