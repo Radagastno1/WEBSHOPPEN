@@ -32,7 +32,7 @@ export default function IndexPage() {
             <div data-cy="cart-items-count-badge">
           <div data-cy="product-buy-button" className="flex-1">
             <AddtoCartButton product={product} />
-            {Count}
+            {/* {Count} */}
           </div>
         </div>
          

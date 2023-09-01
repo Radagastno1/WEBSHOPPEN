@@ -44,7 +44,7 @@ export default function ProductPage() {
         <div data-cy="cart-items-count-badge">
           <div data-cy="product-buy-button" className="flex-1">
             <AddtoCartButton product={selectedProduct} />
-            {Count}
+            {/* {Count} */}
           </div>
         </div>
       </Box>
