@@ -1,7 +1,7 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { NavLink, Outlet } from "react-router-dom";
-import { CounterProvider, useCounterContext } from "../CounterProvider";
+import { useCounterContext } from "../CounterProvider";
 
 export default function RootLayout() {
   const { count } = useCounterContext();

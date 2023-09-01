@@ -6,6 +6,7 @@ type CounterContextType = {
   count: number;
   addCount: () => void;
   subCount: () => void;
+  resetCount: () => void;
 };
 
 // Skapa en kontext
@@ -13,6 +14,7 @@ const CounterContext = createContext<CounterContextType>({
   count: 0,
   addCount: () => {},
   subCount: () => {},
+  resetCount: () => {},
 });
 
 // En komponent som du kan använda för att tillhandahålla värdet i din app
@@ -24,8 +26,12 @@ export function CounterProvider({ children }: { children: ReactNode }) {
 
   const subCount = () => setCount(count - 1);
 
+  const resetCount = () => setCount(0);
+
   return (
-    <CounterContext.Provider value={{ count: count, addCount, subCount }}>
+    <CounterContext.Provider
+      value={{ count: count, addCount, subCount, resetCount }}
+    >
       {children}
     </CounterContext.Provider>
   );

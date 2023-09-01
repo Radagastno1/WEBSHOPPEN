@@ -11,8 +11,10 @@ function getCartItemsFromLocalStorage(): CartItem[] {
   return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
 }
 
+//FÖR VG - PRODUCTPROVIDER OCH ISTÄLLET FÖR USEPARAMS SÅ HÄMTA PRODUCT VIA PRODUCTCONTEXT
+
 export default function ProductPage() {
-  const { Count } = useCounterContext();
+  const { count } = useCounterContext();
 
   const { id } = useParams<{ id: string }>();
   const selectedProduct = mockedProducts.find(

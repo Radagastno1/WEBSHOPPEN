@@ -1,7 +1,7 @@
 import FormComponent from "../components/FormComponent";
 import CartPage from "./CartPage";
 
-export default function OrderPage() {
+export default function CheckoutPage() {
   return (
     <div className="order-page-container flex flex-1 overflow-y-auto">
       <div className="flex flex-1">
