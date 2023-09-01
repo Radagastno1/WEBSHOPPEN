@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { addProductToCart } from "../localstorage";
-import { Products, CartItem } from "../interfaces";
+import { Products } from "../interfaces";
 import { useCounterContext } from "../CounterProvider";
 
 interface Props {
@@ -17,6 +17,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
     if (!productAddedToCart) {
       addProductToCart(product);
       setProductAddedToCart(true);
+      //HÄR ANROPAS FUNKTIONEN I CONTEXT
       addCount();
     }
   };

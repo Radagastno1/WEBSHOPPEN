@@ -28,9 +28,8 @@ export default function ConfirmationPage() {
   const { resetCount } = useCounterContext();
 
   const [orderLoaded, setOrderLoaded] = useState(false);
-  const [orderGenerated, setOrderGenerated] = useState(false);
-  const orderRef = useRef<Order>();
 
+  const orderRef = useRef<Order>();
   const cartsRef = useRef<Cart>();
 
   useEffect(() => {
