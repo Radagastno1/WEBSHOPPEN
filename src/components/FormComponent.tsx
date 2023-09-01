@@ -44,7 +44,6 @@ export default function FormComponent() {
       setPhoneError("Nummer är obligatoriskt.");
       return;
     }
-    // localStorage.removeItem("order");
     navigate("../confirmation");
   }
 
@@ -69,132 +68,119 @@ export default function FormComponent() {
             "data-cy": "customer-name",
           }}
           variant="standard"
+          helperText={
+            nameError ? (
+              <span data-cy="customer-name-error">{nameError}</span>
+            ) : null
+          }
+          error={Boolean(nameError)}
         />
-        {/* Mui helper text */}
-        {nameError && (
-          <Typography
-            className="error-message text-red-800"
-            data-cy="customer-name-error"
-          >
-            {nameError}
-          </Typography>
-        )}
-      </Box>
 
-      <TextField
-        label="Gatuadress"
-        autoComplete="street-address"
-        value={customer?.address}
-        variant="standard"
-        onChange={(e) => {
-          setCustomer({ ...customer, address: e.target.value });
-          setAddressError("");
-        }}
-        inputProps={{
-          "data-cy": "customer-address",
-        }}
-      />
-      {addressError && (
-        <Typography
-          className="error-message text-red-800"
-          data-cy="customer-address-error"
-        >
-          {addressError}
-        </Typography>
-      )}
+        <TextField
+          label="Gatuadress"
+          autoComplete="street-address"
+          value={customer?.address}
+          variant="standard"
+          helperText={
+            addressError ? (
+              <span data-cy="customer-address-error">{addressError}</span>
+            ) : null
+          }
+          error={Boolean(addressError)}
+          onChange={(e) => {
+            setCustomer({ ...customer, address: e.target.value });
+            setAddressError("");
+          }}
+          inputProps={{
+            "data-cy": "customer-address",
+          }}
+        />
 
-      <TextField
-        label="Postkod"
-        autoComplete="postal-code"
-        value={customer?.zipcode}
-        variant="standard"
-        onChange={(e) => {
-          setCustomer({ ...customer, zipcode: e.target.value });
-          setZipcodeError("");
-        }}
-        inputProps={{
-          "data-cy": "customer-zipcode",
-        }}
-      />
-      {zipcodeError && (
-        <Typography
-          className="error-message text-red-800"
-          data-cy="customer-zipcode-error"
-        >
-          {zipcodeError}
-        </Typography>
-      )}
+        <TextField
+          label="Postkod"
+          autoComplete="postal-code"
+          value={customer?.zipcode}
+          variant="standard"
+          helperText={
+            zipcodeError ? (
+              <span data-cy="customer-zipcode-error">{zipcodeError}</span>
+            ) : null
+          }
+          error={Boolean(zipcodeError)}
+          onChange={(e) => {
+            setCustomer({ ...customer, zipcode: e.target.value });
+            setZipcodeError("");
+          }}
+          inputProps={{
+            "data-cy": "customer-zipcode",
+          }}
+        />
 
-      <TextField
-        label="Stad"
-        autoComplete="address-level2"
-        value={customer?.city}
-        variant="standard"
-        onChange={(e) => {
-          setCustomer({ ...customer, city: e.target.value });
-          setCityError("");
-        }}
-        inputProps={{
-          "data-cy": "customer-city",
-        }}
-      />
-      {cityError && (
-        <Typography
-          className="error-message text-red-800"
-          data-cy="customer-city-error"
-        >
-          {cityError}
-        </Typography>
-      )}
+        <TextField
+          label="Stad"
+          autoComplete="address-level2"
+          value={customer?.city}
+          variant="standard"
+          helperText={
+            cityError ? (
+              <span data-cy="customer-city-error">{cityError}</span>
+            ) : null
+          }
+          error={Boolean(cityError)}
+          onChange={(e) => {
+            setCustomer({ ...customer, city: e.target.value });
+            setCityError("");
+          }}
+          inputProps={{
+            "data-cy": "customer-city",
+          }}
+        />
 
-      <TextField
-        label="Email"
-        autoComplete="email"
-        value={customer?.email}
-        variant="standard"
-        onChange={(e) => {
-          setCustomer({ ...customer, email: e.target.value });
-          setEmailError("");
-        }}
-        inputProps={{
-          "data-cy": "customer-email",
-        }}
-      />
-      {emailError && (
-        <Typography
-          className="error-message text-red-800"
-          data-cy="customer-email-error"
-        >
-          {emailError}
-        </Typography>
-      )}
+        <TextField
+          label="Email"
+          autoComplete="email"
+          value={customer?.email}
+          variant="standard"
+          helperText={
+            emailError ? (
+              <span data-cy="customer-email-error">{emailError}</span>
+            ) : null
+          }
+          error={Boolean(emailError)}
+          onChange={(e) => {
+            setCustomer({ ...customer, email: e.target.value });
+            setEmailError("");
+          }}
+          inputProps={{
+            "data-cy": "customer-email",
+          }}
+        />
 
-      <TextField
-        label="Telefonnummer"
-        autoComplete="tel"
-        value={customer?.phone}
-        variant="standard"
-        onChange={(e) => {
-          setCustomer({ ...customer, phone: e.target.value });
-          setPhoneError("");
-        }}
-        inputProps={{
-          "data-cy": "customer-phone",
-        }}
-      />
-      {phoneError && (
-        <Typography
-          className="error-message text-red-800"
-          data-cy="customer-phone-error"
-        >
-          {phoneError}
-        </Typography>
-      )}
+        <TextField
+          label="Telefonnummer"
+          autoComplete="tel"
+          value={customer?.phone}
+          variant="standard"
+          helperText={
+            phoneError ? (
+              <span data-cy="customer-phone-error">{phoneError}</span>
+            ) : null
+          }
+          error={Boolean(phoneError)}
+          onChange={(e) => {
+            setCustomer({ ...customer, phone: e.target.value });
+            setPhoneError("");
+          }}
+          inputProps={{
+            "data-cy": "customer-phone",
+          }}
+        />
 
-      <Box mt={2}>
-        <Button type="submit" variant="contained" color="primary">
-          Bekräfta
-        </Button>
+        <Box mt={2}>
+          <Button type="submit" variant="contained" color="primary">
+            Bekräfta
+          </Button>
+        </Box>
       </Box>
     </form>
   );
