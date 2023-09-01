@@ -3,7 +3,7 @@ import { getCartFromLocalStorage } from '../localstorage';
 
 
 export default function CartPage() {
-
+    //Ska prata med cartContext
     const cart = getCartFromLocalStorage();
 
     const total = cart.products.reduce((accumulator, product) => accumulator + product.price, 0);

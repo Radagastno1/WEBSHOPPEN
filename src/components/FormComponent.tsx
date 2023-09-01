@@ -9,7 +9,7 @@ export default function FormComponent()
 {
     const { customer, setCustomer } = useCustomerContext();
     const navigate = useNavigate();
-  
+    //Använd ZOD 
     const [nameError, setNameError] = useState("");
     const [addressError, setAddressError] = useState("");
     const [zipcodeError, setZipcodeError] = useState("");
@@ -64,6 +64,7 @@ className="flex flex-1 flex-col items-center"
     }}
     variant="standard"
   />
+  {/* Mui helper text */}
   {nameError && (
     <Typography
       className="error-message text-red-800"

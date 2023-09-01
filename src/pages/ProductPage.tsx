@@ -2,9 +2,9 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
-import AddtoCartButton from "./AddtoCartButton";
+import AddtoCartButton from "../components/AddtoCartButton";
 import { CartItem } from "../interfaces";
-
+import { useCounterContext } from "../CounterProvider";
 
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
@@ -12,16 +12,22 @@ function getCartItemsFromLocalStorage(): CartItem[] {
 }
 
 export default function ProductPage() {
-  
+  const { Count } = useCounterContext();
+
   const { id } = useParams<{ id: string }>();
-  const selectedProduct = mockedProducts.find((product) => String(product.id) === id);
+  const selectedProduct = mockedProducts.find(
+    (product) => String(product.id) === id
+  );
 
   if (!selectedProduct) {
     return <p>Product not found</p>;
   }
 
   const cartItems = getCartItemsFromLocalStorage();
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -35,7 +41,12 @@ export default function ProductPage() {
         <Typography data-cy="product-price">
           Price: {selectedProduct.price}
         </Typography>
-        <AddtoCartButton product={selectedProduct }/>
+        <div data-cy="cart-items-count-badge">
+          <div data-cy="product-buy-button" className="flex-1">
+            <AddtoCartButton product={selectedProduct} />
+            {/* {Count} */}
+          </div>
+        </div>
       </Box>
       <img
         src={selectedProduct.image}
@@ -46,16 +57,3 @@ export default function ProductPage() {
     </Box>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

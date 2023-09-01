@@ -13,6 +13,8 @@ import ConfirmationPage from './pages/ConfirmationPage';
 import AdminPage from './pages/AdminPage';
 import ProductPage from './pages/ProductPage';
 
+import {CounterProvider} from './CounterProvider';
+
 
 
 
@@ -21,6 +23,7 @@ const router = createBrowserRouter(
     <Route element={<RootLayout/>}>
 
     {/* alla produkter syns här */}
+   
       <Route index element={<IndexPage/>}></Route> 
       {/* en specifik produkt visas här */}
       <Route path="product/:id" element={<ProductPage/>}></Route>
@@ -37,6 +40,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <CounterProvider>
      <RouterProvider router={router}/>
+     </CounterProvider>
   </React.StrictMode>
 );
