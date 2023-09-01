@@ -16,31 +16,35 @@ export default function RootLayout() {
           backgroundPosition: "center",
         }}
       >
-        <NavLink to="/admin" data-cy="admin-link">
-          <AdminPanelSettingsIcon className="cursor-pointer" fontSize="large" />
-        </NavLink>
-        <div>
-          <NavLink to="/checkout" data-cy="cart-link" className="mr-10" >
-            <ShoppingCartIcon  
-              className="text-black cursor-pointer"
-              fontSize="large"
-              data-cy="cart-items-count-badge"
-              
-            />
-           {Count}
-          </NavLink>
-          
-        </div>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/admin" data-cy="admin-link">
+                <AdminPanelSettingsIcon
+                  className="cursor-pointer"
+                  fontSize="large"
+                />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/checkout" data-cy="cart-link" className="mr-10">
+                <ShoppingCartIcon
+                  className="text-black cursor-pointer"
+                  fontSize="large"
+                  data-cy="cart-items-count-badge"
+                />
+                {Count}
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
 
       <main className="bg-neutral-100 flex flex-1 flex-col">
-        <div className="flex flex-col flex-1">     
-          <Outlet /> 
-        </div>
+        <Outlet />
       </main>
-      <div>
+
       <footer className="flex  flex-col h-10 bg-neutral-400"></footer>
-      </div>
     </div>
   );
 }
