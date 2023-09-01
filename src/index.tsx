@@ -18,6 +18,7 @@ import AdminPage from "./pages/AdminPage";
 import ProductPage from "./pages/ProductPage";
 
 import { CounterProvider } from "./CounterProvider";
+import { CartProvider } from "./CartContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,9 +40,12 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <CounterProvider>
+      <CartProvider>
       <CustomerProvider>
         <RouterProvider router={router} />
       </CustomerProvider>
+      </CartProvider>
     </CounterProvider>
   </React.StrictMode>
+  
 );

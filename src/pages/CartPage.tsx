@@ -1,35 +1,26 @@
-import React from "react";
+import React from 'react';
+import { useCart } from "../CartContext"; 
 import { getCartFromLocalStorage } from '../localstorage'; 
 
-
 export default function CartPage() {
-    //Ska prata med cartContext
-    const cart = getCartFromLocalStorage();
+  const { cart } = useCart();
 
-    const total = cart.products.reduce((accumulator, product) => accumulator + product.price, 0);
-
-    cart.totalPrice = total;
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    //uppdatera det till ls
-  
-    return (
-      <div className="flex flex-1 flex-col items-center">
-        <ul>
-          {cart.products.map((product) => (
-            <li key={product.id} data-cy={`product-${product.id}`} className="product-item">
-              <div className="product-info" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <div className="product-title" style={{ marginRight: '75px' }}>{product.title}</div>
-                <div className="product-price">
-                  <strong>Pris:</strong> {product.price}
-                </div>
+  return (
+    <div className="flex flex-1 flex-col items-center">
+      <ul>
+        {cart.products.map((product) => (
+          <li key={product.id} data-cy="cart-item" className="product-item" >
+            <div className="product-info" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+              <div className="product-title" style={{ marginRight: '75px' }}>{product.title}</div>
+              <div className="product-price">
+                <strong>Pris:</strong> {product.price}
               </div>
-            </li>
-          ))}
-        </ul>
-        <p>Totalt pris: {total}</p>
-      </div>
-    );
-  }
-  
-  
+              <img src={product.image} alt="produkt" className= 'w-5 h-5'/>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p>Totalt pris: {cart.totalPrice}</p>
+    </div>
+  );
+}
