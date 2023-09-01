@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
-import AddtoCartButton from "./AddtoCartButton";
+import AddtoCartButton from "../components/AddtoCartButton";
 import { CartItem } from "../interfaces";
 
 

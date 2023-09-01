@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Products } from "../interfaces";
 import { addProductToLS } from "../localstorage";
 import { mockedProducts } from "../mockedList";
-import AddtoCartButton from "./AddtoCartButton";
+import AddtoCartButton from "../components/AddtoCartButton";
 
 export default function IndexPage() {
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);

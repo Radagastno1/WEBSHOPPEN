@@ -13,6 +13,8 @@ import ConfirmationPage from './pages/ConfirmationPage';
 import AdminPage from './pages/AdminPage';
 import ProductPage from './pages/ProductPage';
 
+import {CounterProvider} from './CounterProvider';
+
 
 
 
@@ -21,7 +23,8 @@ const router = createBrowserRouter(
     <Route element={<RootLayout/>}>
 
     {/* alla produkter syns här */}
-      <Route index element={<IndexPage/>}></Route> 
+   
+      <Route index element={<CounterProvider><IndexPage/></CounterProvider>}></Route> 
       {/* en specifik produkt visas här */}
       <Route path="product/:id" element={<ProductPage/>}></Route>
       {/* formulär betalning */}

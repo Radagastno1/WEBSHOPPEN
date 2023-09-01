@@ -1,8 +1,10 @@
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavLink, Outlet } from "react-router-dom";
+import {  useCounterContext } from '../CounterProvider';
 
 export default function RootLayout(){
+  const {Count} = useCounterContext()
     return(
         <div className="flex flex-col h-screen">
           <header
@@ -20,6 +22,8 @@ export default function RootLayout(){
         <NavLink to="/checkout"  data-cy="cart-link" className="mr-10">
             <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" />
             </NavLink>
+            {Count}
+            
 
         </header>
 
