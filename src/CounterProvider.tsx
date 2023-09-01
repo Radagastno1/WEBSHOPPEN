@@ -2,14 +2,14 @@ import { ReactNode, createContext, useContext } from "react";
 import useLocalStorageState from "./useLocalStorage";
 
 // Definiera contexttypen
-type CartContextType = {
+type CounterContextType = {
   count: number;
   addCount: () => void;
   subCount: () => void;
 };
 
 // Skapa en kontext
-const CounterContext = createContext<CartContextType>({
+const CounterContext = createContext<CounterContextType>({
   count: 0,
   addCount: () => {},
   subCount: () => {},
