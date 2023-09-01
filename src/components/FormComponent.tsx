@@ -1,57 +1,44 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Button, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 import { useCustomerContext } from "../CustomerContext";
 import "../media.css";
 
-export default function FormComponent() {
+const FormSchema = z.object({
+  name: z.string().min(1, { message: "Namn är obligatoriskt." }),
+  address: z.string().min(1, { message: "Adress är obligatoriskt." }),
+  zipcode: z.string().refine((value) => /^\d{5}$/.test(value), {
+    message: "Postkod måste vara 5 siffror.",
+  }),
+  city: z.string().min(1, { message: "Stad är obligatoriskt." }),
+  email: z.string().email({ message: "Email är obligatoriskt." }),
+  phone: z.string().refine((value) => /^\d{10}$/.test(value), {
+    message: "Telefonnummer måste vara 10 siffror.",
+  }),
+});
+
+type Customer = z.infer<typeof FormSchema>;
+
+interface Props {
+  customer?: Customer;
+}
+
+export default function FormComponent(props: Props) {
+  const { register, handleSubmit, formState } = useForm<Customer>({
+    defaultValues: props.customer || {},
+    resolver: zodResolver(FormSchema),
+  });
+
   const { customer, setCustomer } = useCustomerContext();
   const navigate = useNavigate();
-  //Använd ZOD
-  const [nameError, setNameError] = useState("");
-  const [addressError, setAddressError] = useState("");
-  const [zipcodeError, setZipcodeError] = useState("");
-  const [cityError, setCityError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    if (!customer.name) {
-      setNameError("Namn är obligatoriskt.");
-      return;
-    } else if (!customer.address) {
-      setAddressError("Adress är obligatoriskt.");
-      return;
-    } else if (
-      !customer.zipcode ||
-      isNaN(Number(customer.zipcode)) ||
-      customer.zipcode.length != 5
-    ) {
-      setZipcodeError("Postkod är obligatoriskt.");
-      return;
-    } else if (!customer.city) {
-      setCityError("Stad är obligatoriskt.");
-      return;
-    } else if (!customer.email || !customer.email.includes("@")) {
-      setEmailError("Email är obligatoriskt.");
-      return;
-    } else if (
-      !customer.phone ||
-      isNaN(Number(customer.phone)) ||
-      customer.phone.length != 10
-    ) {
-      setPhoneError("Nummer är obligatoriskt.");
-      return;
-    }
-    navigate("../confirmation");
-  }
 
   return (
     <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
+      onSubmit={handleSubmit(() => {
+        navigate("../confirmation");
+      })}
       data-cy="customer-form"
       className="flex flex-1 flex-col items-center"
     >
@@ -60,36 +47,40 @@ export default function FormComponent() {
           label="Förnamn och efternamn"
           value={customer?.name}
           autoComplete="name"
+          {...register("name")}
           onChange={(e) => {
             setCustomer({ ...customer, name: e.target.value });
-            setNameError("");
           }}
           inputProps={{
             "data-cy": "customer-name",
           }}
           variant="standard"
           helperText={
-            nameError ? (
-              <span data-cy="customer-name-error">{nameError}</span>
+            formState.errors.name ? (
+              <span data-cy="customer-name-error" className="text-red-500">
+                {formState.errors.name?.message}
+              </span>
             ) : null
           }
-          error={Boolean(nameError)}
+          error={Boolean(formState.errors.name)}
         />
 
         <TextField
           label="Gatuadress"
           autoComplete="street-address"
+          {...register("address")}
           value={customer?.address}
           variant="standard"
           helperText={
-            addressError ? (
-              <span data-cy="customer-address-error">{addressError}</span>
+            formState.errors.address ? (
+              <span data-cy="customer-address-error" className="text-red-500">
+                {formState.errors.address?.message}
+              </span>
             ) : null
           }
-          error={Boolean(addressError)}
+          error={Boolean(formState.errors.address)}
           onChange={(e) => {
             setCustomer({ ...customer, address: e.target.value });
-            setAddressError("");
           }}
           inputProps={{
             "data-cy": "customer-address",
@@ -99,17 +90,19 @@ export default function FormComponent() {
         <TextField
           label="Postkod"
           autoComplete="postal-code"
+          {...register("zipcode")}
           value={customer?.zipcode}
           variant="standard"
           helperText={
-            zipcodeError ? (
-              <span data-cy="customer-zipcode-error">{zipcodeError}</span>
+            formState.errors.zipcode ? (
+              <span data-cy="customer-zipcode-error" className="text-red-500">
+                {formState.errors.zipcode?.message}
+              </span>
             ) : null
           }
-          error={Boolean(zipcodeError)}
+          error={Boolean(formState.errors.zipcode)}
           onChange={(e) => {
             setCustomer({ ...customer, zipcode: e.target.value });
-            setZipcodeError("");
           }}
           inputProps={{
             "data-cy": "customer-zipcode",
@@ -119,17 +112,19 @@ export default function FormComponent() {
         <TextField
           label="Stad"
           autoComplete="address-level2"
+          {...register("city")}
           value={customer?.city}
           variant="standard"
           helperText={
-            cityError ? (
-              <span data-cy="customer-city-error">{cityError}</span>
+            formState.errors.city ? (
+              <span data-cy="customer-city-error" className="text-red-500">
+                {formState.errors.city?.message}
+              </span>
             ) : null
           }
-          error={Boolean(cityError)}
+          error={Boolean(formState.errors.city)}
           onChange={(e) => {
             setCustomer({ ...customer, city: e.target.value });
-            setCityError("");
           }}
           inputProps={{
             "data-cy": "customer-city",
@@ -139,17 +134,19 @@ export default function FormComponent() {
         <TextField
           label="Email"
           autoComplete="email"
+          {...register("email")}
           value={customer?.email}
           variant="standard"
           helperText={
-            emailError ? (
-              <span data-cy="customer-email-error">{emailError}</span>
+            formState.errors.email ? (
+              <span data-cy="customer-email-error" className="text-red-500">
+                {formState.errors.email?.message}
+              </span>
             ) : null
           }
-          error={Boolean(emailError)}
+          error={Boolean(formState.errors.email)}
           onChange={(e) => {
             setCustomer({ ...customer, email: e.target.value });
-            setEmailError("");
           }}
           inputProps={{
             "data-cy": "customer-email",
@@ -159,17 +156,19 @@ export default function FormComponent() {
         <TextField
           label="Telefonnummer"
           autoComplete="tel"
+          {...register("phone")}
           value={customer?.phone}
           variant="standard"
           helperText={
-            phoneError ? (
-              <span data-cy="customer-phone-error">{phoneError}</span>
+            formState.errors.phone ? (
+              <span data-cy="customer-phone-error" className="text-red-500">
+                {formState.errors.phone?.message}
+              </span>
             ) : null
           }
-          error={Boolean(phoneError)}
+          error={Boolean(formState.errors.phone)}
           onChange={(e) => {
             setCustomer({ ...customer, phone: e.target.value });
-            setPhoneError("");
           }}
           inputProps={{
             "data-cy": "customer-phone",
