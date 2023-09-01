@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { CartItem } from "../interfaces";
 
-
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
   return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
@@ -36,6 +35,7 @@ export default function ProductPage() {
           Price: {selectedProduct.price}
         </Typography>
         <AddtoCartButton product={selectedProduct }/>
+        
       </Box>
       <img
         src={selectedProduct.image}

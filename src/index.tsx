@@ -20,7 +20,7 @@ import {CounterProvider} from './CounterProvider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<RootLayout/>}>
+    <Route element={<CounterProvider><RootLayout/></CounterProvider>}>
 
     {/* alla produkter syns här */}
    

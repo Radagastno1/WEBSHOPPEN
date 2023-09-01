@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 // Definiera contexttypen
 type CartContextType = {
@@ -25,6 +25,7 @@ export function CounterProvider({ children }: { children: ReactNode }) {
   const subCount = () => {
     setCount(count - 1);
   };
+ 
 
   return (
     <CounterContext.Provider value={{ Count: count, addCount, subCount }}>
@@ -37,6 +38,7 @@ export function CounterProvider({ children }: { children: ReactNode }) {
 export function useCounterContext() {
   return useContext(CounterContext);
 }
+
 
 
 

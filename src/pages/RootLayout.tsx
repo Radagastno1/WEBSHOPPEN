@@ -5,6 +5,10 @@ import {  useCounterContext } from '../CounterProvider';
 
 export default function RootLayout(){
   const {Count} = useCounterContext()
+
+  
+
+
     return(
         <div className="flex flex-col h-screen">
           <header
@@ -20,9 +24,10 @@ export default function RootLayout(){
             </NavLink>
 
         <NavLink to="/checkout"  data-cy="cart-link" className="mr-10">
-            <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" />
-            </NavLink>
+            <ShoppingCartIcon className="text-black cursor-pointer" fontSize="large" data-cy="cart-items-count-badge" />
             {Count}
+            </NavLink>
+            
             
 
         </header>
