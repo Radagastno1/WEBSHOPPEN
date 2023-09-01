@@ -4,8 +4,10 @@ import { Products } from "../interfaces";
 import { addProductToLS } from "../localstorage";
 import { mockedProducts } from "../mockedList";
 import AddtoCartButton from "../components/AddtoCartButton";
+import { useCounterContext } from "../CounterProvider";
 
 export default function IndexPage() {
+  const {Count} = useCounterContext();
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
   useEffect(() => {
@@ -28,8 +30,11 @@ export default function IndexPage() {
               <img src={product.image} alt="En katt" className="h-20 w-30"/>
             </NavLink>
           <div data-cy="product-buy-button" className="flex-1">
+            
            <AddtoCartButton product={product} />
+           
           </div>
+          {Count}
           </div>
         ))}
       </ul>

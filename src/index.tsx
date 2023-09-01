@@ -24,7 +24,7 @@ const router = createBrowserRouter(
 
     {/* alla produkter syns här */}
    
-      <Route index element={<CounterProvider><IndexPage/></CounterProvider>}></Route> 
+      <Route index element={<IndexPage/>}></Route> 
       {/* en specifik produkt visas här */}
       <Route path="product/:id" element={<ProductPage/>}></Route>
       {/* formulär betalning */}
