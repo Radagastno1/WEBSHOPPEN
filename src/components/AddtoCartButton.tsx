@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
-import { addProductToCart, getCartFromLocalStorage } from "../localstorage";
+import { addProductToCart } from "../localstorage";
 import { Products, CartItem } from "../interfaces";
 import { useCounterContext } from "../CounterProvider";
 
@@ -10,20 +10,8 @@ interface Props {
 
 const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const { addCount } = useCounterContext();
-
-  useEffect(() => {
-    const cartFromLocalStorage = getCartFromLocalStorage();
-    const cartItemsWithQuantity: CartItem[] = cartFromLocalStorage.products.map(
-      (product) => ({
-        ...product,
-        quantity: 1,
-      })
-    );
-    setCartItems(cartItemsWithQuantity);
-  }, []);
 
   const handleAddToCart = () => {
     if (!productAddedToCart) {
@@ -35,7 +23,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
 
   return (
     <div>
-      
       <Button
         data-cy="product-buy-button"
         onClick={handleAddToCart}
@@ -45,9 +32,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         sx={{ mt: 2 }}
       >
         {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
-      
       </Button>
-      
     </div>
   );
 };
