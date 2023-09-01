@@ -6,6 +6,8 @@ import { addProductToLS } from "../localstorage";
 export default function IndexPage() {
   //FRÅGA DAVID VARFÖR HAN SA TA BORT DENNA?????
   mockedProducts.forEach((p) => addProductToLS(p));
+  //sätter denna här bara för att ta bort att order finns. tillfällig lösning:
+  localStorage.removeItem("orderGenerated");
 
   return (
     <div className="flex flex-col items-center">
