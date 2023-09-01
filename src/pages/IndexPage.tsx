@@ -29,12 +29,13 @@ export default function IndexPage() {
               <h1 className="text-2xl flex-1">{product.title}</h1>
               <img src={product.image} alt="En katt" className="h-20 w-30"/>
             </NavLink>
+            <div data-cy="cart-items-count-badge">
           <div data-cy="product-buy-button" className="flex-1">
-            
-           <AddtoCartButton product={product} />
-           
+            <AddtoCartButton product={product} />
+            {Count}
           </div>
-          {Count}
+        </div>
+         
           </div>
         ))}
       </ul>
