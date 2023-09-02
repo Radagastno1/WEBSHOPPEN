@@ -1,5 +1,6 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge, Box } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 import { useCounterContext } from "../CounterProvider";
 
@@ -17,24 +18,28 @@ export default function RootLayout() {
         }}
       >
         <nav>
-          <ul>
+          <ul style={{ display: "flex" }}>
             <li>
-              <NavLink to="/admin" data-cy="admin-link">
-                <AdminPanelSettingsIcon
-                  className="cursor-pointer"
-                  fontSize="large"
-                />
-              </NavLink>
+              <Box sx={{ marginRight: "0" }}>
+                <NavLink to="/admin" data-cy="admin-link">
+                  <AdminPanelSettingsIcon
+                    className="cursor-pointer"
+                    fontSize="large"
+                  />
+                </NavLink>
+              </Box>
             </li>
             <li>
-              <NavLink to="/checkout" data-cy="cart-link" className="mr-10">
-                <ShoppingCartIcon
-                  className="text-black cursor-pointer"
-                  fontSize="large"
-                  data-cy="cart-items-count-badge"
-                />
-                {count}
-              </NavLink>
+              <Box sx={{ marginRight: "50px" }}>
+                <NavLink to="/checkout" data-cy="cart-link">
+                  <Badge badgeContent={count} color="warning">
+                    <ShoppingCartIcon
+                      className="cursor-pointer"
+                      fontSize="large"
+                    />
+                  </Badge>
+                </NavLink>
+              </Box>
             </li>
           </ul>
         </nav>
