@@ -66,7 +66,7 @@ export default function ProductPage() {
         </div>
       </Box>
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
-        <Grid item lg={2}>
+        <Grid item lg={1}>
           <CardMedia
             component="img"
             alt={selectedProduct.title}
