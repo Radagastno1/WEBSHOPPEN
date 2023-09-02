@@ -13,7 +13,7 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
 
   const { addCount } = useCounterContext();
-  const {addToCart} = useCart();
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     if (!productAddedToCart) {
@@ -21,7 +21,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
       setProductAddedToCart(true);
       addToCart(product);
       addCount();
-      
     }
   };
 

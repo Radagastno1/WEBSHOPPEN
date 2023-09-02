@@ -42,6 +42,7 @@ export default function ConfirmationPage() {
         customer,
         cartsRef.current
       );
+      localStorage.setItem("orderGenerated", "true");
     }
 
     const orderInLS = getOrderFromLS();
