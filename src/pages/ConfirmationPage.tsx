@@ -1,16 +1,16 @@
 import { Paper, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { Cart, useCart } from "../CartContext";
+import { useCounterContext } from "../CounterProvider";
 import { useCustomerContext } from "../CustomerContext";
 import TableMUI from "../components/TableMUIComponent";
 import { Order } from "../interfaces";
-import "../styles.css";
-import { Cart, useCart } from "../CartContext";
-import { useCounterContext } from "../CounterProvider";
 import {
   generateNewOrderToLS,
   getCartFromLocalStorage,
   getOrderFromLS,
 } from "../localstorage";
+import "../styles.css";
 
 function generateRandomNumber() {
   const randomNumbers = Math.floor(Math.random() * 9000) + 1000;
