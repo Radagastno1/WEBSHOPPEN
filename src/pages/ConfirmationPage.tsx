@@ -1,15 +1,11 @@
 import { Paper, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Cart, useCart } from "../CartContext";
+import { useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
 import { useCustomerContext } from "../CustomerContext";
 import TableMUI from "../components/TableMUIComponent";
 import { Order } from "../interfaces";
-import {
-  generateNewOrderToLS,
-  getCartFromLocalStorage,
-  getOrderFromLS,
-} from "../localstorage";
+import { generateNewOrderToLS, getOrderFromLS } from "../localstorage";
 import "../styles.css";
 
 function generateRandomNumber() {
@@ -26,19 +22,17 @@ function generateRandomNumber() {
 export default function ConfirmationPage() {
   const { customer, resetCustomer } = useCustomerContext();
   const { resetCount } = useCounterContext();
-  const { resetCart } = useCart();
+  const { cart, resetCart, totalPrice } = useCart();
 
+  //kanske skulle order kunna bli en context men kanske ej behövs för dett änadå
   const [orderLoaded, setOrderLoaded] = useState(false);
-
   const orderRef = useRef<Order>();
-  const cartsRef = useRef<Cart>();
 
   useEffect(() => {
-    cartsRef.current = getCartFromLocalStorage();
     const hasOrderBeenGenerated = localStorage.getItem("orderGenerated");
 
     if (!hasOrderBeenGenerated) {
-      generateNewOrderToLS(generateRandomNumber(), customer, cartsRef.current);
+      generateNewOrderToLS(generateRandomNumber(), customer, cart, totalPrice);
       localStorage.setItem("orderGenerated", "true");
     }
 
@@ -55,7 +49,6 @@ export default function ConfirmationPage() {
       resetCount();
       resetCustomer();
       resetCart();
-      // alert("count, customer och cart resettas");
     }
   }, [orderLoaded]);
 
@@ -86,7 +79,7 @@ export default function ConfirmationPage() {
       orderRef.current?.orderNr,
       "Instabox",
       "Faktura",
-      orderRef.current?.cart.totalPrice,
+      orderRef.current?.totalPrice,
     ],
   ];
 
@@ -100,8 +93,8 @@ export default function ConfirmationPage() {
 
   let productRows: ProductRow[] = [];
 
-  if (orderRef.current?.cart.products) {
-    productRows = orderRef.current.cart.products.map((p) => [
+  if (orderRef.current?.cart) {
+    productRows = orderRef.current.cart.map((p) => [
       <img src={p.image} alt="Product" width="20" height="20" />,
       p.title,
       p.price,
@@ -160,7 +153,7 @@ export default function ConfirmationPage() {
       </Paper>
 
       <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
-        {orderLoaded && orderRef.current?.cart?.products ? (
+        {orderLoaded && orderRef.current?.cart ? (
           <div>
             <TableMUI titleRow={productTitleRows} cellRows={productRows} />
           </div>

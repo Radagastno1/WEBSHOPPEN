@@ -22,17 +22,17 @@ const FormSchema = z.object({
 type Customer = z.infer<typeof FormSchema>;
 
 interface Props {
+  // onSubmit: () => void;
   customer?: Customer;
 }
 
 export default function FormComponent(props: Props) {
+  const { setCustomer } = useCustomerContext();
+  const navigate = useNavigate();
   const { register, handleSubmit, formState, getValues } = useForm<Customer>({
     defaultValues: props.customer || {},
     resolver: zodResolver(FormSchema),
   });
-
-  const { setCustomer } = useCustomerContext();
-  const navigate = useNavigate();
 
   const handleOnSubmit = () => {
     const customerData = {
@@ -45,6 +45,8 @@ export default function FormComponent(props: Props) {
     };
 
     setCustomer(customerData);
+
+    // props.onSubmit();
 
     navigate("../confirmation");
   };

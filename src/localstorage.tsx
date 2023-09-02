@@ -1,6 +1,6 @@
 import { Customer } from "./CustomerContext";
 import { Order } from "./interfaces";
-import { Cart, Products } from "./interfaces";
+import { Products } from "./CartContext";
 
 export const addProductToLS = (product: Products) => {
   const existingProducts = JSON.parse(
@@ -23,43 +23,23 @@ export const getProductsFromLS = (): Products[] => {
   return products;
 };
 
-export const addProductToCart = (product: Products) => {
-  const cart: Cart = JSON.parse(
-    localStorage.getItem("cart") || '{"products":[],"totalPrice":0}'
-  );
-
-  cart.products.push(product);
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
-
-export const getCartFromLocalStorage = (): Cart => {
-  const cartString = localStorage.getItem("cart");
-  const cart: Cart = cartString
-    ? JSON.parse(cartString)
-    : { products: [], totalPrice: 0 };
-  return cart;
-};
-
-export const removeCartFromLocalstorage = () => {
-  localStorage.removeItem("cart");
-};
-
 export const generateNewOrderToLS = (
   ordernr: string,
   customer: Customer,
-  cart: Cart
+  cart: Products[],
+  totalPrice: number
 ) => {
   localStorage.removeItem("order");
-  alert("generate anropas");
-  const newOrder: Order = { orderNr: ordernr, customer: customer, cart: cart };
+
+  const newOrder: Order = {
+    orderNr: ordernr,
+    customer: customer,
+    cart: cart,
+    totalPrice: totalPrice,
+  };
   localStorage.setItem("order", JSON.stringify(newOrder));
   return newOrder;
 };
-
-// export const addOrderToLS = (order: Order) => {
-//   localStorage.setItem('order', JSON.stringify(order));
-// };
 
 export const getOrderFromLS = (): Order => {
   const orderString = localStorage.getItem("order");

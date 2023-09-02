@@ -1,15 +1,13 @@
 import { Customer } from "./CustomerContext";
-import { Products } from "./CartContext"
-import { Cart } from "./CartContext";
+import { Products } from "./CartContext";
 
-export interface Order{
-    orderNr : string
-    customer : Customer;
-    cart : Cart;
-  }
+export interface Order {
+  orderNr: string;
+  customer: Customer;
+  cart: Products[];
+  totalPrice: number;
+}
 
-
-
-  export interface CartItem extends Products {
-    quantity: number;
-  }
+export interface CartItem extends Products {
+  quantity: number;
+}
