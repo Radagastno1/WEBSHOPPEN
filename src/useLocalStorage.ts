@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorageState<T>(initialVaule: T, key: string) {
-  const [count, setCount] = useState(() => {
-    const IsItem = localStorage.getItem(key);
-
-    if (IsItem) {
-      return JSON.parse(IsItem) as T;
-    } else {
-      return initialVaule;
+function getItemWithFallback<T>(key: string, fallback: T): T {
+  const item = localStorage.getItem(key);
+  if (item) {
+    try {
+      return JSON.parse(item) as T;
+    } catch (error) {
+      // Handle parsing error, e.g., if the stored data is invalid JSON
     }
-  });
+  }
+  return fallback;
+}
+
+export default function useLocalStorageState<T>(
+  initialValue: T,
+  key: string
+) {
+  const [state, setState] = useState<T>(() =>
+    getItemWithFallback(key, initialValue)
+  );
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(count));
-  }, [count, key]);
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [state, key]);
 
-  return [count, setCount] as const;
+  return [state, setState] as const;
 }

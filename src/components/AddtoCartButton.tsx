@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
-import { addProductToCart } from "../localstorage";
-import { Products } from "../CartContext";
+import React, { useState } from "react";
+import { Products, useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
-import { useCart } from "../CartContext";
 
 interface Props {
   product: Products;
@@ -13,15 +11,13 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
 
   const { addCount } = useCounterContext();
-  const {addToCart} = useCart();
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     if (!productAddedToCart) {
-      addProductToCart(product);
-      setProductAddedToCart(true);
       addToCart(product);
+      setProductAddedToCart(true);
       addCount();
-      
     }
   };
 

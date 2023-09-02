@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -22,17 +22,17 @@ const FormSchema = z.object({
 type Customer = z.infer<typeof FormSchema>;
 
 interface Props {
+  // onSubmit: () => void;
   customer?: Customer;
 }
 
 export default function FormComponent(props: Props) {
+  const { setCustomer } = useCustomerContext();
+  const navigate = useNavigate();
   const { register, handleSubmit, formState, getValues } = useForm<Customer>({
     defaultValues: props.customer || {},
     resolver: zodResolver(FormSchema),
   });
-
-  const { setCustomer } = useCustomerContext();
-  const navigate = useNavigate();
 
   const handleOnSubmit = () => {
     const customerData = {
@@ -46,6 +46,8 @@ export default function FormComponent(props: Props) {
 
     setCustomer(customerData);
 
+    // props.onSubmit();
+
     navigate("../confirmation");
   };
 
@@ -55,7 +57,14 @@ export default function FormComponent(props: Props) {
       data-cy="customer-form"
       className="flex flex-1 flex-col items-center"
     >
-      <Box mt={2}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         <TextField
           label="Förnamn och efternamn"
           autoComplete="name"
@@ -66,9 +75,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.name ? (
-              <span data-cy="customer-name-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-name-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.name?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.name)}
@@ -81,9 +94,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.address ? (
-              <span data-cy="customer-address-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-address-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.address?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.address)}
@@ -99,9 +116,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.zipcode ? (
-              <span data-cy="customer-zipcode-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-zipcode-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.zipcode?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.zipcode)}
@@ -117,9 +138,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.city ? (
-              <span data-cy="customer-city-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-city-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.city?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.city)}
@@ -135,9 +160,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.email ? (
-              <span data-cy="customer-email-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-email-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.email?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.email)}
@@ -153,9 +182,13 @@ export default function FormComponent(props: Props) {
           variant="standard"
           helperText={
             formState.errors.phone ? (
-              <span data-cy="customer-phone-error" className="text-red-500">
+              <Typography
+                variant="caption"
+                data-cy="customer-phone-error"
+                sx={{ color: "red" }}
+              >
                 {formState.errors.phone?.message}
-              </span>
+              </Typography>
             ) : null
           }
           error={Boolean(formState.errors.phone)}
