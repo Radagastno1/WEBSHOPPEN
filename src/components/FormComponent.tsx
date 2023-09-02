@@ -26,31 +26,40 @@ interface Props {
 }
 
 export default function FormComponent(props: Props) {
-  const { register, handleSubmit, formState } = useForm<Customer>({
+  const { register, handleSubmit, formState, getValues } = useForm<Customer>({
     defaultValues: props.customer || {},
     resolver: zodResolver(FormSchema),
   });
 
-  const { customer, setCustomer } = useCustomerContext();
+  const { setCustomer } = useCustomerContext();
   const navigate = useNavigate();
+
+  const handleOnSubmit = () => {
+    const customerData = {
+      name: getValues("name"),
+      address: getValues("address"),
+      zipcode: getValues("zipcode"),
+      city: getValues("city"),
+      email: getValues("email"),
+      phone: getValues("phone"),
+    };
+
+    setCustomer(customerData);
+
+    navigate("../confirmation");
+  };
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
-        navigate("../confirmation");
-      })}
+      onSubmit={handleSubmit(handleOnSubmit)}
       data-cy="customer-form"
       className="flex flex-1 flex-col items-center"
     >
       <Box mt={2}>
         <TextField
           label="Förnamn och efternamn"
-          value={customer?.name}
           autoComplete="name"
           {...register("name")}
-          onChange={(e) => {
-            setCustomer({ ...customer, name: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-name",
           }}
@@ -69,7 +78,6 @@ export default function FormComponent(props: Props) {
           label="Gatuadress"
           autoComplete="street-address"
           {...register("address")}
-          value={customer?.address}
           variant="standard"
           helperText={
             formState.errors.address ? (
@@ -79,9 +87,6 @@ export default function FormComponent(props: Props) {
             ) : null
           }
           error={Boolean(formState.errors.address)}
-          onChange={(e) => {
-            setCustomer({ ...customer, address: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-address",
           }}
@@ -91,7 +96,6 @@ export default function FormComponent(props: Props) {
           label="Postkod"
           autoComplete="postal-code"
           {...register("zipcode")}
-          value={customer?.zipcode}
           variant="standard"
           helperText={
             formState.errors.zipcode ? (
@@ -101,9 +105,6 @@ export default function FormComponent(props: Props) {
             ) : null
           }
           error={Boolean(formState.errors.zipcode)}
-          onChange={(e) => {
-            setCustomer({ ...customer, zipcode: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-zipcode",
           }}
@@ -113,7 +114,6 @@ export default function FormComponent(props: Props) {
           label="Stad"
           autoComplete="address-level2"
           {...register("city")}
-          value={customer?.city}
           variant="standard"
           helperText={
             formState.errors.city ? (
@@ -123,9 +123,6 @@ export default function FormComponent(props: Props) {
             ) : null
           }
           error={Boolean(formState.errors.city)}
-          onChange={(e) => {
-            setCustomer({ ...customer, city: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-city",
           }}
@@ -135,7 +132,6 @@ export default function FormComponent(props: Props) {
           label="Email"
           autoComplete="email"
           {...register("email")}
-          value={customer?.email}
           variant="standard"
           helperText={
             formState.errors.email ? (
@@ -145,9 +141,6 @@ export default function FormComponent(props: Props) {
             ) : null
           }
           error={Boolean(formState.errors.email)}
-          onChange={(e) => {
-            setCustomer({ ...customer, email: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-email",
           }}
@@ -157,7 +150,6 @@ export default function FormComponent(props: Props) {
           label="Telefonnummer"
           autoComplete="tel"
           {...register("phone")}
-          value={customer?.phone}
           variant="standard"
           helperText={
             formState.errors.phone ? (
@@ -167,9 +159,6 @@ export default function FormComponent(props: Props) {
             ) : null
           }
           error={Boolean(formState.errors.phone)}
-          onChange={(e) => {
-            setCustomer({ ...customer, phone: e.target.value });
-          }}
           inputProps={{
             "data-cy": "customer-phone",
           }}
