@@ -4,7 +4,7 @@ import { useCustomerContext } from "../CustomerContext";
 import TableMUI from "../components/TableMUIComponent";
 import { Order } from "../interfaces";
 import "../styles.css";
-import { Cart } from "../CartContext";
+import { Cart, useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
 import {
   generateNewOrderToLS,
@@ -26,6 +26,7 @@ function generateRandomNumber() {
 export default function ConfirmationPage() {
   const { customer, resetCustomer } = useCustomerContext();
   const { resetCount } = useCounterContext();
+  const { resetCart } = useCart();
 
   const [orderLoaded, setOrderLoaded] = useState(false);
 
@@ -37,11 +38,7 @@ export default function ConfirmationPage() {
     const hasOrderBeenGenerated = localStorage.getItem("orderGenerated");
 
     if (!hasOrderBeenGenerated) {
-      const newOrder = generateNewOrderToLS(
-        generateRandomNumber(),
-        customer,
-        cartsRef.current
-      );
+      generateNewOrderToLS(generateRandomNumber(), customer, cartsRef.current);
       localStorage.setItem("orderGenerated", "true");
     }
 
@@ -57,8 +54,8 @@ export default function ConfirmationPage() {
     if (orderLoaded) {
       resetCount();
       resetCustomer();
-      localStorage.removeItem("cart");
-      alert("resettas");
+      resetCart();
+      // alert("count, customer och cart resettas");
     }
   }, [orderLoaded]);
 
@@ -96,9 +93,9 @@ export default function ConfirmationPage() {
   const productTitleRows = ["Produkt", "Titel", "Pris"];
 
   interface ProductRow {
-    0: JSX.Element; // Bild
-    1: string; // Titel
-    2: number; // Pris
+    0: JSX.Element; // bilden
+    1: string; // titeln
+    2: number; // priset
   }
 
   let productRows: ProductRow[] = [];
@@ -132,14 +129,12 @@ export default function ConfirmationPage() {
 
       <div className="flex bg-neutral-500 w-screen bg-opacity-5">
         <div className="w-1/2 p-3">
-          {/* <Typography variant="h6" className="font-bold">Order</Typography> */}
           <div>
             <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
           </div>
         </div>
 
         <div className="w-1/2 p-3">
-          {/* <Typography variant="h6" className="font-bold">Leveransadress</Typography> */}
           {orderLoaded ? (
             <div>
               <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
