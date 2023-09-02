@@ -70,7 +70,13 @@ export default function ProductPage() {
           <CardMedia
             component="img"
             alt={selectedProduct.title}
-            style={{ width: "100%", height: "auto", borderRadius: "20px" }}
+            sx={{
+        
+              width: "100%",
+              height: "240px",
+              borderRadius: "15px",
+              overflow: "hidden",
+            }}
             image={selectedProduct.image}
             title={selectedProduct.title}
           />
