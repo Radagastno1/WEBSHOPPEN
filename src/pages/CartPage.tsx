@@ -1,33 +1,41 @@
 import { useCart } from "../CartContext";
+import TableMUI from "../components/TableMUIComponent";
 
 export default function CartPage() {
   const { cart, totalPrice } = useCart();
 
+  const titleRows = [
+    "Titel",
+    "Antal",
+    "Pris",
+    "ProduktBild",
+  ];
+
+  interface ProductRow {
+    0: JSX.Element;
+    1: JSX.Element;
+    2: JSX.Element;
+    3: JSX.Element; // bilden
+  }
+
+    let productRows: ProductRow[] = [];
+
+      productRows = cart.map((p) => [
+        <span data-cy="product-title">{p.title}</span>,
+       <span data-cy="product-price">{ p.price} kr</span>,
+       <span data-cy="product-quantity">{p.quantity} st</span>,
+        <img src={p.image} alt="Product" className="h-10 w-10"/>,
+      ]);
+
+
+    
+
+
   return (
     <div className="flex flex-1 flex-col items-center">
-      <ul>
-        {cart.map((product) => (
-          <li key={product.id} data-cy="cart-item" className="product-item">
-            <div
-              className="product-info"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <div className="product-title" style={{ marginRight: "75px" }}>
-                {product.title}
-              </div>
-              <div className="product-price">
-                <strong>Pris:</strong> {product.price}
-              </div>
-              <img src={product.image} alt="produkt" className="w-5 h-5" />
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p>Totalt pris: {totalPrice}</p>
+            <TableMUI titleRow={titleRows} cellRows={productRows} />
+      <p>Totalt pris:</p>
+      <p data-cy="total-price"> {totalPrice}</p>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows }) => {
         </TableHead>
         <TableBody>
           {cellRows.map((row, rowIndex) => (
-            <TableRow key={rowIndex}>
+            <TableRow key={rowIndex} data-cy="cart-item">
               {row.map((cell:string, cellIndex: number) => (
                 <TableCell key={cellIndex}>{cell}</TableCell>
               ))}
