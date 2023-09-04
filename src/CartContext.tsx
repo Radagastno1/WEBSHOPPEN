@@ -2,18 +2,19 @@ import { ReactNode, createContext, useContext } from "react";
 import useLocalStorageState from "./useLocalStorage";
 
 export interface Products {
-  id: number;
+  id: string;
   title: string;
   price: number;
   description: string;
   image: string;
+  quantity: number;
 }
 
 interface CartContextType {
   cart: Products[];
   totalPrice: number;
   addToCart: (product: Products) => void;
-  removeFromCart: (productId: number) => void;
+  removeFromCart: (product: Products) => void;
   calculateTotal: () => number;
   resetCart: () => void;
 }
@@ -49,36 +50,62 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const addToCart = (product: Products) => {
     const updatedCart = [...cart];
-
-    updatedCart.push(product);
-
+    let productExists = false;
+  
+    for (const cartProduct of updatedCart) {
+      if (cartProduct.id === product.id) {
+        cartProduct.quantity += 1;
+        productExists = true;
+        break; 
+      }
+    }
+  
+    if (!productExists) {
+      product.quantity = 1;
+      updatedCart.push(product);
+    }
+  
     setCart(updatedCart);
-
+  
     const total = updatedCart.reduce(
-      (accumulator, product) => accumulator + product.price,
+      (accumulator, product) => accumulator + product.price * product.quantity,
       0
     );
     setTotalPrice(total);
   };
-
-  const removeFromCart = (productId: number) => {
+  
+  const removeFromCart = (product: Products) => {
     const updatedCart = [...cart];
 
-    const productIndex = updatedCart.findIndex(
-      (product) => product.id === productId
-    );
+    product.quantity -= 1;
 
-    if (productIndex !== -1) {
-      updatedCart.splice(productIndex, 1);
+    if(product.quantity === 0){
 
-      setCart(updatedCart);
-
+      const productIndex = updatedCart.findIndex(
+        (product) => product.id === product.id
+      );
+  
+      if (productIndex !== -1) {
+        updatedCart.splice(productIndex, 1);
+  
+        setCart(updatedCart);
+  
+        const total = updatedCart.reduce(
+          (accumulator, product) => accumulator + product.price,
+          0
+        );
+        setTotalPrice(total);
+      }
+    }
+    else{
+        
       const total = updatedCart.reduce(
         (accumulator, product) => accumulator + product.price,
         0
       );
       setTotalPrice(total);
     }
+
   };
 
   const calculateTotal = () => {

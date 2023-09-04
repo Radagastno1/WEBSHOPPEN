@@ -71,6 +71,7 @@ export default function AdminPage() {
       title: p.title,
       description: p.description,
       price: p.price,
+      quantity: p.quantity
     });
   });
 
