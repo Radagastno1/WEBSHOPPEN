@@ -2,6 +2,7 @@ import { Button, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Products, useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 interface Props {
   product: Products;
@@ -29,8 +30,8 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         setResetButton(true);
         setTimeout(() => {
           setResetButton(false);
-        }, 500);
-      }, 500);
+        });
+      }, 1000);
     }
   };
 
@@ -40,19 +41,30 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         data-cy="product-buy-button"
         onClick={handleAddToCart}
         variant="contained"
-        color="primary"
+        
         disabled={productAddedToCart || resetButton}
-        sx={{ mt: 2 }}
+        sx={{ 
+          mt: 1,
+          mb: 1,
+          background: "#000", 
+          color: "#fff", 
+          "&:hover": {
+            backgroundColor: "black",
+            transform: "scale(1.05)", // Öka storleken med 5% vid hovring
+            transition: "transform 0.2s ease-in-out", // Lägg till en mjuk övergångseffekt
+          },
+        }}
       >
-         {productAddedToCart ? (
-    <Typography variant="body1" color="textPrimary" data-cy="added-to-cart-toast">
-      {count} {product.title} har lagts till
-    </Typography>
-  ) : (
-    <Typography variant="body1" color="textPrimary">
-      Lägg till {product.title} i kundvagn
-    </Typography>
-  )}
+     <ShoppingCartIcon fontSize="small" style={{ marginRight: "8px" }} /> 
+        {productAddedToCart ? (
+          <Typography variant="body1" data-cy="added-to-cart-toast">
+             har lagts till
+          </Typography>
+        ) : (
+          <Typography variant="body1">
+            Lägg till
+          </Typography>
+        )}
       </Button>
     </div>
   );
