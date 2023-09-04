@@ -1,9 +1,10 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Badge, Box, Link, Toolbar, Typography } from "@mui/material";
-import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import { useCounterContext } from "../CounterProvider";
+import PopupListComponent from "../components/PopupListComponent";
 
 export default function RootLayout() {
   const { count } = useCounterContext();
@@ -84,7 +85,14 @@ export default function RootLayout() {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></header>
+      >
+        {" "}
+        {isPopupVisible && (
+          <div className="absolute top-0 right-0 w-50" style={{ zIndex: 1 }}>
+            <PopupListComponent />
+          </div>
+        )}
+      </header>
 
       <main className="bg-neutral-100 flex flex-1 flex-col">
         <Outlet />
