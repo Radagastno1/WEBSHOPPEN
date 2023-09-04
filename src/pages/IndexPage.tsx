@@ -10,7 +10,7 @@ const cardImageStyle = {
 };
 
 const pageContainerStyle = {
-  padding: "20px", // Lägg till önskad yttre padding
+  padding: "20px",
 };
 
 export default function IndexPage() {
@@ -18,7 +18,7 @@ export default function IndexPage() {
   localStorage.removeItem("orderGenerated");
 
   return (
-    <Container sx={pageContainerStyle}> {/* Använd Container för att lägga till padding runt sidan */}
+    <Container sx={pageContainerStyle}> 
       <div className="flex flex-col items-center">
         <h1>SKORPA</h1>
         <Grid container spacing={2}>
