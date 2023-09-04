@@ -1,41 +1,74 @@
 import { useCart } from "../CartContext";
-import TableMUI from "../components/TableMUIComponent";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 
 export default function CartPage() {
-  const { cart, totalPrice } = useCart();
-
-  const titleRows = [
-    "Titel",
-    "Antal",
-    "Pris",
-    "ProduktBild",
-  ];
-
-  interface ProductRow {
-    0: JSX.Element;
-    1: JSX.Element;
-    2: JSX.Element;
-    3: JSX.Element; // bilden
-  }
-
-    let productRows: ProductRow[] = [];
-
-      productRows = cart.map((p) => [
-        <span data-cy="product-title">{p.title}</span>,
-       <span data-cy="product-price">{ p.price} kr</span>,
-       <span data-cy="product-quantity">{p.quantity} st</span>,
-        <img src={p.image} alt="Product" className="h-10 w-10"/>,
-      ]);
-
-
-    
-
+  const { cart, totalPrice, addToCart, removeFromCart } = useCart();
 
   return (
     <div className="flex flex-1 flex-col items-center">
-            <TableMUI titleRow={titleRows} cellRows={productRows} />
-      <p>Totalt pris:</p>
-      <p data-cy="total-price"> {totalPrice}</p>
+      {cart.length > 0 ? (
+        <div>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Titel</TableCell>
+                  <TableCell>Pris</TableCell>
+                  <TableCell>Antal</TableCell>
+                  <TableCell>Produktbild</TableCell>
+                  <TableCell>Ändra Antal</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cart.map((p) => (
+                  <TableRow key={p.id} data-cy="cart-item">
+                    <TableCell data-cy="product-title">{p.title}</TableCell>
+                    <TableCell data-cy="product-price">{p.price * p.quantity} kr</TableCell>
+                    <TableCell data-cy="product-quantity">{p.quantity} st</TableCell>
+                    <TableCell className="w-10 h-10">
+                      <div style={{ overflow: "visible" }}>
+                        <img
+                          src={p.image}
+                          alt="Product"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        onClick={() => addToCart(p)}
+                        data-cy={`increase-quantity-button`}
+                      >
+                        +
+                      </Button>
+                      <Button
+                        onClick={() => removeFromCart(p)}
+                        data-cy={`decrease-quantity-button`}
+                      >
+                        -
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Typography variant="h6" data-cy="total-price">
+            Totalt pris: {totalPrice}
+          </Typography>
+        </div>
+      ) : (
+        <Typography variant="body1">Tomt i plånkan?</Typography>
+      )}
     </div>
   );
 }
