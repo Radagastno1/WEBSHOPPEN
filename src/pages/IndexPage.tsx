@@ -9,6 +9,7 @@ export default function IndexPage() {
   mockedProducts.forEach((p) => addProductToLS(p));
   //sätter denna här bara för att ta bort att order finns. tillfällig lösning:
   localStorage.removeItem("orderGenerated");
+  //jag skriver en kommentar
 
   return (
     <div className="flex flex-col items-center">
