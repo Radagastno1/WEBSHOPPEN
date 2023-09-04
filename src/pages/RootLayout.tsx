@@ -79,7 +79,29 @@ export default function RootLayout() {
         <Outlet />
       </main>
 
-      <footer className="flex  flex-col h-10 bg-neutral-400"></footer>
+      <footer className="flex bg-neutral-400">
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            alignItems: "center",
+            "& a": {
+              ml: 2,
+              color: "#424242",
+              padding: 1,
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            },
+          }}
+        >
+          <Link href="#">{"Kundservice"}</Link>
+          <Link href="#">{"Om mig"}</Link>
+        </Box>
+      </footer>
     </div>
   );
 }
