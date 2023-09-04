@@ -20,7 +20,6 @@ export default function IndexPage() {
   return (
     <Container sx={pageContainerStyle}> 
       <div className="flex flex-col items-center">
-        <h1>SKORPA</h1>
         <Grid container spacing={2}>
           {mockedProducts.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
