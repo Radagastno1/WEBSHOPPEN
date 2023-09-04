@@ -100,7 +100,7 @@ export default function RootLayout() {
         <Outlet />
       </main>
 
-      <footer className="flex bg-neutral-400">
+      <footer className="flex bg-neutral-900">
         <Box
           sx={{
             display: "flex",
@@ -110,7 +110,8 @@ export default function RootLayout() {
             alignItems: "center",
             "& a": {
               ml: 2,
-              color: "#424242",
+              color: "white",
+              fontSize: 14,
               padding: 1,
               textDecoration: "none",
               "&:hover": {
