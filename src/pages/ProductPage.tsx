@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Box, Typography, CardMedia, Grid, Button } from "@mui/material"; // Importera komponenter från Material-UI
 import { mockedProducts } from "../mockedList";
 import { useParams } from "react-router-dom";
@@ -60,12 +61,7 @@ export default function ProductPage() {
           Price: {selectedProduct.price}
         </Typography>
 
-        <div className="flex-1 flex justify-center">
-          <AddtoCartButton
-            product={selectedProduct}
-            data-cy="product-buy-button"
-          />
-        </div>
+       
       </Box>
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
         <Grid item lg={1}>
@@ -74,22 +70,23 @@ export default function ProductPage() {
             alt={selectedProduct.title}
             sx={{
               width: "100%",
-              height: "240px",
+              height: "170px",
               borderRadius: "15px",
               overflow: "hidden",
             }}
             image={selectedProduct.image}
             title={selectedProduct.title}
           />
-          <Typography
-            variant="h6"
-            color="textPrimary"
-            data-cy="added-to-cart-toast"
-          >
-            {selectedProduct.title}
-          </Typography>
+          
         </Grid>
       </Grid>
+      <div className="flex-1 flex justify-center">
+          <AddtoCartButton
+          
+            product={selectedProduct}
+            data-cy="product-buy-button"
+          />
+        </div>
     </Box>
   );
 }
