@@ -40,9 +40,11 @@ export default function RootLayout() {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography variant="h4" className="flex flex-1 justify-center">
-                KERAMIKA
-              </Typography>
+              <NavLink to="/">
+                <Typography variant="h4" className="flex flex-1 justify-center">
+                  KERAMIKA
+                </Typography>
+              </NavLink>
             </Box>
             <nav>
               <ul style={{ display: "flex" }}>
@@ -51,7 +53,7 @@ export default function RootLayout() {
                     <NavLink to="/admin" data-cy="admin-link">
                       <AdminPanelSettingsIcon
                         className="cursor-pointer"
-                        fontSize="medium"
+                        fontSize="large"
                       />
                     </NavLink>
                   </Box>
@@ -68,7 +70,7 @@ export default function RootLayout() {
                       >
                         <ShoppingCartIcon
                           className="cursor-pointer"
-                          fontSize="medium"
+                          fontSize="large"
                         />
                       </Badge>
                     </NavLink>
