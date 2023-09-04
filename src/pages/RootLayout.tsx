@@ -32,7 +32,7 @@ export default function RootLayout() {
             <li>
               <Box sx={{ marginRight: "50px" }}>
                 <NavLink to="/checkout" data-cy="cart-link">
-                  <Badge badgeContent={count} color="warning">
+                  <Badge badgeContent={count} color="warning" data-cy="cart-items-count-badge">
                     <ShoppingCartIcon
                       className="cursor-pointer"
                       fontSize="large"
