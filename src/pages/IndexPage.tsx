@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { mockedProducts } from "../mockedList";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { addProductToLS } from "../localstorage";
+import { Slide } from "@mui/material";
 
 export default function IndexPage() {
   //FRÅGA DAVID VARFÖR HAN SA TA BORT DENNA?????
