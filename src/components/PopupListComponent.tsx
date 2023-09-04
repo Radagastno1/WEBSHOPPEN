@@ -2,8 +2,8 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import { useCart } from "../CartContext";
+import { Typography } from "@mui/material";
 
 export default function PopupListComponent() {
   const { cart } = useCart();
@@ -16,7 +16,12 @@ export default function PopupListComponent() {
             <ListItemIcon>
               <img src={product.image} alt="produktbild" className="h-5 w-5" />
             </ListItemIcon>
-            <ListItemText primary={`${product.title} ${product.quantity}st`} />
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "12px", fontWeight: 400 }}
+            >
+              {`${product.title} ${product.quantity}st`}
+            </Typography>
           </ListItem>
         ))}
       </List>

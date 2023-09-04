@@ -63,6 +63,8 @@ export default function RootLayout() {
                         badgeContent={count}
                         color="warning"
                         data-cy="cart-items-count-badge"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       >
                         <ShoppingCartIcon
                           className="cursor-pointer"
@@ -88,7 +90,7 @@ export default function RootLayout() {
       >
         {" "}
         {isPopupVisible && (
-          <div className="absolute top-0 right-0 w-50" style={{ zIndex: 1 }}>
+          <div className="absolute top-10 right-0 w-50" style={{ zIndex: 1 }}>
             <PopupListComponent />
           </div>
         )}
