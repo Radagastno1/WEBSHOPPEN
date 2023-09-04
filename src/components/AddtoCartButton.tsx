@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import React, { useState } from "react";
+import { Button, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import { Products, useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
 
@@ -9,15 +9,28 @@ interface Props {
 
 const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
+  const [resetButton, setResetButton] = useState(false);
 
-  const { addCount } = useCounterContext();
+  const { addCount, count } = useCounterContext();
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    if (resetButton) {
+      setProductAddedToCart(false);
+    }
+  }, [resetButton]);
 
   const handleAddToCart = () => {
     if (!productAddedToCart) {
       addToCart(product);
       setProductAddedToCart(true);
       addCount();
+      setTimeout(() => {
+        setResetButton(true);
+        setTimeout(() => {
+          setResetButton(false);
+        }, 500);
+      }, 500);
     }
   };
 
@@ -28,10 +41,18 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         onClick={handleAddToCart}
         variant="contained"
         color="primary"
-        disabled={productAddedToCart}
+        disabled={productAddedToCart || resetButton}
         sx={{ mt: 2 }}
       >
-        {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
+         {productAddedToCart ? (
+    <Typography variant="body1" color="textPrimary" data-cy="added-to-cart-toast">
+      {count} {product.title} har lagts till
+    </Typography>
+  ) : (
+    <Typography variant="body1" color="textPrimary">
+      Lägg till {product.title} i kundvagn
+    </Typography>
+  )}
       </Button>
     </div>
   );

@@ -59,10 +59,12 @@ export default function ProductPage() {
         <Typography data-cy="product-price">
           Price: {selectedProduct.price}
         </Typography>
-        <div data-cy="cart-items-count-badge">
-          <div data-cy="product-buy-button" className="flex-1">
-            <AddtoCartButton product={selectedProduct} />
-          </div>
+
+        <div className="flex-1 flex justify-center">
+          <AddtoCartButton
+            product={selectedProduct}
+            data-cy="product-buy-button"
+          />
         </div>
       </Box>
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
@@ -71,7 +73,6 @@ export default function ProductPage() {
             component="img"
             alt={selectedProduct.title}
             sx={{
-        
               width: "100%",
               height: "240px",
               borderRadius: "15px",
@@ -80,6 +81,13 @@ export default function ProductPage() {
             image={selectedProduct.image}
             title={selectedProduct.title}
           />
+          <Typography
+            variant="h6"
+            color="textPrimary"
+            data-cy="added-to-cart-toast"
+          >
+            {selectedProduct.title}
+          </Typography>
         </Grid>
       </Grid>
     </Box>
