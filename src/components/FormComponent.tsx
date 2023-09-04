@@ -197,7 +197,7 @@ export default function FormComponent(props: Props) {
           }}
         />
 
-        <Box mt={2}>
+        <Box mt={2} mb={2}>
           <Button type="submit" variant="contained" color="primary">
             Bekräfta
           </Button>

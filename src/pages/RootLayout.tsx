@@ -1,11 +1,23 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge, Box, AppBar, Toolbar, Typography, Link } from "@mui/material";
+import { AppBar, Badge, Box, Link, Toolbar, Typography } from "@mui/material";
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useCounterContext } from "../CounterProvider";
+import PopupListComponent from "../components/PopupListComponent";
 
 export default function RootLayout() {
   const { count } = useCounterContext();
+
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPopupVisible(false);
+  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -51,6 +63,8 @@ export default function RootLayout() {
                         badgeContent={count}
                         color="warning"
                         data-cy="cart-items-count-badge"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       >
                         <ShoppingCartIcon
                           className="cursor-pointer"
@@ -73,13 +87,20 @@ export default function RootLayout() {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></header>
+      >
+        {" "}
+        {isPopupVisible && (
+          <div className="absolute top-10 right-0 w-50" style={{ zIndex: 1 }}>
+            <PopupListComponent />
+          </div>
+        )}
+      </header>
 
       <main className="bg-neutral-100 flex flex-1 flex-col">
         <Outlet />
       </main>
 
-      <footer className="flex bg-neutral-400">
+      <footer className="flex bg-neutral-900">
         <Box
           sx={{
             display: "flex",
@@ -89,7 +110,8 @@ export default function RootLayout() {
             alignItems: "center",
             "& a": {
               ml: 2,
-              color: "#424242",
+              color: "white",
+              fontSize: 14,
               padding: 1,
               textDecoration: "none",
               "&:hover": {
