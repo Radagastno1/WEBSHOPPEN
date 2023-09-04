@@ -1,11 +1,22 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge, Box, AppBar, Toolbar, Typography, Link } from "@mui/material";
+import { AppBar, Badge, Box, Link, Toolbar, Typography } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
+import { useState } from "react";
 import { useCounterContext } from "../CounterProvider";
 
 export default function RootLayout() {
   const { count } = useCounterContext();
+
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPopupVisible(false);
+  };
 
   return (
     <div className="flex flex-col h-screen">
