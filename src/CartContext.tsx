@@ -65,48 +65,44 @@ export function CartProvider({ children }: CartProviderProps) {
       updatedCart.push(product);
     }
   
-    setCart(updatedCart);
+    
   
     const total = updatedCart.reduce(
       (accumulator, product) => accumulator + product.price * product.quantity,
       0
     );
     setTotalPrice(total);
+
+    setCart(updatedCart);
   };
   
   const removeFromCart = (product: Products) => {
     const updatedCart = [...cart];
-
-    product.quantity -= 1;
-
-    if(product.quantity === 0){
-
-      const productIndex = updatedCart.findIndex(
-        (product) => product.id === product.id
-      );
+    const productIndex = updatedCart.findIndex((p) => p.id === product.id);
   
-      if (productIndex !== -1) {
+    if (productIndex !== -1) {
+      const existingProduct = updatedCart[productIndex];
+  
+      // Decrease the quantity
+      existingProduct.quantity -= 1;
+  
+      // Remove the product if quantity reaches zero
+      if (existingProduct.quantity === 0) {
         updatedCart.splice(productIndex, 1);
-  
-        setCart(updatedCart);
-  
-        const total = updatedCart.reduce(
-          (accumulator, product) => accumulator + product.price,
-          0
-        );
-        setTotalPrice(total);
       }
-    }
-    else{
-        
+  
+      // Calculate the new total price
       const total = updatedCart.reduce(
-        (accumulator, product) => accumulator + product.price,
+        (accumulator, p) => accumulator + p.price * p.quantity,
         0
       );
+  
+      // Update cart and total price
+      setCart(updatedCart);
       setTotalPrice(total);
     }
-
   };
+  
 
   const calculateTotal = () => {
     return cart.reduce(
