@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
-import React, { useState } from "react";
+import { Button, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import { Products, useCart } from "../CartContext";
 import { useCounterContext } from "../CounterProvider";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 interface Props {
   product: Products;
@@ -9,15 +10,28 @@ interface Props {
 
 const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
+  const [resetButton, setResetButton] = useState(false);
 
-  const { addCount } = useCounterContext();
+  const { addCount, count } = useCounterContext();
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    if (resetButton) {
+      setProductAddedToCart(false);
+    }
+  }, [resetButton]);
 
   const handleAddToCart = () => {
     if (!productAddedToCart) {
       addToCart(product);
       setProductAddedToCart(true);
       addCount();
+      setTimeout(() => {
+        setResetButton(true);
+        setTimeout(() => {
+          setResetButton(false);
+        });
+      }, 1000);
     }
   };
 
@@ -27,11 +41,30 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         data-cy="product-buy-button"
         onClick={handleAddToCart}
         variant="contained"
-        color="primary"
-        disabled={productAddedToCart}
-        sx={{ mt: 2 }}
+        
+        disabled={productAddedToCart || resetButton}
+        sx={{ 
+          mt: 1,
+          mb: 1,
+          background: "#000", 
+          color: "#fff", 
+          "&:hover": {
+            backgroundColor: "black",
+            transform: "scale(1.05)", // Öka storleken med 5% vid hovring
+            transition: "transform 0.2s ease-in-out", // Lägg till en mjuk övergångseffekt
+          },
+        }}
       >
-        {productAddedToCart ? "Tillagd i kundvagn" : "Lägg till i kundvagn"}
+     <ShoppingCartIcon fontSize="small" style={{ marginRight: "8px" }} /> 
+        {productAddedToCart ? (
+          <Typography variant="body1" data-cy="added-to-cart-toast">
+             har lagts till
+          </Typography>
+        ) : (
+          <Typography variant="body1">
+            Lägg till
+          </Typography>
+        )}
       </Button>
     </div>
   );

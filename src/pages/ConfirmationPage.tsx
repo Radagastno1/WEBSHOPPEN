@@ -83,7 +83,7 @@ export default function ConfirmationPage() {
     ],
   ];
 
-  const productTitleRows = ["Produkt", "Titel", "Pris"];
+  const productTitleRows = ["Produkt", "Titel", "Antal", "Pris"];
 
   interface ProductRow {
     0: JSX.Element; // bilden
@@ -97,6 +97,7 @@ export default function ConfirmationPage() {
     productRows = orderRef.current.cart.map((p) => [
       <img src={p.image} alt="Product" width="20" height="20" />,
       p.title,
+      p.quantity,
       p.price,
     ]);
   }
