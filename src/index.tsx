@@ -16,6 +16,7 @@ import ConfirmationPage from "./pages/ConfirmationPage";
 
 import AdminPage from "./pages/AdminPage";
 import ProductPage from "./pages/ProductPage";
+import AdminProductPage from "./pages/AdminProductPage";
 
 import { CartProvider } from "./contexts/CartContext";
 import { CounterProvider } from "./contexts/CounterProvider";
@@ -33,7 +34,12 @@ const router = createBrowserRouter(
       <Route path="checkout" element={<CheckoutPage />}></Route>
       {/* bekräftelsesida */}
       <Route path="confirmation" element={<ConfirmationPage />}></Route>
+
       <Route path="admin" element={<AdminPage />}></Route>
+      <Route
+        path="admin/product"
+        element={<AdminProductPage title={""} />}
+      ></Route>
     </Route>
   )
 );
