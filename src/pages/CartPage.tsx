@@ -1,4 +1,6 @@
 import { useCart } from "../CartContext";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {
   Button,
   Table,
@@ -44,17 +46,17 @@ export default function CartPage() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Button
+                    <Button
                         onClick={() => addToCart(p)}
                         data-cy={`increase-quantity-button`}
                       >
-                        +
+                        <AddCircleIcon style={{ color: 'darkgrey' }} />
                       </Button>
                       <Button
                         onClick={() => removeFromCart(p)}
                         data-cy={`decrease-quantity-button`}
                       >
-                        -
+                        <RemoveCircleIcon style={{ color: 'darkgrey' }} />
                       </Button>
                     </TableCell>
                   </TableRow>
