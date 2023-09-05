@@ -5,6 +5,8 @@ import { mockedProducts } from "../mockedList";
 
 interface ProductContextType {
   products: Products[];
+  product: Products; // Lägg till product i kontexten
+  setProduct: (product: Products) => void;
   addProduct: (product: Products) => void;
   removeProduct: (product: Products) => void;
   editProduct: (product: Products) => void;
@@ -12,6 +14,15 @@ interface ProductContextType {
 
 const ProductContext = createContext<ProductContextType>({
   products: [],
+  product: {
+    id: "",
+    title: "",
+    description: "",
+    price: 0,
+    image: "string",
+    quantity: 0,
+  },
+  setProduct: () => {},
   addProduct: () => {},
   removeProduct: () => {},
   editProduct: () => {},
@@ -34,14 +45,22 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     mockedProducts,
     "products"
   );
+  const [product, setProduct] = useLocalStorageState<Products>(
+    {
+      id: "",
+      title: "",
+      description: "",
+      price: 0,
+      image: "string",
+      quantity: 0,
+    },
+    "product"
+  );
 
   const addProduct = (product: Products) => {
     const updatedProducts = [...products, product];
     setProducts(updatedProducts);
   };
-
-  
-
 
   const removeProduct = (product: Products) => {
     const updatedProducts = [...products];
@@ -59,16 +78,13 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     );
     setProducts(updatedProducts);
   };
-  
-
-
- 
-
 
   return (
     <ProductContext.Provider
       value={{
         products,
+        product, // Lägg till product i kontextvärdet
+        setProduct,
         addProduct,
         removeProduct,
         editProduct,

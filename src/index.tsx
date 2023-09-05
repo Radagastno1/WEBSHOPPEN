@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       <Route path="admin" element={<AdminPage />}></Route>
       <Route
         path="admin/product"
-        element={<AdminProductPage title={""} />}
+        element={<AdminProductPage title={"Lägg till"} />}
       ></Route>
     </Route>
   )
