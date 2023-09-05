@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
+import AddAndEditAdminButton from "../components/AddAndEditAdminButton";
 
 interface Props {
   title: string;
@@ -147,10 +148,14 @@ export default function AdminProductPage(props: Props) {
             defaultValue={1}
           />
 
-          <Box mt={2} mb={2}>
+          {/* <Box mt={2} mb={2}>
             <Button type="submit" variant="contained" color="primary">
               {props.title}
             </Button>
+          </Box> */}
+          {/* denna ska användas här nedanför sen */}
+          <Box mt={2} mb={2}>
+            <AddAndEditAdminButton onClick={handleOnSubmit} />
           </Box>
         </Box>
       </form>

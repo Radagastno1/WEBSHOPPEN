@@ -4,12 +4,14 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
+  Box,
 } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
 import DatagridComponent from "../components/DatagridComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
+import { NavLink } from "react-router-dom";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
@@ -83,7 +85,15 @@ export default function AdminPage() {
   });
 
   return (
-    <div className="flex flex-1" data-cy="product-title">
+    <div className="flex flex-col flex-1" data-cy="product-title">
+      <Box mb={1}>
+        <NavLink to="/admin/product" style={{ textDecoration: 'none' }}>
+          <Button variant="contained" color="primary">
+            Lägg till produkt
+          </Button>
+        </NavLink>
+      </Box>
+      
       <DatagridComponent rows={rows} columns={columns}/>
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
