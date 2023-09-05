@@ -8,34 +8,11 @@ import { Order } from "../interfaces";
 import { generateNewOrderToLS, getOrderFromLS } from "../localstorage";
 import "../styles.css";
 
-function generateRandomNumber() {
-  const randomNumbers = Math.floor(Math.random() * 9000) + 1000;
-
-  const timestamp = new Date().getTime();
-  const last6Digits = timestamp.toString().slice(-6);
-
-  const orderNumber = `${last6Digits}-${randomNumbers}`;
-
-  return String(orderNumber);
-}
-
 export default function ConfirmationPage() {
-  const { customer, resetCustomer } = useCustomerContext();
-  const { resetCount } = useCounterContext();
-  const { cart, resetCart, totalPrice } = useCart();
-
-  //kanske skulle order kunna bli en context men kanske ej behövs för dett änadå
   const [orderLoaded, setOrderLoaded] = useState(false);
   const orderRef = useRef<Order>();
 
   useEffect(() => {
-    const hasOrderBeenGenerated = localStorage.getItem("orderGenerated");
-
-    if (!hasOrderBeenGenerated) {
-      generateNewOrderToLS(generateRandomNumber(), customer, cart, totalPrice);
-      localStorage.setItem("orderGenerated", "true");
-    }
-
     const orderInLS = getOrderFromLS();
     orderRef.current = orderInLS;
     if (orderRef.current) {
@@ -43,14 +20,6 @@ export default function ConfirmationPage() {
       console.log(orderLoaded);
     }
   }, []);
-
-  useEffect(() => {
-    if (orderLoaded) {
-      resetCount();
-      resetCustomer();
-      resetCart();
-    }
-  }, [orderLoaded]);
 
   const addressTitleRow = [
     "Namn",
