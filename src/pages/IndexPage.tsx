@@ -23,7 +23,7 @@ export default function IndexPage() {
         <Grid container spacing={2}>
           {mockedProducts.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
-              <Card>
+               <Card data-cy="product">
                 <NavLink to={`/product/${String(product.id)}`}>
                   <CardMedia
                     component="img"
