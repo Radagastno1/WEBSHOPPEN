@@ -23,19 +23,14 @@ export const getProductsFromLS = (): Products[] => {
   return products;
 };
 
-export const generateNewOrderToLS = (
-  ordernr: string,
-  customer: Customer,
-  cart: Products[],
-  totalPrice: number
-) => {
+export const generateNewOrderToLS = (order: Order) => {
   localStorage.removeItem("order");
 
   const newOrder: Order = {
-    orderNr: ordernr,
-    customer: customer,
-    cart: cart,
-    totalPrice: totalPrice,
+    orderNr: order.orderNr,
+    customer: order.customer,
+    cart: order.cart,
+    totalPrice: order.totalPrice,
   };
   localStorage.setItem("order", JSON.stringify(newOrder));
   return newOrder;

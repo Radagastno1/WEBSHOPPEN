@@ -1,9 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, TextField, Typography, Grid } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { useCart } from "../CartContext";
+import { useCounterContext } from "../CounterProvider";
 import { useCustomerContext } from "../CustomerContext";
+import { Order } from "../interfaces";
+import { generateNewOrderToLS } from "../localstorage";
 import "../media.css";
 
 const FormSchema = z.object({
@@ -22,19 +26,33 @@ const FormSchema = z.object({
 type Customer = z.infer<typeof FormSchema>;
 
 interface Props {
-  // onSubmit: () => void;
   customer?: Customer;
+}
+
+function generateRandomNumber() {
+  const randomNumbers = Math.floor(Math.random() * 9000) + 1000;
+
+  const timestamp = new Date().getTime();
+  const last6Digits = timestamp.toString().slice(-6);
+
+  const orderNumber = `${last6Digits}-${randomNumbers}`;
+
+  return String(orderNumber);
 }
 
 export default function FormComponent(props: Props) {
   const { setCustomer } = useCustomerContext();
+  const { customer, resetCustomer } = useCustomerContext();
+  const { resetCount } = useCounterContext();
+  const { cart, resetCart, totalPrice } = useCart();
+
   const navigate = useNavigate();
   const { register, handleSubmit, formState, getValues } = useForm<Customer>({
     defaultValues: props.customer || {},
     resolver: zodResolver(FormSchema),
   });
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     const customerData = {
       name: getValues("name"),
       address: getValues("address"),
@@ -46,7 +64,26 @@ export default function FormComponent(props: Props) {
 
     setCustomer(customerData);
 
-    // props.onSubmit();
+    const hasOrderBeenGenerated = localStorage.getItem("orderGenerated");
+
+    if (!hasOrderBeenGenerated) {
+      const orderNumber = generateRandomNumber();
+
+      const order: Order = {
+        orderNr: orderNumber,
+        customer: customerData,
+        cart: cart,
+        totalPrice: totalPrice,
+      };
+
+      generateNewOrderToLS(order);
+
+      localStorage.setItem("orderGenerated", "true");
+    }
+
+    resetCount();
+    resetCustomer();
+    resetCart();
 
     navigate("../confirmation");
   };
