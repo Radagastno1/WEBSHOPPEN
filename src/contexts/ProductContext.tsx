@@ -35,7 +35,13 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     "products"
   );
 
-  const addProduct = (product: Products) => {};
+  const addProduct = (product: Products) => {
+    const updatedProducts = [...products, product];
+    setProducts(updatedProducts);
+  };
+
+  
+
 
   const removeProduct = (product: Products) => {
     const updatedProducts = [...products];

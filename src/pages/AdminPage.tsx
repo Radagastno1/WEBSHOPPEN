@@ -14,13 +14,18 @@ import { useProductContext } from "../contexts/ProductContext";
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
   // const products = mockedProducts;
-  const { products, removeProduct } = useProductContext();
+  const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
   function handleAction(product: Products) {
     setSelectedProduct(product);
     setIsPopupOpen(true);
+  }
+
+  function handleAddProduct(product: Products) {
+    addProduct(product)
+    setIsPopupOpen(false)
   }
 
   function handleRemoveProduct(product: Products) {
