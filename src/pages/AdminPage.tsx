@@ -83,13 +83,13 @@ export default function AdminPage() {
   });
 
   return (
-    <div className="flex flex-1">
-      <DatagridComponent rows={rows} columns={columns} />
+    <div className="flex flex-1" data-cy="product-title">
+      <DatagridComponent rows={rows} columns={columns}/>
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
         <DialogContent>
           {selectedProduct && (
-            <div>
+            <div data-cy="product">
               <p>ID: {selectedProduct.id}</p>
               <p>Title: {selectedProduct.title}</p>
               <p>Description: {selectedProduct.description}</p>
