@@ -14,10 +14,10 @@ export default function DatagridComponent({ rows, columns }: DatagridProps) {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 6 },
+            paginationModel: { page: 0, pageSize: 12 },
           },
         }}
-        pageSizeOptions={[6, 12]}
+        pageSizeOptions={[25, 50]}
         checkboxSelection
       />
     </div>

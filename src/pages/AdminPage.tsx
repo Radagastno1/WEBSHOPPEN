@@ -9,11 +9,12 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
 import DatagridComponent from "../components/DatagridComponent";
 import { Products } from "../contexts/CartContext";
-import { mockedProducts } from "../mockedList";
+import { useProductContext } from "../contexts/ProductContext";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
-  const products = mockedProducts;
+  // const products = mockedProducts;
+  const { products, removeProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
@@ -23,12 +24,16 @@ export default function AdminPage() {
   }
 
   function handleRemoveProduct(product: Products) {
-    //här anropar vi removeproduct från
+    removeProduct(product);
     setIsPopupOpen(false);
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "Id" },
+    {
+      field: "id",
+      headerName: "Id",
+      renderCell: (params: any) => <div data-cy="product"></div>,
+    },
     {
       field: "image",
       headerName: "Bild",
@@ -39,9 +44,6 @@ export default function AdminPage() {
     {
       field: "title",
       headerName: "Titel",
-      renderCell: (params: any) => (
-        <Typography data-cy={`product`}>{params.value}</Typography>
-      ),
     },
     { field: "description", headerName: "Beskrivning" },
     { field: "price", headerName: "Pris" },
@@ -76,7 +78,7 @@ export default function AdminPage() {
   });
 
   return (
-    <div>
+    <div className="flex flex-1">
       <DatagridComponent rows={rows} columns={columns} />
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>

@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useContext } from "react";
 import useLocalStorageState from "../useLocalStorage";
 import { Products } from "./CartContext";
+import { mockedProducts } from "../mockedList";
 
 interface ProductContextType {
   products: Products[];
@@ -30,7 +31,7 @@ interface ProcutProviderProps {
 
 export function ProductProvider({ children }: ProcutProviderProps) {
   const [products, setProducts] = useLocalStorageState<Products[]>(
-    [],
+    mockedProducts,
     "products"
   );
 
