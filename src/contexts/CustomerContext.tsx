@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext } from "react";
-import useLocalStorageState from "./useLocalStorage";
+import useLocalStorageState from "../useLocalStorage";
 
 export type Customer = {
   name: string;

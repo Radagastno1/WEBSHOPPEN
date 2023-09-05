@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext } from "react";
-import useLocalStorageState from "./useLocalStorage";
+import useLocalStorageState from "../useLocalStorage";
 
 export interface Products {
   id: string;
@@ -51,22 +51,20 @@ export function CartProvider({ children }: CartProviderProps) {
   const addToCart = (product: Products) => {
     const updatedCart = [...cart];
     let productExists = false;
-  
+
     for (const cartProduct of updatedCart) {
       if (cartProduct.id === product.id) {
         cartProduct.quantity += 1;
         productExists = true;
-        break; 
+        break;
       }
     }
-  
+
     if (!productExists) {
       product.quantity = 1;
       updatedCart.push(product);
     }
-  
-    
-  
+
     const total = updatedCart.reduce(
       (accumulator, product) => accumulator + product.price * product.quantity,
       0
@@ -75,34 +73,33 @@ export function CartProvider({ children }: CartProviderProps) {
 
     setCart(updatedCart);
   };
-  
+
   const removeFromCart = (product: Products) => {
     const updatedCart = [...cart];
     const productIndex = updatedCart.findIndex((p) => p.id === product.id);
-  
+
     if (productIndex !== -1) {
       const existingProduct = updatedCart[productIndex];
-  
+
       // Decrease the quantity
       existingProduct.quantity -= 1;
-  
+
       // Remove the product if quantity reaches zero
       if (existingProduct.quantity === 0) {
         updatedCart.splice(productIndex, 1);
       }
-  
+
       // Calculate the new total price
       const total = updatedCart.reduce(
         (accumulator, p) => accumulator + p.price * p.quantity,
         0
       );
-  
+
       // Update cart and total price
       setCart(updatedCart);
       setTotalPrice(total);
     }
   };
-  
 
   const calculateTotal = () => {
     return cart.reduce(

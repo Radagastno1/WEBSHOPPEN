@@ -11,14 +11,15 @@ import CheckoutPage from "./pages/CheckoutPage";
 import IndexPage from "./pages/IndexPage";
 import RootLayout from "./pages/RootLayout";
 
-import { CustomerProvider } from "./CustomerContext";
+import { CustomerProvider } from "./contexts/CustomerContext";
 import ConfirmationPage from "./pages/ConfirmationPage";
 
 import AdminPage from "./pages/AdminPage";
 import ProductPage from "./pages/ProductPage";
 
-import { CounterProvider } from "./CounterProvider";
-import { CartProvider } from "./CartContext";
+import { CartProvider } from "./contexts/CartContext";
+import { CounterProvider } from "./contexts/CounterProvider";
+import { ProductProvider } from "./contexts/ProductContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,11 +42,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <CounterProvider>
       <CartProvider>
-      <CustomerProvider>
-        <RouterProvider router={router} />
-      </CustomerProvider>
+        <CustomerProvider>
+          <ProductProvider>
+            <RouterProvider router={router} />
+          </ProductProvider>
+        </CustomerProvider>
       </CartProvider>
     </CounterProvider>
   </React.StrictMode>
-  
 );

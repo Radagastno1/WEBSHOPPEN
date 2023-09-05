@@ -1,8 +1,8 @@
-import { Button, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { Products, useCart } from "../CartContext";
-import { useCounterContext } from "../CounterProvider";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Products, useCart } from "../contexts/CartContext";
+import { useCounterContext } from "../contexts/CounterProvider";
 
 interface Props {
   product: Products;
@@ -41,13 +41,12 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
         data-cy="product-buy-button"
         onClick={handleAddToCart}
         variant="contained"
-        
         disabled={productAddedToCart || resetButton}
-        sx={{ 
+        sx={{
           mt: 1,
           mb: 1,
-          background: "#000", 
-          color: "#fff", 
+          background: "#000",
+          color: "#fff",
           "&:hover": {
             backgroundColor: "black",
             transform: "scale(1.05)", // Öka storleken med 5% vid hovring
@@ -55,15 +54,13 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
           },
         }}
       >
-     <ShoppingCartIcon fontSize="small" style={{ marginRight: "8px" }} /> 
+        <ShoppingCartIcon fontSize="small" style={{ marginRight: "8px" }} />
         {productAddedToCart ? (
           <Typography variant="body1" data-cy="added-to-cart-toast">
-             har lagts till
+            har lagts till
           </Typography>
         ) : (
-          <Typography variant="body1">
-            Lägg till
-          </Typography>
+          <Typography variant="body1">Lägg till</Typography>
         )}
       </Button>
     </div>

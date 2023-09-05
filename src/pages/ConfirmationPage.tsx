@@ -1,11 +1,8 @@
 import { Paper, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { useCart } from "../CartContext";
-import { useCounterContext } from "../CounterProvider";
-import { useCustomerContext } from "../CustomerContext";
 import TableMUI from "../components/TableMUIComponent";
 import { Order } from "../interfaces";
-import { generateNewOrderToLS, getOrderFromLS } from "../localstorage";
+import { getOrderFromLS } from "../localstorage";
 import "../styles.css";
 
 export default function ConfirmationPage() {

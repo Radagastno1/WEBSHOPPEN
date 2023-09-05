@@ -1,5 +1,5 @@
-import { Customer } from "./CustomerContext";
-import { Products } from "./CartContext";
+import { Products } from "./contexts/CartContext";
+import { Customer } from "./contexts/CustomerContext";
 
 export interface Order {
   orderNr: string;

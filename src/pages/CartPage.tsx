@@ -1,6 +1,7 @@
 import { useCart } from "../CartContext";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+
 import {
   Button,
   Table,
@@ -11,6 +12,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useCart } from "../contexts/CartContext";
 
 export default function CartPage() {
   const { cart, totalPrice, addToCart, removeFromCart } = useCart();
@@ -34,8 +36,12 @@ export default function CartPage() {
                 {cart.map((p) => (
                   <TableRow key={p.id} data-cy="cart-item">
                     <TableCell data-cy="product-title">{p.title}</TableCell>
-                    <TableCell data-cy="product-price">{p.price * p.quantity} kr</TableCell>
-                    <TableCell data-cy="product-quantity">{p.quantity} st</TableCell>
+                    <TableCell data-cy="product-price">
+                      {p.price * p.quantity} kr
+                    </TableCell>
+                    <TableCell data-cy="product-quantity">
+                      {p.quantity} st
+                    </TableCell>
                     <TableCell className="w-10 h-10">
                       <div style={{ overflow: "visible" }}>
                         <img
