@@ -88,7 +88,7 @@ export default function AdminPage() {
     <div className="flex flex-col flex-1" data-cy="product-title">
       <Box mb={1}>
         <NavLink to="/admin/product" style={{ textDecoration: 'none' }}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" data-cy="admin-add-product">
             Lägg till produkt
           </Button>
         </NavLink>
