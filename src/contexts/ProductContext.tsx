@@ -53,7 +53,17 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     }
   };
 
-  const editProduct = (product: Products) => {};
+  const editProduct = (editedProduct: Products) => {
+    const updatedProducts = products.map((product) =>
+      product.id === editedProduct.id ? editedProduct : product
+    );
+    setProducts(updatedProducts);
+  };
+  
+
+
+ 
+
 
   return (
     <ProductContext.Provider
