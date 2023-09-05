@@ -1,9 +1,9 @@
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { useCart } from "../CartContext";
-import { Typography } from "@mui/material";
+import { useCart } from "../contexts/CartContext";
 
 export default function PopupListComponent() {
   const { cart } = useCart();

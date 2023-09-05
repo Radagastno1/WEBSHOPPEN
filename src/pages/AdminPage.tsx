@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
-import { Products } from "../CartContext";
 import DatagridComponent from "../components/DatagridComponent";
+import { Products } from "../contexts/CartContext";
 import { mockedProducts } from "../mockedList";
 
 export default function AdminPage() {
@@ -71,7 +71,7 @@ export default function AdminPage() {
       title: p.title,
       description: p.description,
       price: p.price,
-      quantity: p.quantity
+      quantity: p.quantity,
     });
   });
 

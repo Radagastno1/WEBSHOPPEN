@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Products } from "../CartContext";
+import { Products } from "../contexts/CartContext";
 
 interface DatagridProps {
   rows: Products[];
