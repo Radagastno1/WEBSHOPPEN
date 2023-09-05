@@ -1,11 +1,9 @@
-import React from "react";
-
-import { Box, Typography, CardMedia, Grid, Button } from "@mui/material"; // Importera komponenter från Material-UI
-import { mockedProducts } from "../mockedList";
+import { Box, CardMedia, Grid, Typography } from "@mui/material"; // Importera komponenter från Material-UI
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
+import { useCounterContext } from "../contexts/CounterProvider";
 import { CartItem } from "../interfaces";
-import { useCounterContext } from "../CounterProvider";
+import { mockedProducts } from "../mockedList";
 
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
@@ -60,8 +58,6 @@ export default function ProductPage() {
         <Typography data-cy="product-price">
           Price: {selectedProduct.price}
         </Typography>
-
-       
       </Box>
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
         <Grid item lg={1}>
@@ -77,16 +73,14 @@ export default function ProductPage() {
             image={selectedProduct.image}
             title={selectedProduct.title}
           />
-          
         </Grid>
       </Grid>
       <div className="flex-1 flex justify-center">
-          <AddtoCartButton
-          
-            product={selectedProduct}
-            data-cy="product-buy-button"
-          />
-        </div>
+        <AddtoCartButton
+          product={selectedProduct}
+          data-cy="product-buy-button"
+        />
+      </div>
     </Box>
   );
 }

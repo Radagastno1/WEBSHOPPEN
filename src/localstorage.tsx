@@ -1,6 +1,5 @@
-import { Customer } from "./CustomerContext";
+import { Products } from "./contexts/CartContext";
 import { Order } from "./interfaces";
-import { Products } from "./CartContext";
 
 export const addProductToLS = (product: Products) => {
   const existingProducts = JSON.parse(

@@ -3,8 +3,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Badge, Box, Link, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { useCounterContext } from "../CounterProvider";
 import PopupListComponent from "../components/PopupListComponent";
+import { useCounterContext } from "../contexts/CounterProvider";
 
 export default function RootLayout() {
   const { count } = useCounterContext();
