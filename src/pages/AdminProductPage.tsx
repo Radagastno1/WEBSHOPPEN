@@ -2,10 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { discriminatedUnion, z } from "zod";
+import { useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 import AddAndEditAdminButton from "../components/AddAndEditAdminButton";
-import PopupListComponent from "../components/PopupListComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
 
@@ -23,17 +22,18 @@ const FormSchema = z.object({
 // type Product = z.infer<typeof FormSchema>;
 
 export default function AdminProductPage() {
-  const { products, editProduct, addProduct, product, setProduct } =
-    useProductContext();
+  const { products, editProduct, addProduct, setProduct } = useProductContext();
   const [isProductAdded, setProductAdded] = useState(false);
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
+  // const navigate = useNavigate();
 
   const productToEdit = products.find((p) => p.id == id);
 
   const { register, handleSubmit, formState, getValues, reset } =
     useForm<Products>({
-      //defaultvalues ska ju vara om det är med id och finns en produkt på idt
       resolver: zodResolver(FormSchema),
     });
 
@@ -55,10 +55,12 @@ export default function AdminProductPage() {
     setProduct(product);
 
     reset();
+
+    navigate("/admin");
   };
 
   return (
-    <Paper sx={{ display: "flex" }}>
+    <Paper sx={{ display: "flex", flexDirection: "column" }}>
       <Paper
         sx={{
           display: "flex",
@@ -190,32 +192,6 @@ export default function AdminProductPage() {
             </Box>
           </Box>
         </form>
-      </Paper>
-      <Paper
-        sx={{
-          height: "300px",
-          overflowY: "auto",
-          alignItems: "center",
-          flex: "1",
-        }}
-      >
-        {/* {isProductAdded && (
-          <PopupListComponent
-            products={product}
-            titleDatacy="product-title"
-            datacy="product"
-            priceDatacy="product-price"
-          />
-        )} */}
-
-        <Typography variant="h6">Alla produkter</Typography>
-
-        <PopupListComponent
-          products={[...products]}
-          titleDatacy="product-title"
-          datacy="product"
-          priceDatacy="product-price"
-        />
       </Paper>
     </Paper>
   );

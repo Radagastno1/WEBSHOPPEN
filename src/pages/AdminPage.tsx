@@ -1,17 +1,9 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Typography,
-  Box,
-} from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
+import { Box, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useState } from "react";
-import DatagridComponent from "../components/DatagridComponent";
+import { NavLink } from "react-router-dom";
+import TableMUI from "../components/TableMUIComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
-import { NavLink } from "react-router-dom";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
@@ -35,58 +27,26 @@ export default function AdminPage() {
     setIsPopupOpen(false);
   }
 
-  const columns: GridColDef[] = [
-    {
-      field: "id",
-      headerName: "Id",
-      renderCell: (params: any) => <div data-cy="product"></div>,
-    },
-    {
-      field: "image",
-      headerName: "Bild",
-      renderCell: (params: any) => (
-        <img src={params.value} alt="Product" style={{ width: 100 }} />
-      ),
-    },
-    {
-      field: "title",
-      headerName: "Titel",
-    },
-    { field: "description", headerName: "Beskrivning" },
-    { field: "price", headerName: "Pris" },
-    {
-      field: "action",
-      headerName: "Radera",
-      renderCell: (params: any) => (
-        <Button
-          variant="contained"
-          data-cy="admin-remove-product"
-          color="primary"
-          onClick={() => handleAction(params.row)}
-        >
-          Ta bort
-        </Button>
-      ),
-    },
-  ];
-  let rows: Products[] = [];
+  const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera"];
 
-  if (!products) {
-  }
-  products.forEach((p) => {
-    rows.push({
-      id: p.id,
-      image: p.image,
-      title: p.title,
-      description: p.description,
-      price: p.price,
-      quantity: p.quantity,
-    });
-  });
+  const productRows = products.map((p) => [
+    <img src={p.image} alt="Product" width="20" height="20" />,
+    <p data-cy="product-id">{p.id}</p>,
+    <p data-cy="product-title">{p.title}</p>,
+    <p data-cy="product-price">{p.price}</p>,
+    <Button
+      variant="contained"
+      data-cy="admin-remove-product"
+      color="primary"
+      onClick={() => handleAction(p)}
+    >
+      Ta bort produkten
+    </Button>,
+  ]);
 
   return (
-    <div className="flex flex-col flex-1" data-cy="product-title">
-      <Box mb={1}>
+    <div className="flex flex-col flex-1">
+      <Box my={2}>
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
@@ -98,13 +58,14 @@ export default function AdminPage() {
         </NavLink>
       </Box>
 
-      <DatagridComponent rows={rows} columns={columns} />
+      <TableMUI titleRow={titleRows} cellRows={productRows} datacy="product" />
+
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
         <DialogContent>
           {selectedProduct && (
             <div data-cy="product">
-              <p>ID: {selectedProduct.id}</p>
+              <p data-cy="product-title">ID: {selectedProduct.id}</p>
               <p>Title: {selectedProduct.title}</p>
               <p>Description: {selectedProduct.description}</p>
               <p>Price: {selectedProduct.price}</p>
@@ -115,7 +76,7 @@ export default function AdminPage() {
                   color="primary"
                   onClick={() => handleRemoveProduct(selectedProduct)}
                 >
-                  Ta bort produkten
+                  Ta bort
                 </Button>
               }
             </div>
