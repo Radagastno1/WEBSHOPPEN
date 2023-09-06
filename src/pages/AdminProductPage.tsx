@@ -1,15 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { z } from "zod";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
-import AddAndEditAdminButton from "../components/AddAndEditAdminButton";
-
-interface Props {
-  title: string;
-  product?: Products;
-}
 
 const FormSchema = z.object({
   title: z.string().min(1, { message: "Titel är obligatoriskt." }),
@@ -24,16 +19,29 @@ const FormSchema = z.object({
 
 // type Product = z.infer<typeof FormSchema>;
 
-export default function AdminProductPage(props: Props) {
-  const { addProduct, product, setProduct } = useProductContext();
+export default function AdminProductPage() {
+  const { products, editProduct, addProduct } = useProductContext();
+
+  const { id } = useParams();
+
+  const productToEdit = products.find((p) => p.id == id);
+  if (productToEdit) {
+    //fyll i formulären efter produktens egenskaper
+  } else {
+    if (id == "ny") {
+      //då är det lägg till ny produkt
+    }
+  }
+
   const { register, handleSubmit, formState, getValues } = useForm<Products>({
-    defaultValues: props.product || {},
+    //defaultvalues ska ju vara om det är med id och finns en produkt på idt
     resolver: zodResolver(FormSchema),
   });
 
+  //när det är id - förifyllda produkt fält
   const handleOnSubmit = async () => {
     const product: Products = {
-      id: "default",
+      id: productToEdit ? productToEdit.id : "default",
       title: getValues("title"),
       description: getValues("description"),
       price: getValues("price"),
@@ -41,8 +49,7 @@ export default function AdminProductPage(props: Props) {
       quantity: getValues("quantity"),
     };
 
-    //produkt får id i metoden istället
-    addProduct(product);
+    productToEdit ? editProduct(product) : addProduct(product);
   };
 
   return (
@@ -50,7 +57,7 @@ export default function AdminProductPage(props: Props) {
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Typography variant="h6" padding={2}>
-        {props.title} produkt
+        {id} produkt
       </Typography>
 
       <form
@@ -73,6 +80,7 @@ export default function AdminProductPage(props: Props) {
               "data-cy": "product-title",
             }}
             variant="standard"
+            defaultValue={productToEdit?.title}
             helperText={
               formState.errors.title ? (
                 <Typography
@@ -91,6 +99,7 @@ export default function AdminProductPage(props: Props) {
             label="Beskrivning"
             {...register("description")}
             variant="standard"
+            defaultValue={productToEdit?.description}
             helperText={
               formState.errors.description ? (
                 <Typography
@@ -109,6 +118,7 @@ export default function AdminProductPage(props: Props) {
             label="Pris"
             {...register("price")}
             variant="standard"
+            defaultValue={productToEdit?.price}
             helperText={
               formState.errors.price ? (
                 <Typography
@@ -127,6 +137,7 @@ export default function AdminProductPage(props: Props) {
             label="Bild (url)"
             {...register("image")}
             variant="standard"
+            defaultValue={productToEdit?.image}
             helperText={
               formState.errors.image ? (
                 <Typography
@@ -145,7 +156,7 @@ export default function AdminProductPage(props: Props) {
             label="Antal"
             {...register("quantity")}
             variant="standard"
-            defaultValue={1}
+            defaultValue={productToEdit ? productToEdit.quantity : 1}
           />
 
           {/* <Box mt={2} mb={2}>
@@ -155,7 +166,10 @@ export default function AdminProductPage(props: Props) {
           </Box> */}
           {/* denna ska användas här nedanför sen */}
           <Box mt={2} mb={2}>
-            <AddAndEditAdminButton onClick={handleOnSubmit} />
+            {/* <AddAndEditAdminButton onClick={handleOnSubmit} /> */}
+            <Button onClick={handleOnSubmit}>
+              {productToEdit ? "Redigera" : "Lägg till"}
+            </Button>
           </Box>
         </Box>
       </form>
