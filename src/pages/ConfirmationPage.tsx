@@ -90,14 +90,22 @@ export default function ConfirmationPage() {
       <div className="flex bg-neutral-500 w-screen bg-opacity-5">
         <div className="w-1/2 p-3">
           <div>
-            <TableMUI titleRow={orderTitleRows} cellRows={orderRow} />
+            <TableMUI
+              titleRow={orderTitleRows}
+              cellRows={orderRow}
+              datacy="cart-item"
+            />
           </div>
         </div>
 
         <div className="w-1/2 p-3">
           {orderLoaded ? (
             <div>
-              <TableMUI titleRow={addressTitleRow} cellRows={addressRow} />
+              <TableMUI
+                titleRow={addressTitleRow}
+                cellRows={addressRow}
+                datacy="cart-item"
+              />
             </div>
           ) : (
             <Typography>Laddar uppgifter....</Typography>
@@ -122,7 +130,11 @@ export default function ConfirmationPage() {
       <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
         {orderLoaded && orderRef.current?.cart ? (
           <div>
-            <TableMUI titleRow={productTitleRows} cellRows={productRows} />
+            <TableMUI
+              titleRow={productTitleRows}
+              cellRows={productRows}
+              datacy="cart-item"
+            />
           </div>
         ) : (
           <Typography>Väntar på att produkter ska laddas...</Typography>
