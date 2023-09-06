@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import TableMUI from "../components/TableMUIComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
   // const products = mockedProducts;
+    const navigate = useNavigate(); 
   const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
@@ -27,7 +29,7 @@ export default function AdminPage() {
     setIsPopupOpen(false);
   }
 
-  const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera"];
+  const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera", "Redigera"];
 
   const productRows = products.map((p) => [
     <img src={p.image} alt="Product" width="20" height="20" />,
@@ -41,6 +43,14 @@ export default function AdminPage() {
       onClick={() => handleAction(p)}
     >
       Ta bort produkten
+    </Button>,
+      <Button
+      variant="contained"
+      data-cy="admin-edit-product"
+      color="primary"
+      onClick={() => navigate(`/admin/product/${p.id}`)} 
+    >
+      Redigera produkten
     </Button>,
   ]);
 
