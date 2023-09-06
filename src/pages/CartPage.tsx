@@ -86,7 +86,7 @@ export default function CartPage() {
           </Typography>
         </div>
       ) : (
-        <Typography variant="body1">Tomt i plånkan?</Typography>
+        <Typography variant="body1">Din varukorg är tom</Typography>
       )}
     </div>
   );
