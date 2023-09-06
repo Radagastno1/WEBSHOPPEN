@@ -25,13 +25,6 @@ export default function AdminProductPage() {
   const { id } = useParams();
 
   const productToEdit = products.find((p) => p.id == id);
-  if (productToEdit) {
-    //fyll i formulären efter produktens egenskaper
-  } else {
-    if (id == "ny") {
-      //då är det lägg till ny produkt
-    }
-  }
 
   const { register, handleSubmit, formState, getValues } = useForm<Products>({
     //defaultvalues ska ju vara om det är med id och finns en produkt på idt
