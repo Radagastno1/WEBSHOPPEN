@@ -46,7 +46,7 @@ export default function AdminPage() {
 
   return (
     <div className="flex flex-col flex-1">
-      <Box mb={1}>
+      <Box my={2}>
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
@@ -76,7 +76,7 @@ export default function AdminPage() {
                   color="primary"
                   onClick={() => handleRemoveProduct(selectedProduct)}
                 >
-                  Ta bort produkten
+                  Ta bort
                 </Button>
               }
             </div>
