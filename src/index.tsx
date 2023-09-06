@@ -15,6 +15,7 @@ import { CustomerProvider } from "./contexts/CustomerContext";
 import ConfirmationPage from "./pages/ConfirmationPage";
 
 import AdminPage from "./pages/AdminPage";
+import AdminProductPage from "./pages/AdminProductPage";
 import ProductPage from "./pages/ProductPage";
 
 import { CartProvider } from "./contexts/CartContext";
@@ -24,16 +25,19 @@ import { ProductProvider } from "./contexts/ProductContext";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
-      {/* alla produkter syns här */}
-
       <Route index element={<IndexPage />}></Route>
-      {/* en specifik produkt visas här */}
+
       <Route path="product/:id" element={<ProductPage />}></Route>
-      {/* formulär betalning */}
+
       <Route path="checkout" element={<CheckoutPage />}></Route>
-      {/* bekräftelsesida */}
+
       <Route path="confirmation" element={<ConfirmationPage />}></Route>
+
       <Route path="admin" element={<AdminPage />}></Route>
+      <Route path="admin/product" element={<AdminProductPage />}>
+        <Route path=":id" element={<AdminPage />}></Route>
+        {/* <Route path="ny" element={<div>ny</div>}></Route> */}
+      </Route>
     </Route>
   )
 );

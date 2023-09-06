@@ -4,23 +4,30 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
+  Box,
 } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
 import DatagridComponent from "../components/DatagridComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
+import { NavLink } from "react-router-dom";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
   // const products = mockedProducts;
-  const { products, removeProduct } = useProductContext();
+  const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
   function handleAction(product: Products) {
     setSelectedProduct(product);
     setIsPopupOpen(true);
+  }
+
+  function handleAddProduct(product: Products) {
+    addProduct(product);
+    setIsPopupOpen(false);
   }
 
   function handleRemoveProduct(product: Products) {
@@ -78,13 +85,25 @@ export default function AdminPage() {
   });
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-col flex-1" data-cy="product-title">
+      <Box mb={1}>
+        <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            data-cy="admin-add-product"
+          >
+            Lägg till produkt
+          </Button>
+        </NavLink>
+      </Box>
+
       <DatagridComponent rows={rows} columns={columns} />
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
         <DialogContent>
           {selectedProduct && (
-            <div>
+            <div data-cy="product">
               <p>ID: {selectedProduct.id}</p>
               <p>Title: {selectedProduct.title}</p>
               <p>Description: {selectedProduct.description}</p>

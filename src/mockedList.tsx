@@ -8,7 +8,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/bhT4KZe.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "2",
@@ -17,7 +17,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/7EsVFH2.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "3",
@@ -26,7 +26,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/XYshqOS.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "4",
@@ -35,7 +35,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/HyVOKyU.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "5",
@@ -44,7 +44,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/PRpEisa.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "6",
@@ -53,7 +53,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/ScEZIJH.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "7",
@@ -62,7 +62,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/xr1Uyj6.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "8",
@@ -71,7 +71,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/Mgg4zoe.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "9",
@@ -80,7 +80,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/pqTB4BE.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "10",
@@ -89,7 +89,7 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/cKGOOxB.jpg",
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: "11",
@@ -98,6 +98,6 @@ export const mockedProducts: Products[] = [
     description:
       "En väldigt tunn och skär tallrik som är grön prickig på sidorna och har en slät kant.",
     image: "https://i.imgur.com/OTXngiT.jpg",
-    quantity: 0,
+    quantity: 1,
   },
 ];
