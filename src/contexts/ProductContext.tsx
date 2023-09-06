@@ -56,9 +56,23 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     },
     "product"
   );
+  //gamla addproduct
+  // const addProduct = (product: Products) => {
+  //   const updatedProducts = [...products, product];
+  //   setProducts(updatedProducts);
+  // };
 
-  const addProduct = (product: Products) => {
-    const updatedProducts = [...products, product];
+  //addproduct med ett updaterat id
+  const addProduct = (newProduct: Products) => {
+    const latestId = products.reduce((maxId, product) => {
+      const productId = parseInt(product.id, 10);
+      return productId > maxId ? productId : maxId;
+    }, 0);
+    const newId = `${latestId + 1}`;
+
+    newProduct.id = newId;
+
+    const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
   };
 
