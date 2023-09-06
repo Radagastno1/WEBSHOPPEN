@@ -1,27 +1,53 @@
-import { Typography } from "@mui/material";
+import { ListItemText, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { useCart } from "../contexts/CartContext";
+import { Products } from "../contexts/CartContext";
 
-export default function PopupListComponent() {
-  const { cart } = useCart();
+interface Props {
+  products?: Products[] | Products;
+  datacy?: string;
+  titleDatacy?: string;
+  priceDatacy?: string;
+}
+
+export default function PopupListComponent(props: Props) {
+  const productsArray = Array.isArray(props.products)
+    ? props.products
+    : [props.products];
 
   return (
     <Grid item xs={12} md={2}>
       <List sx={{ backgroundColor: "white", opacity: "0.9" }}>
-        {cart.map((product, index) => (
-          <ListItem key={index}>
+        {productsArray.map((product, index) => (
+          <ListItem key={index} data-cy={`product`}>
             <ListItemIcon>
-              <img src={product.image} alt="produktbild" className="h-5 w-5" />
+              <img src={product?.image} alt="produktbild" className="h-5 w-5" />
             </ListItemIcon>
-            <Typography
-              variant="body2"
-              sx={{ fontSize: "12px", fontWeight: 400 }}
-            >
-              {`${product.title} ${product.quantity}st`}
-            </Typography>
+
+            <ListItemIcon>
+              <Typography
+                variant="body2"
+                sx={{
+                  overflow: "visible",
+                }}
+                data-cy={props.titleDatacy}
+              >
+                {product?.title}
+              </Typography>
+            </ListItemIcon>
+
+            <ListItemIcon>
+              <Typography variant="body2">{`${product?.quantity}st`}</Typography>
+            </ListItemIcon>
+
+            <ListItemIcon>
+              <Typography
+                variant="body2"
+                data-cy={props.priceDatacy}
+              >{`${product?.price}kr`}</Typography>
+            </ListItemIcon>
           </ListItem>
         ))}
       </List>
