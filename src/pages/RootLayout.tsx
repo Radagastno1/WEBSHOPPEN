@@ -4,10 +4,12 @@ import { AppBar, Badge, Box, Link, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import PopupListComponent from "../components/PopupListComponent";
+import { useCart } from "../contexts/CartContext";
 import { useCounterContext } from "../contexts/CounterProvider";
 
 export default function RootLayout() {
   const { count } = useCounterContext();
+  const { cart } = useCart();
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -93,7 +95,7 @@ export default function RootLayout() {
         {" "}
         {isPopupVisible && (
           <div className="absolute top-10 right-0 w-50" style={{ zIndex: 1 }}>
-            <PopupListComponent />
+            <PopupListComponent products={cart} />
           </div>
         )}
       </header>

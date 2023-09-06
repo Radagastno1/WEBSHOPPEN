@@ -26,8 +26,8 @@ export default function AdminPage() {
   }
 
   function handleAddProduct(product: Products) {
-    addProduct(product)
-    setIsPopupOpen(false)
+    addProduct(product);
+    setIsPopupOpen(false);
   }
 
   function handleRemoveProduct(product: Products) {
@@ -87,14 +87,18 @@ export default function AdminPage() {
   return (
     <div className="flex flex-col flex-1" data-cy="product-title">
       <Box mb={1}>
-        <NavLink to="/admin/product" style={{ textDecoration: 'none' }}>
-          <Button variant="contained" color="primary" data-cy="admin-add-product">
+        <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            data-cy="admin-add-product"
+          >
             Lägg till produkt
           </Button>
         </NavLink>
       </Box>
-      
-      <DatagridComponent rows={rows} columns={columns}/>
+
+      <DatagridComponent rows={rows} columns={columns} />
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
         <DialogContent>
