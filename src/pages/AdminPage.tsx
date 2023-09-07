@@ -4,10 +4,13 @@ import { NavLink } from "react-router-dom";
 import TableMUI from "../components/TableMUIComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
+import { useNavigate } from "react-router-dom";
+import { typography } from "@mui/system";
 
 export default function AdminPage() {
   //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
   // const products = mockedProducts;
+    const navigate = useNavigate(); 
   const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
@@ -27,9 +30,10 @@ export default function AdminPage() {
     setIsPopupOpen(false);
   }
 
-  const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera"];
-
+  const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera", "Redigera "];
+  
   const productRows = products.map((p) => [
+    
     <img src={p.image} alt="Product" width="20" height="20" />,
     <p data-cy="product-id">{p.id}</p>,
     <p data-cy="product-title">{p.title}</p>,
@@ -42,10 +46,19 @@ export default function AdminPage() {
     >
       Ta bort produkten
     </Button>,
+      <Button
+      variant="contained"
+      data-cy="admin-edit-product"
+      color="primary"
+      onClick={() => navigate(`/admin/product/${p.id}`)} 
+    >
+      Redigera produkten
+    </Button>,
+    
   ]);
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1" >
       <Box my={2}>
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
@@ -58,11 +71,11 @@ export default function AdminPage() {
         </NavLink>
       </Box>
 
-      <TableMUI titleRow={titleRows} cellRows={productRows} datacy="product" />
+      <TableMUI titleRow={titleRows} cellRows={productRows} datacy="product" data-cy="product-form" />
 
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
-        <DialogContent>
+        <DialogContent >
           {selectedProduct && (
             <div data-cy="product">
               <p data-cy="product-title">ID: {selectedProduct.id}</p>

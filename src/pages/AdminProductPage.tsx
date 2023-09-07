@@ -60,7 +60,7 @@ export default function AdminProductPage() {
   };
 
   return (
-    <Paper sx={{ display: "flex", flexDirection: "column" }}>
+    <Paper sx={{ display: "flex", flexDirection: "column" }} >
       <Paper
         sx={{
           display: "flex",
@@ -69,7 +69,7 @@ export default function AdminProductPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6" padding={2}>
+        <Typography variant="h6" padding={2} data-cy="product-form">
           {productToEdit ? "Redigera produkt" : "Lägg till ny produkt"}
         </Typography>
 

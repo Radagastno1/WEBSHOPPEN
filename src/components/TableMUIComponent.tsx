@@ -17,9 +17,9 @@ interface TableMUIProps {
 
 const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows, datacy }) => {
   return (
-    <TableContainer elevation={2} component={Paper}>
+    <TableContainer elevation={2} component={Paper} >
       <Table aria-label="simple table">
-        <TableHead>
+        <TableHead data-cy="product-form">
           <TableRow>
             {titleRow.map((title) => (
               <TableCell
