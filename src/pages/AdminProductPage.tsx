@@ -13,9 +13,13 @@ const FormSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Beskrivning måste vara 5 siffror." }),
-  price: z.string().refine((value) => /^\d{1}$/.test(value), {
-    message: "Pris är obligatoriskt.",
-  }),
+    price: z
+    .string()
+    .min(1, { message: "Pris är obligatoriskt." })
+    .refine((value) => {
+      const parsedPrice = parseFloat(value);
+      return !isNaN(parsedPrice) && parsedPrice > 0;
+    }, { message: "Pris måste vara en giltig siffra och mer än 0." }),
   image: z.string().url({ message: "Bild ska vara en url" }),
 });
 
@@ -183,11 +187,7 @@ export default function AdminProductPage() {
 
             <Box mt={2} mb={2}>
               <AddAndEditAdminButton
-                onClick={handleOnSubmit}
                 titel={productToEdit ? "Redigera" : "Lägg till"}
-                onSubmitTitel={
-                  productToEdit ? "Produkt uppdateras" : "Produkt tillagd"
-                }
               />
             </Box>
           </Box>
