@@ -5,11 +5,8 @@ import TableMUI from "../components/TableMUIComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
-import { typography } from "@mui/system";
 
 export default function AdminPage() {
-  //här behöver vi använda oss av product state sen och det ska ju handla om mockedproducts med
-  // const products = mockedProducts;
     const navigate = useNavigate(); 
   const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);

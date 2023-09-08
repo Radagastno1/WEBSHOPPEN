@@ -43,7 +43,6 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
       phone: "",
     });
 
-  //detta menas att alla barn i denna kommer åt customerprovidern och kan använda useCustomerContext
   return (
     <CustomerContext.Provider value={{ customer, setCustomer, resetCustomer }}>
       {children}

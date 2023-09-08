@@ -6,7 +6,7 @@ function getItemWithFallback<T>(key: string, fallback: T): T {
     try {
       return JSON.parse(item) as T;
     } catch (error) {
-      // Handle parsing error, e.g., if the stored data is invalid JSON
+     
     }
   }
   return fallback;

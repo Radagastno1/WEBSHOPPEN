@@ -36,7 +36,6 @@ const router = createBrowserRouter(
       <Route path="admin" element={<AdminPage />}></Route>
       <Route path="admin/product" element={<AdminProductPage />}>
         <Route path=":id" element={<AdminPage />}></Route>
-        {/* <Route path="ny" element={<div>ny</div>}></Route> */}
       </Route>
     </Route>
   )

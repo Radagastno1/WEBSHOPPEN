@@ -1,26 +1,26 @@
 import { Products } from "./contexts/CartContext";
 import { Order } from "./interfaces";
 
-export const addProductToLS = (product: Products) => {
-  const existingProducts = JSON.parse(
-    localStorage.getItem("products") || "[]"
-  ) as Products[];
+// export const addProductToLS = (product: Products) => {
+//   const existingProducts = JSON.parse(
+//     localStorage.getItem("products") || "[]"
+//   ) as Products[];
 
-  const productExists = existingProducts.some(
-    (existingProduct) => existingProduct.id === product.id
-  );
+//   const productExists = existingProducts.some(
+//     (existingProduct) => existingProduct.id === product.id
+//   );
 
-  if (!productExists) {
-    existingProducts.push(product);
-    localStorage.setItem("products", JSON.stringify(existingProducts));
-  }
-};
+//   if (!productExists) {
+//     existingProducts.push(product);
+//     localStorage.setItem("products", JSON.stringify(existingProducts));
+//   }
+// };
 
-export const getProductsFromLS = (): Products[] => {
-  const productsString = localStorage.getItem("products");
-  const products = productsString ? JSON.parse(productsString) : [];
-  return products;
-};
+// export const getProductsFromLS = (): Products[] => {
+//   const productsString = localStorage.getItem("products");
+//   const products = productsString ? JSON.parse(productsString) : [];
+//   return products;
+// };
 
 export const generateNewOrderToLS = (order: Order) => {
   localStorage.removeItem("order");

@@ -9,11 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 
-
 interface CustomButton {
-  icon: React.ReactNode; 
+  icon: React.ReactNode;
   datacy: string;
-  onClick: () => void; // Använd en funktion för onClick
+  onClick: () => void;
 }
 
 interface ProductWithButtons extends Products {
@@ -56,13 +55,17 @@ function ListComponent(props: Props) {
           />
           <ListItemText
             primary={
-              <Typography variant="body2">{`${p.price * p.quantity} kr`}</Typography>
+              <Typography variant="body2">{`${
+                p.price * p.quantity
+              } kr`}</Typography>
             }
             data-cy="product-price"
             sx={{ padding: "4px" }}
           />
           <ListItemText
-            primary={<Typography variant="body2">{`${p.quantity} st`}</Typography>}
+            primary={
+              <Typography variant="body2">{`${p.quantity} st`}</Typography>
+            }
             data-cy="product-quantity"
             sx={{ padding: "4px" }}
           />
@@ -70,7 +73,7 @@ function ListComponent(props: Props) {
             {p.customButtons.map((button, buttonIndex) => (
               <div key={buttonIndex}>
                 <Button
-                  onClick={button.onClick} // Använd onClick-funktionen här
+                  onClick={button.onClick}
                   data-cy={button.datacy}
                   sx={{ color: "darkgray" }}
                 >
