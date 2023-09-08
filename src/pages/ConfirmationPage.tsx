@@ -79,10 +79,10 @@ export default function ConfirmationPage() {
           mt: 1,
           p: 1.5,
           width: "99%",
-          backgroundColor: "#1f1f1f",
+          backgroundColor: "#e5e0e0",
         }}
       >
-        <Typography variant="h6" className="text-white">
+        <Typography variant="h6" className="text-black">
           Order och leverans
         </Typography>
       </Paper>
@@ -119,10 +119,10 @@ export default function ConfirmationPage() {
           mt: 0,
           p: 1.5,
           width: "99%",
-          backgroundColor: "#1f1f1f",
+          backgroundColor: "#e5e0e0",
         }}
       >
-        <Typography variant="h6" className="text-white">
+        <Typography variant="h6" className="text-black">
           Beställda produkter
         </Typography>
       </Paper>
