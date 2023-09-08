@@ -1,19 +1,20 @@
-import { NavLink } from "react-router-dom";
-import AddtoCartButton from "../components/AddtoCartButton";
 import {
-  Slide,
   Card,
   CardContent,
-  Typography,
   CardMedia,
-  Grid,
   Container,
+  Grid,
+  Typography,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
 const cardImageStyle = {
-  height: "200px",
+  height: "210px",
   objectFit: "cover",
+  transform: "scale(1.1)",
+  objectPosition: "center 60%",
 };
 
 const pageContainerStyle = {
@@ -36,7 +37,6 @@ export default function IndexPage() {
                   <CardMedia
                     component="img"
                     alt={product.title}
-                    height="140"
                     image={product.image}
                     sx={cardImageStyle}
                   />
