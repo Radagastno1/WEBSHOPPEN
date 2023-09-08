@@ -4,6 +4,7 @@ import AddtoCartButton from "../components/AddtoCartButton";
 import { useCounterContext } from "../contexts/CounterProvider";
 import { CartItem } from "../interfaces";
 import { mockedProducts } from "../mockedList";
+import { useProductContext } from "../contexts/ProductContext";
 
 function getCartItemsFromLocalStorage(): CartItem[] {
   const cartItemsJSON = localStorage.getItem("cartItems");
@@ -14,11 +15,19 @@ function getCartItemsFromLocalStorage(): CartItem[] {
 
 export default function ProductPage() {
   const { count } = useCounterContext();
+  const { products } = useProductContext();
 
   const { id } = useParams<{ id: string }>();
-  const selectedProduct = mockedProducts.find(
-    (product) => String(product.id) === id
-  );
+  const selectedProduct =
+  products.find((product) => String(product.id) === id) ||
+  mockedProducts.find((product) => String(product.id) === id);
+  
+  // const selectedProduct = mockedProducts.find(
+  //   (product) => String(product.id) === id
+  // );
+
+  // Här kan du välja att använda mockedProducts som fallback om produkten inte finns i useProductContext
+ 
 
   if (!selectedProduct) {
     return <p>Product not found</p>;
