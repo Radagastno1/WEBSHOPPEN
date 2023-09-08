@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Paper, TextField, Typography } from "@mui/material";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
@@ -13,26 +12,25 @@ const FormSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Beskrivning måste vara 5 siffror." }),
-    price: z
+  price: z
     .string()
     .min(1, { message: "Pris är obligatoriskt." })
-    .refine((value) => {
-      const parsedPrice = parseFloat(value);
-      return !isNaN(parsedPrice) && parsedPrice > 0;
-    }, { message: "Pris måste vara en giltig siffra och mer än 0." }),
+    .refine(
+      (value) => {
+        const parsedPrice = parseFloat(value);
+        return !isNaN(parsedPrice) && parsedPrice > 0;
+      },
+      { message: "Pris måste vara en giltig siffra och mer än 0." }
+    ),
   image: z.string().url({ message: "Bild ska vara en url" }),
 });
 
-// type Product = z.infer<typeof FormSchema>;
-
 export default function AdminProductPage() {
   const { products, editProduct, addProduct, setProduct } = useProductContext();
-  const [isProductAdded, setProductAdded] = useState(false);
 
   const navigate = useNavigate();
 
   const { id } = useParams();
-  // const navigate = useNavigate();
 
   const productToEdit = products.find((p) => p.id == id);
 
@@ -54,8 +52,6 @@ export default function AdminProductPage() {
 
     productToEdit ? editProduct(product) : addProduct(product);
 
-    setProductAdded(true);
-
     setProduct(product);
 
     reset();
@@ -64,7 +60,7 @@ export default function AdminProductPage() {
   };
 
   return (
-    <Paper sx={{ display: "flex", flexDirection: "column" }} >
+    <Paper sx={{ display: "flex", flexDirection: "column" }}>
       <Paper
         sx={{
           display: "flex",

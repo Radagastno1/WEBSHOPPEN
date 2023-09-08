@@ -1,10 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { mockedProducts } from "../mockedList";
 import AddtoCartButton from "../components/AddtoCartButton";
-import { addProductToLS } from "../localstorage";
-import { Slide, Card, CardContent, Typography, CardMedia, Grid, Container } from "@mui/material";
+import {
+  Slide,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Grid,
+  Container,
+} from "@mui/material";
 import { useProductContext } from "../contexts/ProductContext";
-
 
 const cardImageStyle = {
   height: "200px",
@@ -16,7 +21,6 @@ const pageContainerStyle = {
 };
 
 export default function IndexPage() {
-  mockedProducts.forEach((p) => addProductToLS(p));
   localStorage.removeItem("orderGenerated");
 
   const { products } = useProductContext();

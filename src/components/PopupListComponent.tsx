@@ -10,6 +10,8 @@ interface Props {
   priceDatacy?: string;
 }
 
+//här ska in gå till checkouut/kundvagn knapp då för nästa nya test
+
 export default function PopupListComponent(props: Props) {
   const productsArray = Array.isArray(props.products)
     ? props.products
