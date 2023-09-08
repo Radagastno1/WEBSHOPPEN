@@ -78,8 +78,8 @@ export default function ConfirmationPage() {
         sx={{
           mt: 1,
           p: 1.5,
-          width: "100%",
-          backgroundColor: "#707070",
+          width: "99%",
+          backgroundColor: "#1f1f1f",
         }}
       >
         <Typography variant="h6" className="text-white">
@@ -118,8 +118,8 @@ export default function ConfirmationPage() {
         sx={{
           mt: 0,
           p: 1.5,
-          width: "100%",
-          backgroundColor: "#707070",
+          width: "99%",
+          backgroundColor: "#1f1f1f",
         }}
       >
         <Typography variant="h6" className="text-white">

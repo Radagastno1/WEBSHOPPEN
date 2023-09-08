@@ -26,8 +26,8 @@ export default function RootLayout() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "white",
-          height: "3rem",
+          backgroundColor: "#1f1f1f",
+          height: "3.6rem",
           backdropFilter: "blur(10px)",
         }}
       >
@@ -43,7 +43,7 @@ export default function RootLayout() {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <NavLink to="/">
-                <Typography variant="h4" className="flex flex-1 justify-center">
+                <Typography variant="h4" className="flex flex-1 justify-center" style={{ color: 'white', fontWeight: 'bold', letterSpacing: '1px' }}>
                   KERAMIKA
                 </Typography>
               </NavLink>
@@ -56,6 +56,7 @@ export default function RootLayout() {
                       <AdminPanelSettingsIcon
                         className="cursor-pointer"
                         fontSize="large"
+                        sx={{ color: 'white' }}
                       />
                     </NavLink>
                   </Box>
@@ -73,6 +74,7 @@ export default function RootLayout() {
                         <ShoppingCartIcon
                           className="cursor-pointer"
                           fontSize="large"
+                          sx={{ color: 'white' }}
                         />
                       </Badge>
                     </NavLink>
