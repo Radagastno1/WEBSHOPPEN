@@ -3,6 +3,8 @@ import { mockedProducts } from "../mockedList";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { addProductToLS } from "../localstorage";
 import { Slide, Card, CardContent, Typography, CardMedia, Grid, Container } from "@mui/material";
+import { useProductContext } from "../contexts/ProductContext";
+
 
 const cardImageStyle = {
   height: "200px",
@@ -17,13 +19,15 @@ export default function IndexPage() {
   mockedProducts.forEach((p) => addProductToLS(p));
   localStorage.removeItem("orderGenerated");
 
+  const { products } = useProductContext();
+
   return (
-    <Container sx={pageContainerStyle}> 
+    <Container sx={pageContainerStyle}>
       <div className="flex flex-col items-center">
         <Grid container spacing={2}>
-          {mockedProducts.map((product) => (
+          {products.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
-               <Card data-cy="product">
+              <Card data-cy="product">
                 <NavLink to={`/product/${String(product.id)}`}>
                   <CardMedia
                     component="img"
