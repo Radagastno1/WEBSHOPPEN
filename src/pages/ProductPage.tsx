@@ -19,8 +19,10 @@ export default function ProductPage() {
 
   const { id } = useParams<{ id: string }>();
   const selectedProduct =
-  products.find((product) => String(product.id) === id) ||
-  mockedProducts.find((product) => String(product.id) === id);
+  products.find((product) => String(product.id) === id); 
+  
+  // ||
+  // mockedProducts.find((product) => String(product.id) === id);
   
   // const selectedProduct = mockedProducts.find(
   //   (product) => String(product.id) === id
@@ -33,11 +35,11 @@ export default function ProductPage() {
     return <p>Product not found</p>;
   }
 
-  const cartItems = getCartItemsFromLocalStorage();
-  const cartItemCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  // const cartItems = ();
+  // const cartItemCount = cartItems.reduce(
+  //   (total, item) => total + item.quantity,
+  //   0
+  // );
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
