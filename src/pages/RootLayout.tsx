@@ -43,7 +43,15 @@ export default function RootLayout() {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <NavLink to="/">
-                <Typography variant="h4" className="flex flex-1 justify-center" style={{ color: 'black', fontWeight: 'bold', letterSpacing: '1px' }}>
+                <Typography
+                  variant="h4"
+                  className="flex flex-1 justify-center"
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    letterSpacing: "1px",
+                  }}
+                >
                   KERAMIKA
                 </Typography>
               </NavLink>
@@ -94,7 +102,7 @@ export default function RootLayout() {
       >
         {" "}
         {isPopupVisible && (
-          <div className="absolute top-10 right-0 w-50" style={{ zIndex: 1 }}>
+          <div className="absolute top-10 right-2 w-50" style={{ zIndex: 1 }}>
             <PopupListComponent products={cart} />
           </div>
         )}

@@ -30,6 +30,7 @@ export default function PopupListComponent(props: Props) {
             borderBottom: "1px solid #ccc",
             flexWrap: "wrap",
             marginTop: "10px",
+            backgroundColor: "white",
           }}
         >
           <ListItemIcon className="w-15 h-10">
