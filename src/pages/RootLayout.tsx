@@ -26,8 +26,8 @@ export default function RootLayout() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "white",
-          height: "3rem",
+          backgroundColor: "#e5e0e0",
+          height: "3.6rem",
           backdropFilter: "blur(10px)",
         }}
       >
@@ -43,7 +43,7 @@ export default function RootLayout() {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <NavLink to="/">
-                <Typography variant="h4" className="flex flex-1 justify-center">
+                <Typography variant="h4" className="flex flex-1 justify-center" style={{ color: 'black', fontWeight: 'bold', letterSpacing: '1px' }}>
                   KERAMIKA
                 </Typography>
               </NavLink>
