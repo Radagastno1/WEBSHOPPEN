@@ -2,14 +2,8 @@ import { Box, CardMedia, Grid, Typography } from "@mui/material"; // Importera k
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useCounterContext } from "../contexts/CounterProvider";
-import { CartItem } from "../interfaces";
-import { mockedProducts } from "../mockedList";
 import { useProductContext } from "../contexts/ProductContext";
 
-function getCartItemsFromLocalStorage(): CartItem[] {
-  const cartItemsJSON = localStorage.getItem("cartItems");
-  return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
-}
 
 //FÖR VG - PRODUCTPROVIDER OCH ISTÄLLET FÖR USEPARAMS SÅ HÄMTA PRODUCT VIA PRODUCTCONTEXT
 
@@ -19,25 +13,13 @@ export default function ProductPage() {
 
   const { id } = useParams<{ id: string }>();
   const selectedProduct =
-  products.find((product) => String(product.id) === id) ||
-  mockedProducts.find((product) => String(product.id) === id);
-  
-  // const selectedProduct = mockedProducts.find(
-  //   (product) => String(product.id) === id
-  // );
+  products.find((product) => String(product.id) === id); 
 
   // Här kan du välja att använda mockedProducts som fallback om produkten inte finns i useProductContext
  
-
   if (!selectedProduct) {
     return <p>Product not found</p>;
   }
-
-  const cartItems = getCartItemsFromLocalStorage();
-  const cartItemCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
