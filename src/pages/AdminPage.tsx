@@ -7,7 +7,7 @@ import { useProductContext } from "../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
-    const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
@@ -28,9 +28,8 @@ export default function AdminPage() {
   }
 
   const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera", "Redigera "];
-  
+
   const productRows = products.map((p) => [
-    
     <img src={p.image} alt="Product" width="20" height="20" />,
     <p data-cy="product-id">{p.id}</p>,
     <p data-cy="product-title">{p.title}</p>,
@@ -38,29 +37,28 @@ export default function AdminPage() {
     <Button
       variant="contained"
       data-cy="admin-remove-product"
-      color="primary"
+      sx={{ backgroundColor: "black" }}
       onClick={() => handleAction(p)}
     >
-      Ta bort produkten
+      Radera
     </Button>,
-      <Button
+    <Button
       variant="contained"
       data-cy="admin-edit-product"
-      color="primary"
-      onClick={() => navigate(`/admin/product/${p.id}`)} 
+      sx={{ backgroundColor: "black" }}
+      onClick={() => navigate(`/admin/product/${p.id}`)}
     >
-      Redigera produkten
+      Redigera
     </Button>,
-    
   ]);
 
   return (
-    <div className="flex flex-col flex-1" >
+    <div className="flex flex-col flex-1">
       <Box my={2}>
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
-            color="primary"
+            sx={{ backgroundColor: "black" }}
             data-cy="admin-add-product"
           >
             Lägg till produkt
@@ -68,14 +66,21 @@ export default function AdminPage() {
         </NavLink>
       </Box>
 
-      <TableMUI titleRow={titleRows} cellRows={productRows} datacy="product" data-cy="product-form" />
+      <TableMUI
+        titleRow={titleRows}
+        cellRows={productRows}
+        datacy="product"
+        data-cy="product-form"
+      />
 
       <Dialog open={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         <DialogTitle>Product Details</DialogTitle>
-        <DialogContent >
+        <DialogContent sx={{ display: "flex" }}>
           {selectedProduct && (
             <div data-cy="product">
-              <p data-cy="product-title">ID: {selectedProduct.id}</p>
+              <p data-cy="product-title" className="flex-1">
+                ID: {selectedProduct.id}
+              </p>
               <p>Title: {selectedProduct.title}</p>
               <p>Description: {selectedProduct.description}</p>
               <p>Price: {selectedProduct.price}</p>
