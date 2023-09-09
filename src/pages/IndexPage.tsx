@@ -11,10 +11,10 @@ import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
 const cardImageStyle = {
-  height: "210px",
+  height: "200px",
   objectFit: "cover",
-  transform: "scale(1.1)",
-  objectPosition: "center 60%",
+  transform: "scale(1)",
+  objectPosition: "center 57%",
 };
 
 const pageContainerStyle = {
