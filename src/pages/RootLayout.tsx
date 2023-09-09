@@ -5,10 +5,9 @@ import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import PopupListComponent from "../components/PopupListComponent";
 import { useCart } from "../contexts/CartContext";
-import { useCounterContext } from "../contexts/CounterProvider";
+
 
 export default function RootLayout() {
-  const { count } = useCounterContext();
   const { cart } = useCart();
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -72,7 +71,7 @@ export default function RootLayout() {
                   <Box sx={{ marginRight: "50px" }}>
                     <NavLink to="/checkout" data-cy="cart-link">
                       <Badge
-                        badgeContent={count}
+                        badgeContent={cart.length}
                         color="warning"
                         data-cy="cart-items-count-badge"
                         onMouseEnter={handleMouseEnter}
