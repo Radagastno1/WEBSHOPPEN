@@ -9,6 +9,7 @@ import { useCart } from "../contexts/CartContext";
 
 export default function RootLayout() {
   const { cart } = useCart();
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -71,7 +72,7 @@ export default function RootLayout() {
                   <Box sx={{ marginRight: "50px" }}>
                     <NavLink to="/checkout" data-cy="cart-link">
                       <Badge
-                        badgeContent={cart.length}
+                        badgeContent={( totalQuantity)}
                         color="warning"
                         data-cy="cart-items-count-badge"
                         onMouseEnter={handleMouseEnter}

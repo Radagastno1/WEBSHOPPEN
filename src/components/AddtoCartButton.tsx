@@ -2,7 +2,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Products, useCart } from "../contexts/CartContext";
-import { useCounterContext } from "../contexts/CounterProvider";
 
 interface Props {
   product: Products;
@@ -12,7 +11,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
   const [productAddedToCart, setProductAddedToCart] = useState(false);
   const [resetButton, setResetButton] = useState(false);
 
-  const { addCount, count } = useCounterContext();
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -25,7 +23,6 @@ const AddtoCartButton: React.FC<Props> = ({ product }) => {
     if (!productAddedToCart) {
       addToCart(product);
       setProductAddedToCart(true);
-      addCount();
       setTimeout(() => {
         setResetButton(true);
         setTimeout(() => {
