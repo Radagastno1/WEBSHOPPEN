@@ -37,7 +37,12 @@ export default function AdminPage() {
     <Button
       variant="contained"
       data-cy="admin-remove-product"
-      sx={{ backgroundColor: "black" }}
+      sx={{
+        backgroundColor: "black",
+        "&:hover": {
+          backgroundColor: "grey",
+        },
+      }}
       onClick={() => handleAction(p)}
     >
       Radera
@@ -45,7 +50,12 @@ export default function AdminPage() {
     <Button
       variant="contained"
       data-cy="admin-edit-product"
-      sx={{ backgroundColor: "black" }}
+      sx={{
+        backgroundColor: "black",
+        "&:hover": {
+          backgroundColor: "grey",
+        },
+      }}
       onClick={() => navigate(`/admin/product/${p.id}`)}
     >
       Redigera
@@ -58,7 +68,12 @@ export default function AdminPage() {
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
-            sx={{ backgroundColor: "black" }}
+            sx={{
+              backgroundColor: "#009688",
+              "&:hover": {
+                backgroundColor: "#00695c",
+              },
+            }}
             data-cy="admin-add-product"
           >
             Lägg till produkt
