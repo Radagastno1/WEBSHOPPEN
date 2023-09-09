@@ -84,7 +84,7 @@ export const mockedProducts: Products[] = [
   },
   {
     id: "10",
-    title: "KVINNA ESSENS NO°2",
+    title: "KVINNA ESSENS NO°3",
     price: 1500,
     description:
       "En skulptur som representerar kvinnlighet i en ljus och ganska grå färg. Denna skulptur förkroppsligar en subtil och enkel elegans som framhäver den feminina styrkan.",
