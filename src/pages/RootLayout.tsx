@@ -6,9 +6,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import PopupListComponent from "../components/PopupListComponent";
 import { useCart } from "../contexts/CartContext";
 
-
 export default function RootLayout() {
-  const { cart } = useCart();
+  const { cart, totalPrice } = useCart();
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -72,7 +71,7 @@ export default function RootLayout() {
                   <Box sx={{ marginRight: "50px" }}>
                     <NavLink to="/checkout" data-cy="cart-link">
                       <Badge
-                        badgeContent={( totalQuantity)}
+                        badgeContent={totalQuantity}
                         color="warning"
                         data-cy="cart-items-count-badge"
                         onMouseEnter={handleMouseEnter}
@@ -101,9 +100,12 @@ export default function RootLayout() {
         }}
       >
         {" "}
-        {isPopupVisible && (
+        {window.innerWidth > 768 && isPopupVisible && (
           <div className="absolute top-10 right-2 w-50" style={{ zIndex: 1 }}>
-            <PopupListComponent products={cart} />
+            <PopupListComponent
+              products={cart}
+              totalPrice={totalPrice.toString()}
+            />
           </div>
         )}
       </header>
