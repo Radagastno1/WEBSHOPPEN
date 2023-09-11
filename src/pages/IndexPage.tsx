@@ -71,7 +71,10 @@ export default function IndexPage() {
                     />
                   </div>
 
-                  <Typography sx={{ fontSize: 16, px: 1 }} component="div">
+                  <Typography
+                    sx={{ fontSize: 16, px: 1, pt: 1 }}
+                    component="div"
+                  >
                     {product.title}
                   </Typography>
                 </NavLink>
