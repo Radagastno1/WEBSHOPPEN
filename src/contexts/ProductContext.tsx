@@ -64,13 +64,9 @@ export function ProductProvider({ children }: ProcutProviderProps) {
 
   //addproduct med ett updaterat id
   const addProduct = (newProduct: Products) => {
-    const latestId = products.reduce((maxId, product) => {
-      const productId = parseInt(product.id, 10);
-      return productId > maxId ? productId : maxId;
-    }, 0);
-    const newId = `${latestId + 1}`;
+    const milliseconds = Date.now() % 1000;
 
-    newProduct.id = newId;
+    newProduct.id = milliseconds.toString(); 
 
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
