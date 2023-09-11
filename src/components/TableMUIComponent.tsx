@@ -30,6 +30,7 @@ const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows, datacy }) => {
               <TableCell
                 sx={{
                   backgroundColor: "#c9c7c7",
+                  padding: 1.5,
                 }}
                 key={title}
               >
