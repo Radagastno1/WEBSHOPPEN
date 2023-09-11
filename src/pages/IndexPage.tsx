@@ -1,22 +1,15 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
 const cardImageStyle = {
-  height: "200px",
+  height: "250px",
   objectFit: "cover",
   transform: "scale(1)",
-  objectPosition: "center 57%",
+  objectPosition: "center 60%",
 };
 
 const pageContainerStyle = {
@@ -36,10 +29,10 @@ const zoomIconStyle = {
 };
 
 const zoomedCardImageStyle = {
-  height: "250px",
+  height: "220px",
   objectFit: "cover",
   transform: "scale(1.5)",
-  objectPosition: "center 52%",
+  objectPosition: "center 58%",
 };
 
 export default function IndexPage() {
@@ -78,18 +71,13 @@ export default function IndexPage() {
                     />
                   </div>
 
-                  {/* <CardContent> */}
-
-                  <Typography variant="h6" component="div">
+                  <Typography sx={{ fontSize: 16, px: 1 }} component="div">
                     {product.title}
                   </Typography>
-                  {/* </CardContent> */}
                 </NavLink>
-                {/* <CardContent> */}
-                <div data-cy="cart-items-count-badge">
+                <div data-cy="cart-items-count-badge" className="px-1">
                   <AddtoCartButton product={product} />
                 </div>
-                {/* </CardContent> */}
               </Card>
             </Grid>
           ))}
