@@ -1,4 +1,4 @@
-import FormComponent from "../components/FormComponent";
+import FormComponent from "../components/CustomerCheckoutFormComponent";
 import CartPage from "./CartPage";
 
 export default function CheckoutPage() {

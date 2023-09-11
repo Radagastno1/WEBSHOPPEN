@@ -43,7 +43,7 @@ const zoomedCardImageStyle = {
 };
 
 export default function IndexPage() {
-  localStorage.removeItem("orderGenerated");
+  // localStorage.removeItem("orderGenerated");
 
   const { products } = useProductContext();
   const [zoomedProduct, setZoomedProduct] = useState("");
@@ -78,17 +78,18 @@ export default function IndexPage() {
                     />
                   </div>
 
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {product.title}
-                    </Typography>
-                  </CardContent>
+                  {/* <CardContent> */}
+
+                  <Typography variant="h6" component="div">
+                    {product.title}
+                  </Typography>
+                  {/* </CardContent> */}
                 </NavLink>
-                <CardContent>
-                  <div data-cy="cart-items-count-badge">
-                    <AddtoCartButton product={product} />
-                  </div>
-                </CardContent>
+                {/* <CardContent> */}
+                <div data-cy="cart-items-count-badge">
+                  <AddtoCartButton product={product} />
+                </div>
+                {/* </CardContent> */}
               </Card>
             </Grid>
           ))}

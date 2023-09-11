@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  styled,
 } from "@mui/material";
 import React from "react";
 
@@ -15,9 +16,13 @@ interface TableMUIProps {
   datacy: string;
 }
 
+const StyledTableCell = styled(TableCell)`
+  white-space: nowrap;
+`;
+
 const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows, datacy }) => {
   return (
-    <TableContainer elevation={2} component={Paper} >
+    <TableContainer component={Paper} elevation={2}>
       <Table aria-label="simple table">
         <TableHead data-cy="product-form">
           <TableRow>
@@ -36,9 +41,17 @@ const TableMUI: React.FC<TableMUIProps> = ({ titleRow, cellRows, datacy }) => {
         <TableBody>
           {cellRows.map((row, rowIndex) => (
             <TableRow key={rowIndex} data-cy={datacy}>
-              {row.map((cell: string, cellIndex: number) => (
-                <TableCell key={cellIndex}>{cell}</TableCell>
-              ))}
+              {row.map(
+                (cell: { property: ""; datacyCell: "" }, cellIndex: number) => (
+                  <StyledTableCell
+                    key={cellIndex}
+                    data-cy={cell.datacyCell}
+                    sx={{ fontSize: "12px" }}
+                  >
+                    {cell.property}
+                  </StyledTableCell>
+                )
+              )}
             </TableRow>
           ))}
         </TableBody>

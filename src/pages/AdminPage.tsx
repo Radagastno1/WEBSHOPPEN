@@ -1,10 +1,9 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import TableMUI from "../components/TableMUIComponent";
 import { Products } from "../contexts/CartContext";
 import { useProductContext } from "../contexts/ProductContext";
-import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -30,36 +29,51 @@ export default function AdminPage() {
   const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera", "Redigera "];
 
   const productRows = products.map((p) => [
-    <img src={p.image} alt="Product" width="20" height="20" />,
-    <p data-cy="product-id">{p.id}</p>,
-    <p data-cy="product-title">{p.title}</p>,
-    <p data-cy="product-price">{p.price}</p>,
-    <Button
-      variant="contained"
-      data-cy="admin-remove-product"
-      sx={{
-        backgroundColor: "black",
-        "&:hover": {
-          backgroundColor: "grey",
-        },
-      }}
-      onClick={() => handleAction(p)}
-    >
-      Radera
-    </Button>,
-    <Button
-      variant="contained"
-      data-cy="admin-edit-product"
-      sx={{
-        backgroundColor: "black",
-        "&:hover": {
-          backgroundColor: "grey",
-        },
-      }}
-      onClick={() => navigate(`/admin/product/${p.id}`)}
-    >
-      Redigera
-    </Button>,
+    {
+      property: <img src={p.image} alt="Product" width="20" height="20" />,
+      datacyCell: "",
+    },
+    { property: p.id, datacyCell: "product-id" },
+    { property: p.title, datacyCell: "product-title" },
+    { property: p.price, datacyCell: "product-price" },
+    {
+      property: (
+        <Button
+          variant="contained"
+          data-cy="admin-remove-product"
+          sx={{
+            backgroundColor: "black",
+            fontSize: "10px",
+            "&:hover": {
+              backgroundColor: "grey",
+            },
+          }}
+          onClick={() => handleAction(p)}
+        >
+          Radera
+        </Button>
+      ),
+      datacyCell: " ",
+    },
+    {
+      property: (
+        <Button
+          variant="contained"
+          data-cy="admin-edit-product"
+          sx={{
+            backgroundColor: "black",
+            fontSize: "10px",
+            "&:hover": {
+              backgroundColor: "grey",
+            },
+          }}
+          onClick={() => navigate(`/admin/product/${p.id}`)}
+        >
+          Redigera
+        </Button>
+      ),
+      datacyCell: " ",
+    },
   ]);
 
   return (

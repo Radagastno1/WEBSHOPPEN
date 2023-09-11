@@ -20,6 +20,7 @@ import ProductPage from "./pages/ProductPage";
 
 import { CartProvider } from "./contexts/CartContext";
 import { CounterProvider } from "./contexts/CounterProvider";
+import { OrderProvider } from "./contexts/OrderContext";
 import { ProductProvider } from "./contexts/ProductContext";
 
 const router = createBrowserRouter(
@@ -47,7 +48,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <CartProvider>
         <CustomerProvider>
           <ProductProvider>
-            <RouterProvider router={router} />
+            <OrderProvider>
+              <RouterProvider router={router} />
+            </OrderProvider>
           </ProductProvider>
         </CustomerProvider>
       </CartProvider>
