@@ -2,26 +2,26 @@ import { Box, Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import TableMUI from "../components/TableMUIComponent";
-import { Products } from "../contexts/CartContext";
+import { Product } from "../../data/index";
 import { useProductContext } from "../contexts/ProductContext";
 
 export default function AdminPage() {
   const navigate = useNavigate();
   const { products, removeProduct, addProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  function handleAction(product: Products) {
+  function handleAction(product: Product) {
     setSelectedProduct(product);
     setIsPopupOpen(true);
   }
 
-  function handleAddProduct(product: Products) {
+  function handleAddProduct(product: Product) {
     addProduct(product);
     setIsPopupOpen(false);
   }
 
-  function handleRemoveProduct(product: Products) {
+  function handleRemoveProduct(product: Product) {
     removeProduct(product);
     setIsPopupOpen(false);
   }

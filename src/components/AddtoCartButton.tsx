@@ -1,10 +1,11 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Products, useCart } from "../contexts/CartContext";
+import { useCart } from "../contexts/CartContext";
+import { Product } from "../../data/index";
 
 interface Props {
-  product: Products;
+  product: Product;
 }
 
 const AddtoCartButton: React.FC<Props> = ({ product }) => {

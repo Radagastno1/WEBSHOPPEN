@@ -8,6 +8,7 @@ import { useCart } from "../contexts/CartContext";
 
 export default function RootLayout() {
   const { cart, totalPrice } = useCart();
+
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -94,7 +95,7 @@ export default function RootLayout() {
       <header
         className="flex h-80 min-h-700 bg-neutral-600 items-end justify-end "
         style={{
-          backgroundImage: `url('https://i.imgur.com/nh4oD1B.jpg')`,
+          backgroundImage: `url('https://i.imgur.com/O8iBqow.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

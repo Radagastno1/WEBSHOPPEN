@@ -36,8 +36,6 @@ const zoomedCardImageStyle = {
 };
 
 export default function IndexPage() {
-  // localStorage.removeItem("orderGenerated");
-
   const { products } = useProductContext();
   const [zoomedProduct, setZoomedProduct] = useState("");
 
