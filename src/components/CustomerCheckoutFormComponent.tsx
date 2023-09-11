@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useCart } from "../contexts/CartContext";
-import { useCounterContext } from "../contexts/CounterProvider";
 import { useCustomerContext } from "../contexts/CustomerContext";
 import { Order } from "../interfaces";
 import "../media.css";
@@ -43,7 +42,6 @@ function generateRandomNumber() {
 export default function FormComponent(props: Props) {
   const { setCustomer } = useCustomerContext();
   const { resetCustomer } = useCustomerContext();
-  const { resetCount } = useCounterContext();
   const { cart, resetCart, totalPrice } = useCart();
   const { setOrder } = useOrderContext();
 
@@ -76,7 +74,6 @@ export default function FormComponent(props: Props) {
 
     setOrder(order);
 
-    resetCount();
     resetCustomer();
     resetCart();
 
