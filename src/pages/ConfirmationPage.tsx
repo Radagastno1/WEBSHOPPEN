@@ -1,22 +1,10 @@
 import { Paper, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
 import TableMUI from "../components/TableMUIComponent";
-import { Order } from "../interfaces";
-import { getOrderFromLS } from "../localstorage";
+import { useOrderContext } from "../contexts/OrderContext";
 import "../styles.css";
 
 export default function ConfirmationPage() {
-  const [orderLoaded, setOrderLoaded] = useState(false);
-  const orderRef = useRef<Order>();
-
-  useEffect(() => {
-    const orderInLS = getOrderFromLS();
-    orderRef.current = orderInLS;
-    if (orderRef.current) {
-      setOrderLoaded(true);
-      console.log(orderLoaded);
-    }
-  }, []);
+  const { order } = useOrderContext();
 
   const addressTitleRow = [
     "Namn",
@@ -33,40 +21,32 @@ export default function ConfirmationPage() {
 
   const addressRow = [
     [
-      orderRef.current?.customer.name,
-      `${orderRef.current?.customer.address} ${orderRef.current?.customer.city} ${orderRef.current?.customer.zipcode} `,
-      orderRef.current?.customer.email,
-      orderRef.current?.customer.phone,
+      { property: order.customer.name },
+      {
+        property: `${order.customer.address} ${order.customer.city} ${order.customer.zipcode} `,
+      },
+      { property: order.customer.email },
+      { property: order.customer.phone },
     ],
   ];
 
   const orderRow = [
     [
-      orderRef.current?.orderNr,
-      "Instabox",
-      "Faktura",
-      orderRef.current?.totalPrice,
+      { property: order.orderNr },
+      { property: "Instabox" },
+      { property: "Faktura" },
+      { property: order.totalPrice },
     ],
   ];
 
   const productTitleRows = ["Produkt", "Titel", "Antal", "Pris"];
 
-  interface ProductRow {
-    0: JSX.Element; // bilden
-    1: string; // titeln
-    2: number; // priset
-  }
-
-  let productRows: ProductRow[] = [];
-
-  if (orderRef.current?.cart) {
-    productRows = orderRef.current.cart.map((p) => [
-      <img src={p.image} alt="Product" width="20" height="20" />,
-      p.title,
-      p.quantity,
-      p.price,
-    ]);
-  }
+  const productRows = order.cart.map((p) => [
+    { property: <img src={p.image} alt="Product" width="20" height="20" /> },
+    { property: p.title },
+    { property: p.quantity },
+    { property: p.price },
+  ]);
 
   return (
     <div
@@ -77,12 +57,12 @@ export default function ConfirmationPage() {
         elevation={4}
         sx={{
           mt: 1,
-          p: 1.5,
+          p: 1,
           width: "99%",
           backgroundColor: "#e5e0e0",
         }}
       >
-        <Typography variant="h6" className="text-black">
+        <Typography sx={{ color: "black", fontSize: "12" }}>
           Order och leverans
         </Typography>
       </Paper>
@@ -99,7 +79,7 @@ export default function ConfirmationPage() {
         </div>
 
         <div className="w-1/2 p-3">
-          {orderLoaded ? (
+          {order ? (
             <div>
               <TableMUI
                 titleRow={addressTitleRow}
@@ -122,13 +102,13 @@ export default function ConfirmationPage() {
           backgroundColor: "#e5e0e0",
         }}
       >
-        <Typography variant="h6" className="text-black">
+        <Typography sx={{ color: "black", fontSize: "12" }}>
           Beställda produkter
         </Typography>
       </Paper>
 
       <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
-        {orderLoaded && orderRef.current?.cart ? (
+        {order && order.cart ? (
           <div>
             <TableMUI
               titleRow={productTitleRows}

@@ -7,8 +7,8 @@ import { useCart } from "../contexts/CartContext";
 import { useCounterContext } from "../contexts/CounterProvider";
 import { useCustomerContext } from "../contexts/CustomerContext";
 import { Order } from "../interfaces";
-import { generateNewOrderToLS } from "../localstorage";
 import "../media.css";
+import { useOrderContext } from "../contexts/OrderContext";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: "Namn är obligatoriskt." }),
@@ -42,9 +42,10 @@ function generateRandomNumber() {
 
 export default function FormComponent(props: Props) {
   const { setCustomer } = useCustomerContext();
-  const { customer, resetCustomer } = useCustomerContext();
+  const { resetCustomer } = useCustomerContext();
   const { resetCount } = useCounterContext();
   const { cart, resetCart, totalPrice } = useCart();
+  const { setOrder } = useOrderContext();
 
   const navigate = useNavigate();
   const { register, handleSubmit, formState, getValues } = useForm<Customer>({
@@ -64,22 +65,16 @@ export default function FormComponent(props: Props) {
 
     setCustomer(customerData);
 
-    const hasOrderBeenGenerated = localStorage.getItem("orderGenerated");
+    const orderNumber = generateRandomNumber();
 
-    if (!hasOrderBeenGenerated) {
-      const orderNumber = generateRandomNumber();
+    const order: Order = {
+      orderNr: orderNumber,
+      customer: customerData,
+      cart: cart,
+      totalPrice: totalPrice,
+    };
 
-      const order: Order = {
-        orderNr: orderNumber,
-        customer: customerData,
-        cart: cart,
-        totalPrice: totalPrice,
-      };
-
-      generateNewOrderToLS(order);
-
-      localStorage.setItem("orderGenerated", "true");
-    }
+    setOrder(order);
 
     resetCount();
     resetCustomer();

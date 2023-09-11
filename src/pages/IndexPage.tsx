@@ -1,22 +1,15 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
 const cardImageStyle = {
-  height: "200px",
+  height: "250px",
   objectFit: "cover",
   transform: "scale(1)",
-  objectPosition: "center 57%",
+  objectPosition: "center 60%",
 };
 
 const pageContainerStyle = {
@@ -36,14 +29,14 @@ const zoomIconStyle = {
 };
 
 const zoomedCardImageStyle = {
-  height: "250px",
+  height: "220px",
   objectFit: "cover",
   transform: "scale(1.5)",
-  objectPosition: "center 52%",
+  objectPosition: "center 58%",
 };
 
 export default function IndexPage() {
-  localStorage.removeItem("orderGenerated");
+  // localStorage.removeItem("orderGenerated");
 
   const { products } = useProductContext();
   const [zoomedProduct, setZoomedProduct] = useState("");
@@ -78,17 +71,16 @@ export default function IndexPage() {
                     />
                   </div>
 
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {product.title}
-                    </Typography>
-                  </CardContent>
+                  <Typography
+                    sx={{ fontSize: 16, px: 1, pt: 1 }}
+                    component="div"
+                  >
+                    {product.title}
+                  </Typography>
                 </NavLink>
-                <CardContent>
-                  <div data-cy="cart-items-count-badge">
-                    <AddtoCartButton product={product} />
-                  </div>
-                </CardContent>
+                <div data-cy="cart-items-count-badge" className="px-1">
+                  <AddtoCartButton product={product} />
+                </div>
               </Card>
             </Grid>
           ))}

@@ -41,7 +41,6 @@ export default function AdminProductPage() {
 
   const handleOnSubmit = async () => {
     const product: Products = {
-      //om det är ny så får den ju ett riktigt id i productcontexrt
       id: productToEdit ? productToEdit.id : "default",
       title: getValues("title"),
       description: getValues("description"),
