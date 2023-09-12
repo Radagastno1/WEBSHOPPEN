@@ -1,7 +1,6 @@
 import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import TableMUI from "../components/TableMUIComponent";
 import { useOrderContext } from "../contexts/OrderContext";
-import "../styles.css";
 
 export default function ConfirmationPage() {
   const { order } = useOrderContext();
