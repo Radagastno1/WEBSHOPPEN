@@ -26,11 +26,11 @@ export default function RootLayout() {
 
   return (
     <div className="flex flex-col h-screen">
-      <AppBar
+    <AppBar
         position="static"
         sx={{
-          backgroundColor: "#e5e0e0",
-          height: "3.6rem",
+          backgroundColor: "white",
+          height: "3rem",
           backdropFilter: "blur(10px)",
         }}
       >
@@ -51,7 +51,7 @@ export default function RootLayout() {
                   className="flex flex-1 justify-center"
                   style={{
                     color: "black",
-                    fontWeight: "bold",
+                    fontWeight: "light",
                     letterSpacing: "1px",
                   }}
                 >

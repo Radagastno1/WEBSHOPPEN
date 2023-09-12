@@ -1,5 +1,5 @@
 import React from "react";
-import { Products } from "../contexts/CartContext";
+
 import {
   Button,
   Card,
@@ -8,6 +8,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { CartItem } from "../../data";
 
 interface CustomButton {
   icon: React.ReactNode;
@@ -15,7 +16,7 @@ interface CustomButton {
   onClick: () => void;
 }
 
-interface ProductWithButtons extends Products {
+interface ProductWithButtons extends CartItem {
   customButtons: CustomButton[];
 }
 
