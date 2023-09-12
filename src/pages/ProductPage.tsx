@@ -1,4 +1,11 @@
-import { Box, CardContent, CardHeader, CardMedia, Grid, Typography  } from "@mui/material"; // Importera komponenter från Material-UI
+import {
+  Box,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material"; // Importera komponenter från Material-UI
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
@@ -9,8 +16,7 @@ export default function ProductPage() {
   const { products } = useProductContext();
 
   const { id } = useParams<{ id: string }>();
-  const selectedProduct =
-  products.find((product) => String(product.id) === id); 
+  const selectedProduct = products.find((product) => String(product.id) === id);
 
   const zoomIconStyle = {
     position: "absolute",
@@ -23,7 +29,7 @@ export default function ProductPage() {
       color: "grey",
     },
   };
-  
+
   const zoomedCardImageStyle = {
     height: "220px",
     objectFit: "cover",
@@ -32,17 +38,14 @@ export default function ProductPage() {
   };
 
   // Här kan du välja att använda mockedProducts som fallback om produkten inte finns i useProductContext
- 
+
   if (!selectedProduct) {
     return <p>Product not found</p>;
   }
 
   return (
-    
-
     <Grid container justifyContent="center" alignItems="center">
-      {/* Vänster sida (bild) */}
-      <Grid item xs={12} sm={5.5} md={6}>
+      <Grid item xs={12} sm={5.5}>
         <CardMedia
           component="img"
           alt={selectedProduct.title}
@@ -52,21 +55,19 @@ export default function ProductPage() {
             border: "30px solid white",
             borderRadius: "15px",
             overflow: "hidden",
-           
           }}
           image={selectedProduct.image}
           title={selectedProduct.title}
         />
       </Grid>
 
-      <Grid item xs={12} sm={5} md={5} >
+      <Grid item xs={12} sm={5} md={5}>
         <Box
           display="flex"
           flexDirection="column"
           alignItems="center"
           textAlign="center"
-          marginLeft= "-13rem" 
-        
+          marginLeft="-13rem"
         >
           <Typography
             variant="h2"
@@ -81,17 +82,19 @@ export default function ProductPage() {
           >
             {selectedProduct.title}
           </Typography>
-          <Typography data-cy="product-description"  sx={{ marginBottom: "2rem" }}>
+          <Typography
+            data-cy="product-description"
+            sx={{ marginBottom: "2rem" }}
+          >
             {selectedProduct.description}
           </Typography>
           <Typography data-cy="product-price">
-          Price: {selectedProduct.price}
-        </Typography>
+            Price: {selectedProduct.price}
+          </Typography>
           <div className="flex-1 flex justify-center">
-            <AddtoCartButton 
+            <AddtoCartButton
               product={selectedProduct}
               data-cy="product-buy-button"
-           
             />
           </div>
         </Box>
