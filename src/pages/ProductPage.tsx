@@ -84,6 +84,9 @@ export default function ProductPage() {
           <Typography data-cy="product-description"  sx={{ marginBottom: "2rem" }}>
             {selectedProduct.description}
           </Typography>
+          <Typography data-cy="product-price">
+          Price: {selectedProduct.price}
+        </Typography>
           <div className="flex-1 flex justify-center">
             <AddtoCartButton 
               product={selectedProduct}
