@@ -1,4 +1,4 @@
-import { ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Box, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { CartItem } from "../../data";
@@ -30,13 +30,13 @@ export default function PopupListComponent(props: Props) {
             }}
           >
             <ListItemIcon className="w-15 h-10">
-              <div style={{ overflow: "visible" }}>
+              <Box sx={{ overflow: "visible" }}>
                 <img
                   src={p?.image}
                   alt="bild"
                   className="w-full h-full object-cover object-center"
                 />
-              </div>
+              </Box>
             </ListItemIcon>
 
             <ListItemText data-cy="product-title" primary={p?.title} />
