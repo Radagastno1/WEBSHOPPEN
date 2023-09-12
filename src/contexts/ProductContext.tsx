@@ -63,7 +63,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   // };
 
   //addproduct med ett updaterat i
-  const addProduct = (newProduct: Products) => {
+  const addProduct = (newProduct: Product) => {
     const milliseconds = Date.now() % 1000;
 
 

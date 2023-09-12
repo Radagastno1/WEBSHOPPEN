@@ -1,9 +1,9 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Products } from "../contexts/CartContext";
+import { Product } from "../../data/index";
 
 interface DatagridProps {
-  rows: Products[];
-  columns: GridColDef<Products>[];
+  rows: Product[];
+  columns: GridColDef<Product>[];
 }
 
 export default function DatagridComponent({ rows, columns }: DatagridProps) {
