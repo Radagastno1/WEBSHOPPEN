@@ -101,7 +101,7 @@ export default function RootLayout() {
         }}
       >
         {" "}
-        {window.innerWidth > 768 && isPopupVisible && (
+        {window.innerWidth > 1024 && isPopupVisible && (
           <div className="absolute top-10 right-2 w-50" style={{ zIndex: 1 }}>
             <PopupListComponent
               products={cart}
