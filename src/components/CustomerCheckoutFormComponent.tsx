@@ -1,13 +1,22 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useCart } from "../contexts/CartContext";
 import { useCustomerContext } from "../contexts/CustomerContext";
+import { useOrderContext } from "../contexts/OrderContext";
 import { Order } from "../interfaces";
 import "../media.css";
-import { useOrderContext } from "../contexts/OrderContext";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: "Namn är obligatoriskt." }),
@@ -44,6 +53,8 @@ export default function FormComponent(props: Props) {
   const { resetCustomer } = useCustomerContext();
   const { cart, resetCart, totalPrice } = useCart();
   const { setOrder } = useOrderContext();
+  //bara för nu, att inte kunna gå vidare om inte faktura är ikryssad, för skojs skull bara
+  const [isInvoiceChecked, setIsInvoiceChecked] = useState(true);
 
   const navigate = useNavigate();
   const { register, handleSubmit, formState, getValues } = useForm<Customer>({
@@ -226,9 +237,32 @@ export default function FormComponent(props: Props) {
           }}
         />
 
+        <Paper elevation={0} sx={{ marginTop: 1 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultChecked
+                onChange={(event) => setIsInvoiceChecked(event.target.checked)}
+              />
+            }
+            label="Faktura"
+          />
+
+          <FormControlLabel
+            disabled
+            control={<Checkbox />}
+            label="Betala med kort"
+          />
+        </Paper>
+
         <Box mt={2} mb={2}>
-          <Button type="submit" variant="contained" color="primary">
-            Bekräfta
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={cart.length <= 0 || !isInvoiceChecked}
+          >
+            Bekräfta Köp
           </Button>
         </Box>
       </Box>
