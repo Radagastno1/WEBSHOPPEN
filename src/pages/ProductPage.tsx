@@ -1,11 +1,10 @@
 import {
   Box,
-  CardContent,
-  CardHeader,
   CardMedia,
   Grid,
   Typography,
-} from "@mui/material"; // Importera komponenter från Material-UI
+  useMediaQuery,
+} from "@mui/material"; 
 import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
@@ -14,6 +13,7 @@ import { useProductContext } from "../contexts/ProductContext";
 
 export default function ProductPage() {
   const { products } = useProductContext();
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   const { id } = useParams<{ id: string }>();
   const selectedProduct = products.find((product) => String(product.id) === id);
@@ -25,13 +25,13 @@ export default function ProductPage() {
   }
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
-      <Grid item xs={12} sm={5.7}>
+    <Grid container justifyContent="center" alignItems="center" spacing={isSmallScreen ? 2 : 3}>
+      <Grid item xs={12} sm={isSmallScreen ? 12 : 5.5} >
         <CardMedia
           component="img"
           alt={selectedProduct.title}
           sx={{
-            width: "50%",
+            width: "50%", 
             height: "auto",
             border: "30px solid white",
             borderRadius: "15px",
@@ -42,13 +42,16 @@ export default function ProductPage() {
         />
       </Grid>
 
-      <Grid item xs={12} sm={5} md={5}>
+      <Grid item xs={12} sm={isSmallScreen ? 12 : 5} md={5}>
         <Box
           display="flex"
           flexDirection="column"
           alignItems="center"
           textAlign="center"
           marginLeft="-13rem"
+          sx={{
+            marginLeft: isSmallScreen ? "0" : "-13rem", 
+          }}
         >
           <Typography
             variant="h2"
