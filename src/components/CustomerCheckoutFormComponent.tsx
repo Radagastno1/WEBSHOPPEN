@@ -237,7 +237,7 @@ export default function FormComponent(props: Props) {
           }}
         />
 
-        <Paper elevation={0} sx={{ marginTop: 1 }}>
+        <Paper elevation={0} sx={{ backgroundColor: 'transparent'}}>
           <FormControlLabel
             control={
               <Checkbox
@@ -255,7 +255,7 @@ export default function FormComponent(props: Props) {
           />
         </Paper>
 
-        <Box mt={2} mb={2}>
+        <Box  mb={0.5}>
           <Button
             type="submit"
             variant="contained"
