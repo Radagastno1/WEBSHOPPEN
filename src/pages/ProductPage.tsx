@@ -42,7 +42,7 @@ export default function ProductPage() {
 
     <Grid container justifyContent="center" alignItems="center">
       {/* Vänster sida (bild) */}
-      <Grid item xs={12} sm={5.5}>
+      <Grid item xs={12} sm={5.5} md={6}>
         <CardMedia
           component="img"
           alt={selectedProduct.title}
@@ -59,7 +59,7 @@ export default function ProductPage() {
         />
       </Grid>
 
-      <Grid item xs={12} sm={5} >
+      <Grid item xs={12} sm={5} md={5} >
         <Box
           display="flex"
           flexDirection="column"
