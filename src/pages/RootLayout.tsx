@@ -5,6 +5,9 @@ import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import PopupListComponent from "../components/PopupListComponent";
 import { useCart } from "../contexts/CartContext";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailIcon from '@mui/icons-material/Email';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function RootLayout() {
   const { cart, totalPrice } = useCart();
@@ -135,8 +138,15 @@ export default function RootLayout() {
             },
           }}
         >
-          <Link href="#">{"Kundservice"}</Link>
-          <Link href="#">{"Om mig"}</Link>
+            <a href="https://www.instagram.com" target="_blank">
+            <InstagramIcon fontSize="large" />
+          </a>
+          <a href="mailto:Keramika@email.com" target="_blank">
+            <EmailIcon fontSize="large" />
+          </a>
+          <a href="https://www.instagram.com" target="_blank">
+            <AccountCircleIcon fontSize="large" />
+          </a>
         </Box>
       </footer>
     </div>
