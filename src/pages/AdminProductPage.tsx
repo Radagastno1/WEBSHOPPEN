@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import AddAndEditAdminButton from "../components/AddAndEditAdminButton";
-import { Products } from "../contexts/CartContext";
+import { Product } from "../../data/index";
 import { useProductContext } from "../contexts/ProductContext";
 
 const FormSchema = z.object({
@@ -20,9 +20,19 @@ const FormSchema = z.object({
         const parsedPrice = parseFloat(value);
         return !isNaN(parsedPrice) && parsedPrice > 0;
       },
-      { message: "Pris måste vara en giltig siffra och mer än 0." }
+      { message: "Ogiltigt pris." }
     ),
   image: z.string().url({ message: "Bild ska vara en url" }),
+  inStock: z
+    .string()
+    .min(1, { message: "Antal är obligatoriskt." })
+    .refine(
+      (value) => {
+        const parsedPrice = parseFloat(value);
+        return !isNaN(parsedPrice) && parsedPrice > 0;
+      },
+      { message: "Antal måste vara en giltig siffra och mer än 0." }
+    ),
 });
 
 export default function AdminProductPage() {
@@ -35,18 +45,18 @@ export default function AdminProductPage() {
   const productToEdit = products.find((p) => p.id == id);
 
   const { register, handleSubmit, formState, getValues, reset } =
-    useForm<Products>({
+    useForm<Product>({
       resolver: zodResolver(FormSchema),
     });
 
   const handleOnSubmit = async () => {
-    const product: Products = {
+    const product: Product = {
       id: productToEdit ? productToEdit.id : "default",
       title: getValues("title"),
       description: getValues("description"),
       price: getValues("price"),
       image: getValues("image"),
-      quantity: getValues("quantity"),
+      inStock: getValues("inStock"),
     };
 
     productToEdit ? editProduct(product) : addProduct(product);
@@ -175,9 +185,9 @@ export default function AdminProductPage() {
 
             <TextField
               label="Antal"
-              {...register("quantity")}
+              {...register("inStock")}
               variant="standard"
-              defaultValue={productToEdit ? productToEdit.quantity : 1}
+              defaultValue={productToEdit ? productToEdit.inStock : 1}
             />
 
             <Box mt={2} mb={2}>

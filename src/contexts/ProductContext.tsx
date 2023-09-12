@@ -1,15 +1,15 @@
 import { ReactNode, createContext, useContext } from "react";
-import useLocalStorageState from "../useLocalStorage";
-import { Products } from "./CartContext";
+import { Product } from "../../data/index";
 import { mockedProducts } from "../mockedList";
+import useLocalStorageState from "../useLocalStorage";
 
 interface ProductContextType {
-  products: Products[];
-  product: Products; // Lägg till product i kontexten
-  setProduct: (product: Products) => void;
-  addProduct: (product: Products) => void;
-  removeProduct: (product: Products) => void;
-  editProduct: (product: Products) => void;
+  products: Product[];
+  product: Product;
+  setProduct: (product: Product) => void;
+  addProduct: (product: Product) => void;
+  removeProduct: (product: Product) => void;
+  editProduct: (product: Product) => void;
 }
 
 const ProductContext = createContext<ProductContextType>({
@@ -20,7 +20,7 @@ const ProductContext = createContext<ProductContextType>({
     description: "",
     price: 0,
     image: "string",
-    quantity: 0,
+    inStock: 0,
   },
   setProduct: () => {},
   addProduct: () => {},
@@ -41,18 +41,18 @@ interface ProcutProviderProps {
 }
 
 export function ProductProvider({ children }: ProcutProviderProps) {
-  const [products, setProducts] = useLocalStorageState<Products[]>(
+  const [products, setProducts] = useLocalStorageState<Product[]>(
     mockedProducts,
     "products"
   );
-  const [product, setProduct] = useLocalStorageState<Products>(
+  const [product, setProduct] = useLocalStorageState<Product>(
     {
       id: "",
       title: "",
       description: "",
       price: 0,
       image: "string",
-      quantity: 0,
+      inStock: 0,
     },
     "product"
   );
@@ -62,9 +62,10 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   //   setProducts(updatedProducts);
   // };
 
-  //addproduct med ett updaterat id
+  //addproduct med ett updaterat i
   const addProduct = (newProduct: Products) => {
     const milliseconds = Date.now() % 1000;
+
 
     newProduct.id = milliseconds.toString(); 
 
@@ -72,7 +73,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     setProducts(updatedProducts);
   };
 
-  const removeProduct = (product: Products) => {
+  const removeProduct = (product: Product) => {
     const updatedProducts = [...products];
     const productIndex = updatedProducts.findIndex((p) => p.id === product.id);
 
@@ -82,7 +83,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     }
   };
 
-  const editProduct = (editedProduct: Products) => {
+  const editProduct = (editedProduct: Product) => {
     const updatedProducts = products.map((product) =>
       product.id === editedProduct.id ? editedProduct : product
     );
@@ -93,7 +94,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     <ProductContext.Provider
       value={{
         products,
-        product, // Lägg till product i kontextvärdet
+        product,
         setProduct,
         addProduct,
         removeProduct,

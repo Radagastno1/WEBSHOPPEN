@@ -1,10 +1,10 @@
 import { ListItemIcon, ListItemText, Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { Products } from "../contexts/CartContext";
+import { CartItem } from "../../data";
 
 interface Props {
-  products?: Products[] | Products;
+  products?: CartItem[] | CartItem;
   datacy?: string;
   titleDatacy?: string;
   priceDatacy?: string;

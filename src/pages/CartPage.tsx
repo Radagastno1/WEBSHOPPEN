@@ -9,21 +9,21 @@ export default function CartPage() {
 
   return (
     <div className="flex flex-1 flex-col items-center">
-      {cart.length > 0 ? (
+      {cart ? (
         <div>
           <ListComponent
             products={cart.map((p) => ({
               ...p,
               customButtons: [
                 {
-                  icon: <AddCircleIcon/>,
-                  onClick: () => addToCart(p), 
-                  datacy: "increase-quantity-button"
+                  icon: <AddCircleIcon />,
+                  onClick: () => addToCart(p),
+                  datacy: "increase-quantity-button",
                 },
                 {
-                  icon: <RemoveCircleIcon/>,
+                  icon: <RemoveCircleIcon />,
                   onClick: () => removeFromCart(p),
-                  datacy: "decrease-quantity-button"
+                  datacy: "decrease-quantity-button",
                 },
               ],
             }))}

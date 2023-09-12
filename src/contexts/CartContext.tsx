@@ -1,20 +1,12 @@
 import { ReactNode, createContext, useContext } from "react";
+import { CartItem, Product } from "../../data";
 import useLocalStorageState from "../useLocalStorage";
 
-export interface Products {
-  id: string;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  quantity: number;
-}
-
 interface CartContextType {
-  cart: Products[];
+  cart: CartItem[];
   totalPrice: number;
-  addToCart: (product: Products) => void;
-  removeFromCart: (product: Products) => void;
+  addToCart: (product: Product) => void;
+  removeFromCart: (product: Product) => void;
   calculateTotal: () => number;
   resetCart: () => void;
 }
@@ -41,66 +33,65 @@ interface CartProviderProps {
 }
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useLocalStorageState<Products[]>([], "cart");
+  const [cart, setCart] = useLocalStorageState<CartItem[]>([], "cart");
 
   const [totalPrice, setTotalPrice] = useLocalStorageState<number>(
     0,
     "totalPrice"
   );
 
-  const addToCart = (product: Products) => {
+  const addToCart = (product: Product) => {
     const updatedCart = [...cart];
     let productExists = false;
-
-    for (const cartProduct of updatedCart) {
-      if (cartProduct.id === product.id) {
-        cartProduct.quantity += 1;
+  
+    for (const cartItem of updatedCart) {
+      if (cartItem.id === product.id) {
+        cartItem.quantity += 1; 
         productExists = true;
         break;
       }
     }
-
+  
     if (!productExists) {
-      product.quantity = 1;
-      updatedCart.push(product);
+      const newCartItem: CartItem = {
+        ...product,
+        quantity: 1,
+      };
+      updatedCart.push(newCartItem);
     }
-
+  
     const total = updatedCart.reduce(
-      (accumulator, product) => accumulator + product.price * product.quantity,
+      (accumulator, cartItem) => accumulator + cartItem.price * cartItem.quantity,
       0
     );
     setTotalPrice(total);
-
+  
     setCart(updatedCart);
   };
-
-  const removeFromCart = (product: Products) => {
+  
+  const removeFromCart = (product: Product) => {
     const updatedCart = [...cart];
-    const productIndex = updatedCart.findIndex((p) => p.id === product.id);
-
+    const productIndex = updatedCart.findIndex((cartItem) => cartItem.id === product.id);
+  
     if (productIndex !== -1) {
-      const existingProduct = updatedCart[productIndex];
-
-      // Decrease the quantity
-      existingProduct.quantity -= 1;
-
-      // Remove the product if quantity reaches zero
-      if (existingProduct.quantity === 0) {
+      const existingCartItem = updatedCart[productIndex];
+  
+      existingCartItem.quantity -= 1;
+  
+      if (existingCartItem.quantity === 0) {
         updatedCart.splice(productIndex, 1);
       }
-
-      // Calculate the new total price
+  
       const total = updatedCart.reduce(
-        (accumulator, p) => accumulator + p.price * p.quantity,
+        (accumulator, cartItem) => accumulator + cartItem.price * cartItem.quantity,
         0
       );
-
-      // Update cart and total price
+  
       setCart(updatedCart);
       setTotalPrice(total);
     }
   };
-
+  
   const calculateTotal = () => {
     return cart.reduce(
       (accumulator, product) => accumulator + product.price,
