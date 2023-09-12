@@ -56,22 +56,18 @@ export function ProductProvider({ children }: ProcutProviderProps) {
     },
     "product"
   );
-  //gamla addproduct
-  // const addProduct = (product: Products) => {
-  //   const updatedProducts = [...products, product];
-  //   setProducts(updatedProducts);
-  // };
 
-  //addproduct med ett updaterat i
+  //addproduct med ett updaterat id med 4 sista från millesec datum
   const addProduct = (newProduct: Product) => {
-    const milliseconds = Date.now() % 1000;
-
-
-    newProduct.id = milliseconds.toString(); 
-
+    const milliseconds = Date.now().toString();
+    const id = milliseconds.slice(-4); 
+  
+    newProduct.id = id;
+  
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
   };
+  
 
   const removeProduct = (product: Product) => {
     const updatedProducts = [...products];

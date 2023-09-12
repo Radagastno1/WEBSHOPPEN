@@ -18,25 +18,6 @@ export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const selectedProduct = products.find((product) => String(product.id) === id);
 
-  const zoomIconStyle = {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    cursor: "pointer",
-    fontSize: "20px",
-    padding: "3",
-    "&:hover": {
-      color: "grey",
-    },
-  };
-
-  const zoomedCardImageStyle = {
-    height: "220px",
-    objectFit: "cover",
-    transform: "scale(1.5)",
-    objectPosition: "center 58%",
-  };
-
   // Här kan du välja att använda mockedProducts som fallback om produkten inte finns i useProductContext
 
   if (!selectedProduct) {
