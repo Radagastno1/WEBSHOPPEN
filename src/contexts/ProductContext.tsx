@@ -62,15 +62,12 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   //   setProducts(updatedProducts);
   // };
 
-  //addproduct med ett updaterat id
-  const addProduct = (newProduct: Product) => {
-    const latestId = products.reduce((maxId, product) => {
-      const productId = parseInt(product.id, 10);
-      return productId > maxId ? productId : maxId;
-    }, 0);
-    const newId = `${latestId + 1}`;
+  //addproduct med ett updaterat i
+  const addProduct = (newProduct: Products) => {
+    const milliseconds = Date.now() % 1000;
 
-    newProduct.id = newId;
+
+    newProduct.id = milliseconds.toString(); 
 
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);

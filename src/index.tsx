@@ -19,7 +19,6 @@ import AdminProductPage from "./pages/AdminProductPage";
 import ProductPage from "./pages/ProductPage";
 
 import { CartProvider } from "./contexts/CartContext";
-import { CounterProvider } from "./contexts/CounterProvider";
 import { OrderProvider } from "./contexts/OrderContext";
 import { ProductProvider } from "./contexts/ProductContext";
 
@@ -44,8 +43,7 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <CounterProvider>
-      <CartProvider>
+     <CartProvider>
         <CustomerProvider>
           <ProductProvider>
             <OrderProvider>
@@ -54,6 +52,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </ProductProvider>
         </CustomerProvider>
       </CartProvider>
-    </CounterProvider>
   </React.StrictMode>
 );
