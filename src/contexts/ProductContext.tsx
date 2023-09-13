@@ -1,10 +1,11 @@
 import { ReactNode, createContext, useContext } from "react";
-import { Product } from "../../data/index";
-import { mockedProducts } from "../mockedList";
+import { Product, products } from "../../data/index";
+
+
 import useLocalStorageState from "../useLocalStorage";
 
 interface ProductContextType {
-  products: Product[];
+  allProducts: Product[];
   product: Product;
   setProduct: (product: Product) => void;
   addProduct: (product: Product) => void;
@@ -13,7 +14,7 @@ interface ProductContextType {
 }
 
 const ProductContext = createContext<ProductContextType>({
-  products: [],
+  allProducts: [],
   product: {
     id: "",
     title: "",
@@ -41,8 +42,8 @@ interface ProcutProviderProps {
 }
 
 export function ProductProvider({ children }: ProcutProviderProps) {
-  const [products, setProducts] = useLocalStorageState<Product[]>(
-    mockedProducts,
+  const [allProducts, setProducts] = useLocalStorageState<Product[]>(
+    products,
     "products"
   );
   const [product, setProduct] = useLocalStorageState<Product>(
@@ -64,7 +65,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   
     newProduct.id = id;
   
-    const updatedProducts = [...products, newProduct];
+    const updatedProducts = [...allProducts, newProduct];
     setProducts(updatedProducts);
   };
   
@@ -89,7 +90,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   return (
     <ProductContext.Provider
       value={{
-        products,
+        allProducts,
         product,
         setProduct,
         addProduct,
