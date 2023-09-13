@@ -42,7 +42,7 @@ export default function IndexPage() {
                       sx={
                         zoomedProduct === product.id
                           ? {
-                              height: "25npm0px",
+                              height: "250px",
                               objectFit: "cover",
                               transform: "scale(1.5)",
                               objectPosition: "center 58%",
