@@ -7,7 +7,7 @@ import { useProductContext } from "../contexts/ProductContext";
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  const { products, removeProduct } = useProductContext();
+  const { allProducts, removeProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -23,7 +23,7 @@ export default function AdminPage() {
 
   const titleRows = ["Produkt", "Id", "Titel", "Pris", "Radera", "Redigera "];
 
-  const productRows = products.map((p) => [
+  const productRows = allProducts.map((p) => [
     {
       property: <img src={p.image} alt="Product" width="20" height="20" />,
       datacyCell: "",

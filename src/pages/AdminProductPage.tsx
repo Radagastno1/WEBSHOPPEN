@@ -36,13 +36,13 @@ const FormSchema = z.object({
 });
 
 export default function AdminProductPage() {
-  const { products, editProduct, addProduct, setProduct } = useProductContext();
+  const { allProducts, editProduct, addProduct, setProduct } = useProductContext();
 
   const navigate = useNavigate();
 
   const { id } = useParams();
 
-  const productToEdit = products.find((p) => p.id == id);
+  const productToEdit = allProducts.find((p) => p.id == id);
 
   const { register, handleSubmit, formState, getValues, reset } =
     useForm<Product>({

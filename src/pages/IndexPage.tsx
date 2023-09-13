@@ -1,12 +1,19 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+  Box,
+} from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
 export default function IndexPage() {
-  const { products } = useProductContext();
+  const { allProducts } = useProductContext();
   const [zoomedProduct, setZoomedProduct] = useState("");
 
   const handleZoom = (productId: string) => {
@@ -15,9 +22,15 @@ export default function IndexPage() {
 
   return (
     <Container sx={{ padding: "20px" }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Grid container spacing={2}>
-          {products.map((product) => (
+          {allProducts.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
               <Card data-cy="product">
                 <NavLink to={`/product/${String(product.id)}`}>
@@ -29,7 +42,7 @@ export default function IndexPage() {
                       sx={
                         zoomedProduct === product.id
                           ? {
-                              height: "220px",
+                              height: "25npm0px",
                               objectFit: "cover",
                               transform: "scale(1.5)",
                               objectPosition: "center 58%",
@@ -59,14 +72,28 @@ export default function IndexPage() {
                     />
                   </div>
 
-                  <Typography
-                    sx={{ fontSize: 16, px: 1, pt: 1 }}
-                    component="div"
-                  >
-                    {product.title}
-                  </Typography>
+                  <Box display={"flex"} justifyContent={"space-between"}>
+                    <Typography
+                      sx={{ fontSize: 16, px: 1, pt: 1 }}
+                      component="div"
+                      data-cy="product-title"
+                    >
+                      {product.title}
+                    </Typography>
+
+                    <Typography
+                      sx={{ fontSize: 16, px: 1, pt: 1 }}
+                      component="div"
+                      data-cy="product-price"
+                    >
+                      {product.price}kr
+                    </Typography>
+                  </Box>
                 </NavLink>
-                <div data-cy="cart-items-count-badge" style={{ paddingLeft: "1px" }}>
+                <div
+                  data-cy="cart-items-count-badge"
+                  style={{ paddingLeft: "1px" }}
+                >
                   <AddtoCartButton product={product} />
                 </div>
               </Card>

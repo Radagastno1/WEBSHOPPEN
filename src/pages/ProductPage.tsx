@@ -12,11 +12,11 @@ import { useProductContext } from "../contexts/ProductContext";
 //FÖR VG - PRODUCTPROVIDER OCH ISTÄLLET FÖR USEPARAMS SÅ HÄMTA PRODUCT VIA PRODUCTCONTEXT
 
 export default function ProductPage() {
-  const { products } = useProductContext();
+  const { allProducts } = useProductContext();
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   const { id } = useParams<{ id: string }>();
-  const selectedProduct = products.find((product) => String(product.id) === id);
+  const selectedProduct = allProducts.find((product) => String(product.id) === id);
 
   // Här kan du välja att använda mockedProducts som fallback om produkten inte finns i useProductContext
 
@@ -26,7 +26,7 @@ export default function ProductPage() {
 
   return (
     <Grid container justifyContent="center" alignItems="center" spacing={isSmallScreen ? 2 : 3}>
-      <Grid item xs={12} sm={isSmallScreen ? 12 : 5.5} >
+      <Grid item xs={12} sm={isSmallScreen ? 12 : 5.8} >
         <CardMedia
           component="img"
           alt={selectedProduct.title}
