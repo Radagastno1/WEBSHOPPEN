@@ -26,7 +26,7 @@ export default function ProductPage() {
 
   return (
     <Grid container justifyContent="center" alignItems="center" spacing={isSmallScreen ? 2 : 3}>
-      <Grid item xs={12} sm={isSmallScreen ? 12 : 5.5} >
+      <Grid item xs={12} sm={isSmallScreen ? 12 : 5.8} >
         <CardMedia
           component="img"
           alt={selectedProduct.title}
