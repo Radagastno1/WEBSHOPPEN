@@ -66,7 +66,6 @@ export default function ConfirmationPage() {
           mt: 1,
           p: 1,
           width: "99%",
-          backgroundColor: "#e5e0e0",
         }}
       >
         <Typography sx={{ color: "black", fontSize: "12" }}>
@@ -112,7 +111,6 @@ export default function ConfirmationPage() {
           mt: 1,
           p: 1.5,
           width: "99%",
-          backgroundColor: "#e5e0e0",
         }}
       >
         <Typography sx={{ color: "black", fontSize: "12" }}>
