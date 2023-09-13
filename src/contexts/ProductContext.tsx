@@ -1,7 +1,6 @@
 import { ReactNode, createContext, useContext } from "react";
 import { Product, products } from "../../data/index";
 
-
 import useLocalStorageState from "../useLocalStorage";
 
 interface ProductContextType {
@@ -61,14 +60,13 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   //addproduct med ett updaterat id med 4 sista från millesec datum
   const addProduct = (newProduct: Product) => {
     const milliseconds = Date.now().toString();
-    const id = milliseconds.slice(-4); 
-  
+    const id = milliseconds.slice(-4);
+
     newProduct.id = id;
-  
+
     const updatedProducts = [...allProducts, newProduct];
     setProducts(updatedProducts);
   };
-  
 
   const removeProduct = (product: Product) => {
     const updatedProducts = [...products];
@@ -81,7 +79,7 @@ export function ProductProvider({ children }: ProcutProviderProps) {
   };
 
   const editProduct = (editedProduct: Product) => {
-    const updatedProducts = products.map((product) =>
+    const updatedProducts = allProducts.map((product) =>
       product.id === editedProduct.id ? editedProduct : product
     );
     setProducts(updatedProducts);
