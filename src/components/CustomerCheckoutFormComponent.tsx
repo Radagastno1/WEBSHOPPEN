@@ -16,7 +16,6 @@ import { useCart } from "../contexts/CartContext";
 import { useCustomerContext } from "../contexts/CustomerContext";
 import { useOrderContext } from "../contexts/OrderContext";
 import { Order } from "../interfaces";
-import "../media.css";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: "Namn är obligatoriskt." }),
@@ -237,7 +236,7 @@ export default function FormComponent(props: Props) {
           }}
         />
 
-        <Paper elevation={0} sx={{ backgroundColor: 'transparent'}}>
+        <Paper elevation={0} sx={{ backgroundColor: "transparent" }}>
           <FormControlLabel
             control={
               <Checkbox
@@ -255,7 +254,7 @@ export default function FormComponent(props: Props) {
           />
         </Paper>
 
-        <Box  mb={0.5}>
+        <Box mb={0.5}>
           <Button
             type="submit"
             variant="contained"

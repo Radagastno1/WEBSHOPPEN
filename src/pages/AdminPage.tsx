@@ -7,18 +7,13 @@ import { useProductContext } from "../contexts/ProductContext";
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  const { products, removeProduct, addProduct } = useProductContext();
+  const { products, removeProduct } = useProductContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   function handleAction(product: Product) {
     setSelectedProduct(product);
     setIsPopupOpen(true);
-  }
-
-  function handleAddProduct(product: Product) {
-    addProduct(product);
-    setIsPopupOpen(false);
   }
 
   function handleRemoveProduct(product: Product) {
@@ -77,7 +72,7 @@ export default function AdminPage() {
   ]);
 
   return (
-    <div className="flex flex-col flex-1">
+    <Box display={"flex"} flex={1} flexDirection={"column"}>
       <Box my={2}>
         <NavLink to="/admin/product/ny" style={{ textDecoration: "none" }}>
           <Button
@@ -106,7 +101,7 @@ export default function AdminPage() {
         <DialogTitle>Product Details</DialogTitle>
         <DialogContent sx={{ display: "flex" }}>
           {selectedProduct && (
-            <div data-cy="product">
+            <Box data-cy="product">
               <p data-cy="product-title" className="flex-1">
                 ID: {selectedProduct.id}
               </p>
@@ -123,10 +118,10 @@ export default function AdminPage() {
                   Ta bort
                 </Button>
               }
-            </div>
+            </Box>
           )}
         </DialogContent>
       </Dialog>
-    </div>
+    </Box>
   );
 }

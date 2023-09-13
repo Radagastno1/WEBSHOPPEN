@@ -1,10 +1,10 @@
-import { Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import TableMUI from "../components/TableMUIComponent";
 import { useOrderContext } from "../contexts/OrderContext";
-import "../styles.css";
 
 export default function ConfirmationPage() {
   const { order } = useOrderContext();
+  const isMobileOrTabletScreen = useMediaQuery("(max-width: 820px)");
 
   const addressTitleRow = [
     "Namn",
@@ -49,9 +49,16 @@ export default function ConfirmationPage() {
   ]);
 
   return (
-    <div
-      className="flex flex-col items-center"
-      style={{ maxHeight: "calc(100vh - 200px)" }}
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      height={
+        isMobileOrTabletScreen ? "calc(100vh - 150px)" : "calc(100vh - 200px)"
+      }
+      sx={{
+        overflowY: "auto",
+      }}
     >
       <Paper
         elevation={4}
@@ -67,36 +74,42 @@ export default function ConfirmationPage() {
         </Typography>
       </Paper>
 
-      <div className="flex bg-neutral-500 w-screen bg-opacity-5">
-        <div className="w-1/2 p-3">
-          <div>
+      <Box
+        display={"flex"}
+        flexDirection={isMobileOrTabletScreen ? "column" : "row"}
+        sx={{ width: "100%" }}
+      >
+        <Box
+          width={isMobileOrTabletScreen ? "100%" : "50%"}
+          sx={{ paddingY: 1.5, paddingX: 1 }}
+        >
+          <TableMUI
+            titleRow={orderTitleRows}
+            cellRows={orderRow}
+            datacy="cart-item"
+          />
+        </Box>
+
+        <Box
+          width={isMobileOrTabletScreen ? "100%" : "50%"}
+          sx={{ paddingY: 1.5, paddingX: 1 }}
+        >
+          {order ? (
             <TableMUI
-              titleRow={orderTitleRows}
-              cellRows={orderRow}
+              titleRow={addressTitleRow}
+              cellRows={addressRow}
               datacy="cart-item"
             />
-          </div>
-        </div>
-
-        <div className="w-1/2 p-3">
-          {order ? (
-            <div>
-              <TableMUI
-                titleRow={addressTitleRow}
-                cellRows={addressRow}
-                datacy="cart-item"
-              />
-            </div>
           ) : (
             <Typography>Laddar uppgifter....</Typography>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       <Paper
         elevation={4}
         sx={{
-          mt: 0,
+          mt: 1,
           p: 1.5,
           width: "99%",
           backgroundColor: "#e5e0e0",
@@ -107,19 +120,28 @@ export default function ConfirmationPage() {
         </Typography>
       </Paper>
 
-      <div className="flex flex-col bg-neutral-500 w-screen overflow-y-auto p-3 bg-opacity-5">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "neutral-500",
+          width: "100vw",
+          overflowY: "auto",
+          backdropFilter: "blur(10px)",
+          paddingY: 1.5,
+          paddingX: 1,
+        }}
+      >
         {order && order.cart ? (
-          <div>
-            <TableMUI
-              titleRow={productTitleRows}
-              cellRows={productRows}
-              datacy="cart-item"
-            />
-          </div>
+          <TableMUI
+            titleRow={productTitleRows}
+            cellRows={productRows}
+            datacy="cart-item"
+          />
         ) : (
           <Typography>Väntar på att produkter ska laddas...</Typography>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
