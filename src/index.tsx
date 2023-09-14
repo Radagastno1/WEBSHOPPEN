@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Link,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -18,6 +19,7 @@ import AdminPage from "./pages/AdminPage";
 import AdminProductPage from "./pages/AdminProductPage";
 import ProductPage from "./pages/ProductPage";
 
+import { Box, Typography } from "@mui/material";
 import { CartProvider } from "./contexts/CartContext";
 import { OrderProvider } from "./contexts/OrderContext";
 import { ProductProvider } from "./contexts/ProductContext";
@@ -34,23 +36,46 @@ const router = createBrowserRouter(
       <Route path="confirmation" element={<ConfirmationPage />}></Route>
 
       <Route path="admin" element={<AdminPage />}></Route>
-      <Route path="admin/product" element={<AdminProductPage />}>
-        <Route path=":id" element={<AdminPage />}></Route>
-      </Route>
+      <Route path="admin/product/:param" element={<AdminProductPage />}></Route>
+      <Route
+        path="*"
+        element={
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            Ojdå, det verkar som att denna sida inte finns.
+            <Link to="/">
+              <Typography
+                fontWeight={"bold"}
+                sx={{
+                  backgroundColor: "lightgrey",
+                  borderRadius: "2px",
+                  padding: 1,
+                }}
+              >
+                Till startsidan
+              </Typography>
+            </Link>
+          </Box>
+        }
+      ></Route>
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-     <CartProvider>
-        <CustomerProvider>
-          <ProductProvider>
-            <OrderProvider>
-              <RouterProvider router={router} />
-            </OrderProvider>
-          </ProductProvider>
-        </CustomerProvider>
-      </CartProvider>
+    <CartProvider>
+      <CustomerProvider>
+        <ProductProvider>
+          <OrderProvider>
+            <RouterProvider router={router} />
+          </OrderProvider>
+        </ProductProvider>
+      </CustomerProvider>
+    </CartProvider>
   </React.StrictMode>
 );

@@ -36,13 +36,20 @@ const FormSchema = z.object({
 });
 
 export default function AdminProductPage() {
-  const { allProducts, editProduct, addProduct, setProduct } = useProductContext();
+  const { allProducts, editProduct, addProduct, setProduct } =
+    useProductContext();
 
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { param } = useParams();
 
-  const productToEdit = allProducts.find((p) => p.id == id);
+  const productToEdit = allProducts.find((p) => p.id == param);
+
+  const isNewProductMode = param === "ny";
+
+  if (!productToEdit && !isNewProductMode) {
+    return <Typography variant="h6">Ojdå, produkten hittades inte.</Typography>;
+  }
 
   const { register, handleSubmit, formState, getValues, reset } =
     useForm<Product>({
@@ -59,7 +66,11 @@ export default function AdminProductPage() {
       inStock: getValues("inStock"),
     };
 
-    productToEdit ? editProduct(product) : addProduct(product);
+    productToEdit
+      ? editProduct(product)
+      : isNewProductMode
+      ? addProduct(product)
+      : "";
 
     setProduct(product);
 

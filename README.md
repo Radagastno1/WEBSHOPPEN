@@ -55,6 +55,21 @@ Produktlistan måste döpas till `products` i localStorage.
 
 För att bli godkänd på den här uppgiften MÅSTE ni använda GIT och GitHub. Inlämningen sker som vanligt på läroplattformen där ni ska zippa ihop projektmappen (kom ihåg att ta bort node_modules). I projektmappen ska det finnas (utöver all kod) en README.md fil. Den ska innehålla en titel, beskrivning av projektet, info om hur projektet byggs och körs samt länk till dokumentationen för designsystemet som används, mm.
 
+## WEBSHOP KERAMIKA
+
+Titel: Keramika
+Beskrivning: Webshop till för att sälja keramik-produkter (skålar, statyer etc).
+Man kan som användare se produkter, läsa mer om produkter, lägga i varukorg, öka och minska antal,
+fylla i sina uppgifter samt få en orderbekräftelse. Som admin kan man lägga till, redigera och ta bort produkter.
+Byggs: 
+Om det är hur VI byggt det:
+Routing ligger i index.tsx och för tillfället så är hela routingen barn till alla providers.
+Så alla komponenter kommer åt alla contexts. På indexsidan så visas alla produkter, på productpage hämtas 
+produktens id via params i urlen. 
+Samma upplägg i admin, att på /admin visas alla produkter och sedan hämtas params i urlen för Adminproductpage sidan, så är det en siffra tex /4 så hämtas produkten det gäller och då är det redigera-mode. Är det /ny så är det lägg till produkt-mode.
+
+Länk till dokumentation: https://mui.com/components/, https://stackoverflow.com/questions/tagged/material-ui
+
 ## Presentation
 
 Ni ska vid presentationstillfället hålla i en muntlig presentation för klassen. Ni ska gå igenom följande punker under presentationen:
