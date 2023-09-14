@@ -9,8 +9,6 @@ import { useParams } from "react-router-dom";
 import AddtoCartButton from "../components/AddtoCartButton";
 import { useProductContext } from "../contexts/ProductContext";
 
-//FÖR VG - PRODUCTPROVIDER OCH ISTÄLLET FÖR USEPARAMS SÅ HÄMTA PRODUCT VIA PRODUCTCONTEXT
-
 export default function ProductPage() {
   const { allProducts } = useProductContext();
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
